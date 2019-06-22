@@ -1,0 +1,22 @@
+{% extends "../dbs/index.html" %}
+{% load static %}
+{% block body %}
+
+	{% if deposit_accounts %}
+
+		{% for savingsAccount in deposit_accounts.savingsAccounts %}
+		<p><strong>{{savingsAccount.productDescription}} ({{savingsAccount.accountNumber}})</strong></p>
+		{{savingsAccount.id}}
+		<p>Available balance: {{savingsAccount.balances.availableBalance.currency}} {{savingsAccount.balances.availableBalance.amount}}</p>
+		<p>Total balance: {{savingsAccount.balances.totalBalance.currency}} {{savingsAccount.balances.totalBalance.amount}}</p>
+		{% endfor %}
+
+		{% for currentAccount in deposit_accounts.currentAccounts %}
+		<p><strong>{{currentAccount.productDescription}} ({{currentAccount.accountNumber}})</strong></p>
+		{{currentAccount.id}}
+		<p>Available balance: {{currentAccount.balances.availableBalance.currency}} {{currentAccount.balances.availableBalance.amount}}</p>
+		<p>Total balance: {{currentAccount.balances.totalBalance.currency}} {{currentAccount.balances.totalBalance.amount}}</p>
+		{% endfor %}
+		
+	{% endif %}
+{% endblock %}

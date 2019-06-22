@@ -1,0 +1,117 @@
+body {
+  font-weight: 400;
+  font-family: 'Quattrocento Sans', sans-serif;
+  font-style: normal;
+  font-size: 18px;
+}
+
+header, section {
+  padding: 40px 0px 20px 0px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5 {
+  font-weight: 700;
+  font-family: 'Quattrocento Sans', sans-serif;
+  font-style: normal;
+}
+
+.h1, h1 {
+    font-size: 3rem;
+}
+
+.bg-orange {
+  background-color: rgba(252, 185, 65, 1);
+  box-sizing: border-box;
+}
+
+.bg-gray {
+  background-color: rgba(192,192,192,1);
+  box-sizing: border-box;
+}
+
+.bg-white {
+  background-color: #000000;
+  box-sizing: border-box;
+}
+
+/* Button */
+.button, .button:focus {
+    padding: 5px 15px;
+    border-radius: 3px;
+    border: 3px;
+    background: #000000;
+    border-style: solid;
+    border-color: #000000;
+    color: #ffffff;
+    display:inline-block;
+    cursor:pointer;
+    text-decoration: none;
+}
+
+.button:hover {
+    background: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .button, .button:focus {
+        padding: 3px 6px;
+    }
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  padding: 20px 0px;
+}
+
+.col-lg-6, .col-lg-12 {
+  margin: 20px 0 0 0;
+}
+
+.languages {
+  display: flex;
+  justify-content: flex-end;
+  align-items:center;
+  cursor: pointer;
+}
+
+.dutch {
+  display: none;
+}
+
+.logo {
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-start;
+}
+
+.pointer {cursor: pointer;}
+
+.fa-plus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fa-minus {
+  display:none;
+}
+
+.job {
+  margin: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+}

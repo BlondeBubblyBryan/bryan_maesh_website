@@ -1,0 +1,77 @@
+{% extends "../i_love_lamp/index.html" %}
+{% load static %}
+{% block body %}
+
+<header>
+	<div class="container">
+		<div class="upperleft">
+			<i class="fas fa-bars"></i>
+		</div>
+		<h2>Cart</h2>
+	</div>
+</header>
+<section>
+	<div class="container product">
+		<div class="image">
+			<img class="productimage" src="{% static 'i_love_lamp/images/desk_lamp.png' %}" alt="Desk Lamp">
+		</div>
+		<div class="description">
+			<div class="productname">Desk Lamp</div>
+			<div>S$59</div>
+		</div>
+		<div class="counter">
+			<div><i class="fas fa-plus"></i></div>
+			<div>1</div>
+			<div><i class="fas fa-minus"></i></div>
+		</div>
+	</div>
+	<div class="container product">
+		<div class="image">
+			<img class="productimage" src="{% static 'i_love_lamp/images/hanging_bulb.png' %}" alt="Desk Lamp">
+		</div>
+		<div class="description">
+			<div class="productname">Hanging Bulb</div>
+			<div>S$39</div>
+		</div>
+		<div class="counter">
+			<div><i class="fas fa-plus"></i></div>
+			<div>1</div>
+			<div><i class="fas fa-minus"></i></div>
+		</div>
+	</div>
+	<div class="container product">
+		<div class="image">
+			<img class="productimage" src="{% static 'i_love_lamp/images/floor_lamp.png' %}" alt="Desk Lamp">
+		</div>
+		<div class="description">
+			<div class="productname">Floor Lamp</div>
+			<div>S$119</div>
+		</div>
+		<div class="counter">
+			<div><i class="fas fa-plus"></i></div>
+			<div>1</div>
+			<div><i class="fas fa-minus"></i></div>
+		</div>
+	</div>
+</section>
+<section style="background-color: #EBEBEB;">
+	<div class="container" style="max-width: 540px;">
+		<div class="total">
+			<div>Subtotal</div>
+			<div>S$202.80</div>
+		</div>
+		<div class="total">
+			<div>GST (7%)</div>
+			<div>S$14.20</div>
+		</div>
+		<div class="total" style="margin-top: 20px;">
+			<div><strong>Total</strong></div>
+			<div><strong>S$217.00</strong></div>
+		</div>
+	</div>
+	<div class="container" style="margin-top: 20px">
+		<a class="button" href="{% url 'payment_method' %}">Check out</a>
+	</div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "../i_love_lamp/index.html" %}
+{% load static %}
+{% block body %}
+
+<header style="background-color: #ffffff;">
+	<div class="container">
+		<a class="upperleft" href="{% url 'payment_method' %}">
+			<i class="fas fa-less-than"></i>
+		</a>
+		<h2>Payment</h2>
+	</div>
+</header>
+<section class="section">
+	<div class="container">
+		<h1 style="text-align: left;">Confirm payment</h1>
+	</div>
+	<div class="container" style="padding-top: 60px;">
+		<div class="shape-wrapper">
+			<div class="shape shape-background shape-right"></div>
+		</div>
+		<div class="price">
+			<h1 style="font-size: 3rem;">S$217.00</h1>
+			<div><strong>To:</strong> I Love Lamp Pte Ltd</div>
+			<div><strong>Date:</strong> June 13, 2019</div>
+		</div>
+	</div>
+	<div class="container account" style="text-align: left; padding-top: 60px;">
+		{% if dbs %}
+		<img class="bankimage" style="width:100px;" src="{% static 'i_love_lamp/images/dbs.png' %}" alt="DBS">
+		{% endif %}
+		{% if ocbc %}
+		<img class="bankimage" style="width:100px;" src="{% static 'i_love_lamp/images/ocbc.png' %}" alt="OCBC">
+		{% endif %}
+		{% if dbs %}
+		<div><strong>Account number: </strong><br>028-801127-5​​​​​​​</div>
+		{% endif %}
+		{% if ocbc %}
+		<div><strong>Account number: </strong><br>501999999001</div>
+		{% endif %}
+		<div><strong>Account holder: </strong><br>J. Doe</div>
+	</div>
+</section>
+<section>
+	<div class="container">
+		<a class="button" href="{% url 'confirmation' %}">Buy</a>
+	</div>
+</section>
+<footer>
+	<div class="container footer">
+		<h6>Pay with</h6>				
+		<img style="width: 80px;height: 40px;" src="{% static 'i_love_lamp/images/paynow.png' %}" alt="PayNow">
+	</div>
+</footer>
+{% endblock %}
