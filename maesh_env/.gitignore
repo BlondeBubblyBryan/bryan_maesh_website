@@ -1,0 +1,10 @@
+.Python
+bin/
+include/
+lib/
+pip-selfcheck.json
+*.pyc
+*/*.pyc
+#db.sqlite3
+*/.DS_Store
+.DS_Store
