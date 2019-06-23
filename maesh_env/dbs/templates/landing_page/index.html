@@ -4,10 +4,10 @@
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 	<title>Online payment processing in Singapore - Maesh</title>
 	<link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans" rel="stylesheet">
-	<link href="css/style.css" rel="stylesheet">
+	<link href="{% static 'landing_page/css/style.css' %}" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset='utf-8'>
-	<link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
+	<link rel="shortcut icon" type="image/png" href="{% static 'landing_page/images/favicon.png' %}"/>
 	<link rel="stylesheet" href="https://assets.sendinblue.com/component/form/61c63ac2f8837041dc7e.css">
     <link rel="stylesheet" href="https://assets.sendinblue.com/component/clickable/e7a2987d113375ffc0e0.css">
     <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
@@ -34,10 +34,10 @@
 			<div class="row align-items-center">
 				<div class="col-md-6 col-lg-6">
 					<div class="mb-5">
-						<img src="images/maesh.png" alt="maesh" style="width:100px;">
+						<img src="{% static 'landing_page/images/maesh.png' %}" alt="maesh" style="width:100px;">
 					</div>
 					<h5 class="font-lg mb-5">The best online payment solution in Singapore 🇸🇬</h5>
-					<p class="lead">We use <a href="https://www.abs.org.sg/consumer-banking/pay-now"><img src="images/PayNow.png" alt="PayNow" style="width:100px;"></a><br>You get lower transaction fees for your online business</p>
+					<p class="lead">We use <a href="https://www.abs.org.sg/consumer-banking/pay-now"><img src="{% static 'landing_page/images/PayNow.png' %}" alt="PayNow" style="width:100px;"></a><br>You get lower transaction fees for your online business</p>
 					<div class="mt-5 align-items-center">
 						<div class="container">
   							<!-- Button to Open the Modal -->
@@ -170,7 +170,7 @@
 				</div>
 				<div class="col-md-6 col-lg-5 ml-lg-auto">
 					<div class="screen">
-						<img src="images/maesh_prototype.gif" alt="Maesh Prototype" style="height:500px;    border-radius: 16%/8%;">
+						<img src="{% static 'landing_page/images/maesh_prototype.gif' %}" alt="Maesh Prototype" style="height:500px;    border-radius: 16%/8%;">
 					</div>
 				</div>
 			</div>
@@ -187,7 +187,7 @@
 					<div class="media flex-column flex-lg-row align-items-center align-items-md-start">
 						<div class="media-body mt-3 mt-md-0">
 							<h5 class="mt-0 mb-1">1. Select PayNow via Maesh</h5>
-							<img src="images/PayNow.png" alt="PayNow" class="mt-2 mb-2" style="height:70px;">
+							<img src="{% static 'landing_page/images/PayNow.png' %}" alt="PayNow" class="mt-2 mb-2" style="height:70px;">
 							<p class="color-2 m-0">The customer clicks on our payment method</p>
 						</div>
 					</div>
@@ -196,9 +196,9 @@
 					<div class="media flex-column flex-lg-row align-items-center align-items-md-start">
 						<div class="media-body mt-3 mt-md-0">
 							<h5 class="mt-0 mb-1">2. Select the preferred local bank</h5>
-							<img src="images/DBS-logo.png" alt="DBS bank logo" class="mt-2 mb-2 ml-3 mr-3" style="height:70px;">
-							<img src="images/OCBC-logo.png" alt="OCBC bank logo" class="mt-2 mb-2 ml-3" style="height:70px;">
-							<img src="images/UOB-logo.png" alt="UOB bank logo" class="mt-2 mb-2" style="height:70px;">
+							<img src="{% static 'landing_page/images/DBS-logo.png' %}" alt="DBS bank logo" class="mt-2 mb-2 ml-3 mr-3" style="height:70px;">
+							<img src="{% static 'landing_page/images/OCBC-logo.png' %}" alt="OCBC bank logo" class="mt-2 mb-2 ml-3" style="height:70px;">
+							<img src="{% static 'landing_page/images/UOB-logo.png' %}" alt="UOB bank logo" class="mt-2 mb-2" style="height:70px;">
 							<p class="color-2 m-0">The customer selects DBS, OCBC or UOB</p>
 						</div>
 					</div>
@@ -207,7 +207,7 @@
 					<div class="media flex-column flex-lg-row align-items-center align-items-md-start">
 						<div class="media-body mt-3 mt-md-0">
 							<h5 class="mt-0 mb-1">3. Authorize with OAuth 2.0</h5>
-							<img src="images/oauth-2-sm.png" alt="OAuth 2.0" class="mt-2 mb-2" style="height:70px;">
+							<img src="{% static 'landing_page/images/oauth-2-sm.png' %}" alt="OAuth 2.0" class="mt-2 mb-2" style="height:70px;">
 							<p class="color-2 m-0">The customer authorizes the payment with bank grade security</p>
 						</div>
 					</div>
@@ -268,7 +268,7 @@
 		</div>
 	</footer>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="js/javascript.js"></script>
+	<script src="{% static 'landing_page/js/javascript.js' %}"></script>	
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://www.google.com/recaptcha/api.js?hl=en"></script>
