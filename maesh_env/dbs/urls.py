@@ -6,7 +6,7 @@ from django.contrib.staticfiles import views as static
 app_name = 'dbs'
 
 urlpatterns = [
-	path('', views.index, name='start'),
+	path('', views.product_page, name='start'),
 	path('index', views.index, name='index'),
 	path('dbs_authorize', views.dbs_authorize, name='dbs_authorize'),
 	path('account_balance', views.account_balance, name='account_balance'),
