@@ -11,11 +11,6 @@ from django.conf import settings
 
 import os.path
 
-#Landing page
-def landing_page(request):
-
-	return render(request, 'landing_page/index.html')
-
 #Product page with what's in the cart
 def product_page(request):
 
