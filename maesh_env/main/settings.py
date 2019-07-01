@@ -32,7 +32,7 @@ CLIENTID = '6fce2916-d21e-4114-8433-8428d41effae'
 CLIENTSECRET = '527011b7-d982-478e-bd22-d28b54e33829'
 API = 'https://www.dbs.com/sandbox/api/sg/v1'
 API_OCBC = 'https://api.ocbc.com/'
-SITE = 'https:maesh.io:8000'#'http://159.65.7.84:8000/'#'http://192.168.0.119:8000/'
+SITE = 'https://maesh.io:8000'#'http://159.65.7.84:8000/'#'http://192.168.0.119:8000/'
 ACCESS_TOKEN_OCBC = '8c24fe6033a55fb4a8622239a0df7742'
 
 # Application definition
