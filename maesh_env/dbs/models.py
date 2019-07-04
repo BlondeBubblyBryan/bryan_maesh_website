@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class Credential(models.Model):
 
@@ -8,3 +9,18 @@ class Credential(models.Model):
     token_type = models.CharField(max_length=6)
     refresh_token = models.CharField(max_length=50)
     cin_party_id = models.CharField(max_length=13)
+
+class Transaction(models.Model):
+
+	amount = models.FloatField()
+	currency = models.CharField(max_length=3)
+	UEN = models.CharField(max_length=10)
+	created = models.DateTimeField(editable=False, default=timezone.now())
+	modified = models.DateTimeField(default=timezone.now())
+
+	def save(self, *args, **kwargs):
+		''' On save, update timestamps '''
+		if not self.id:
+			self.created = timezone.now()
+		self.modified = timezone.now()
+		return super(Transaction, self).save(*args, **kwargs)

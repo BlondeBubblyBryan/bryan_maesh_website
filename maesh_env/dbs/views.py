@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect
-from dbs.models import Credential
+from dbs.models import Credential, Transaction
 
 import json
 import jwt
@@ -30,6 +30,14 @@ def paynow_maesh(request):
 
 	context = {}
 	context['maesh'] = True
+
+	amount = request.GET.get('amount')
+	currency = request.GET.get('currency')
+	UEN = request.GET.get('UEN')
+	if amount:
+		transaction = Transaction.objects.create(amount=amount,currency=currency,UEN=UEN)
+	else:
+		transaction = Transaction.objects.create(amount='217.00',currency='SGD',UEN='1234567890')
 
 	return render(request, 'i_love_lamp/paynow_maesh.html', context)
 
@@ -72,6 +80,15 @@ def payment_maesh(request):
 			credential.expire_in = data['expire_in']
 			credential.refresh_token = data['refresh_token']
 			credential.save()
+
+	#Retrieving information about the payer
+	deposit_accounts = get_deposits_accounts(credential)
+	my_json = (deposit_accounts.content.decode('utf8').replace("'", '"'))
+	context['deposit_accounts'] = json.loads(my_json)
+
+	#Retrieving the transaction details
+	transaction = Transaction.objects.latest('created')
+	context['transaction'] = transaction
 
 	return render(request, 'i_love_lamp/payment_maesh.html', context)
 
@@ -125,6 +142,21 @@ def get_access_token(auth_code,redirect_uri):
 	my_json = (response.content.decode('utf8').replace("'", '"'))
 	
 	return json.loads(my_json)
+
+# def get_party_profile(credential):
+
+# 	headers = {
+# 		'clientId': settings.CLIENTID,
+# 		'accessToken': credential.access_token,
+# 		'Content-Type':'application/json',
+# 	}
+
+# 	print(credential.party_id)
+# 	response = requests.get(settings.API+'/parties/'+credential.cin_party_id, headers=headers)
+# 	print(vars(response))
+# 	my_json = (response.content.decode('utf8').replace("'", '"'))
+
+# 	return json.loads(my_json)
 
 def ocbc_authorize():
 
@@ -270,11 +302,15 @@ def transfer(request,payNow=False,lamp=True):
 
 	credentials = Credential.objects.all()
 	credential = credentials.first()
+	transaction = Transaction.objects.latest('created')
 
 	auth_code = request.GET.get('code', '')	
 
+	#Account number to be used is posted
+	account_number = request.POST.get('account')
+
 	if payNow == True:
-		response = make_paynow_transfer(credential)
+		response = make_paynow_transfer(credential,transaction,account_number)
 		my_json = (response.content.decode('utf8').replace("'", '"'))
 		data = json.loads(my_json)
 
@@ -286,7 +322,7 @@ def transfer(request,payNow=False,lamp=True):
 	else:
 		#If no auth_code is available, initiate transfer, but catch error
 		if not auth_code:
-			response = make_transfer(credential)	
+			response = make_transfer(credential,transaction)	
 			#If response is an error, then 2FA needs to be granted
 			if response.status_code == 403:
 				my_json = (response.content.decode('utf8').replace("'", '"'))
@@ -298,7 +334,7 @@ def transfer(request,payNow=False,lamp=True):
 			access_token_2FA = get_access_token(auth_code,settings.SITE+'transfer')
 			credential.access_token = access_token_2FA['access_token']
 
-			response = make_transfer(credential)
+			response = make_transfer(credential,transaction)
 			my_json = (response.content.decode('utf8').replace("'", '"'))
 			data = json.loads(my_json)
 
@@ -307,7 +343,7 @@ def transfer(request,payNow=False,lamp=True):
 
 	return r1
 
-def make_transfer(credential):
+def make_transfer(credential,transaction):
 
 	headers = {
 		'Content-Type':'application/json',
@@ -329,10 +365,10 @@ def make_transfer(credential):
  				"alternateReferenceDesc":"MOBILE",
  				"alternateReference":"9790888878"
  				},
- 			"amount":"1",
- 			"sourceCurrency":"SGD",
- 			"destinationCurrency":"SGD",
- 			"transferCurrency":"SGD",
+ 			"amount":transaction.amount,
+ 			"sourceCurrency":transaction.currency,
+ 			"destinationCurrency":transaction.currency,
+ 			"transferCurrency":transaction.currency,
  			"comments":"thanks",
  			"purpose":"FCCC",
  			"transferType":"INSTANT",
@@ -375,7 +411,7 @@ def transaction_history(request):
 
 	return render(request, 'dbs/transaction_history.html', context)
 
-def make_paynow_transfer(credential):
+def make_paynow_transfer(credential,transaction,account_number):
 
 	headers = {
 		'Content-Type':'application/json',
@@ -383,19 +419,17 @@ def make_paynow_transfer(credential):
 		'accessToken': credential.access_token,
 	}
 
-	debitAccountId = "16614260647620470151013"
-
 	payload = {
  		"fundTransferDetl": {
     		"partyId": credential.cin_party_id,
-		    "debitAccountId": debitAccountId,
+		    "debitAccountId": account_number,
 		    "payeeReference": {
-		      "referenceType": "NRIC",
-		      "referenceDesc": "NRIC",
-		      "reference": "S1069604F"
+		      "referenceType": "UEN",
+		      "referenceDesc": "UEN",
+		      "reference": transaction.UEN
 		    },
-		    "amount": "3",
-		    "transferCurrency": "SGD",
+		    "amount": transaction.amount,
+		    "transferCurrency": transaction.currency,
 		    "comments": "for roti",
 		    "purpose": "Transfer",
 		    "referenceId": "4P3EDAB1C853A004117A32"

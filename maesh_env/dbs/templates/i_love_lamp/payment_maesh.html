@@ -19,31 +19,42 @@
 			<div class="shape shape-background shape-right"></div>
 		</div>
 		<div class="price">
-			<h1 style="font-size: 3rem;">S$217.00</h1>
+			<h1 style="font-size: 3rem;">S${{transaction.amount|floatformat:2}}</h1>
 			<div><strong>To:</strong> I Love Lamp Pte Ltd</div>
-			<div><strong>Date:</strong> June 13, 2019</div>
+			<div><strong>Date: </strong>{% now "F j, Y" %}</div>
+			<div><strong>Time: </strong>{% now "H:i" %}</div>
 		</div>
 	</div>
-	<div class="container account" style="text-align: left; padding-top: 60px;">
-		{% if dbs %}
-		<img class="bankimage" style="width:100px;" src="{% static 'i_love_lamp/images/dbs.png' %}" alt="DBS">
-		{% endif %}
-		{% if ocbc %}
-		<img class="bankimage" style="width:100px;" src="{% static 'i_love_lamp/images/ocbc.png' %}" alt="OCBC">
-		{% endif %}
-		{% if dbs %}
-		<div><strong>Account number: </strong><br>028-801127-5​​​​​​​</div>
-		{% endif %}
-		{% if ocbc %}
-		<div><strong>Account number: </strong><br>501999999001</div>
-		{% endif %}
-		<div><strong>Account holder: </strong><br>J. Doe</div>
-	</div>
-</section>
-<section>
-	<div class="container">
-		<a class="button" href="{% url 'confirmation' %}">Buy</a>
-	</div>
+	<form method="post" action="{% url 'confirmation' %}">
+		<div class="container account" style="text-align: left; padding-top: 60px;">
+			{% if dbs %}
+			<img class="bankimage" style="width:100px;" src="{% static 'i_love_lamp/images/dbs.png' %}" alt="DBS">
+			{% endif %}
+			{% if ocbc %}
+			<img class="bankimage" style="width:100px;" src="{% static 'i_love_lamp/images/ocbc.png' %}" alt="OCBC">
+			{% endif %}
+			{% if dbs %}
+			{% if deposit_accounts %}
+	 				<div class="form-group">
+			  			<label for="sel1"><strong>Bank account: </strong></label>
+			  			<select class="form-control" id="sel1" name="account" style="width:50%">
+			  				{% for currentAccount in deposit_accounts.currentAccounts %}
+						    <option value="{{currentAccount.id}}">{{currentAccount.productDescription}} ({{currentAccount.accountNumber}}) | {{currentAccount.balances.availableBalance.currency}} {{currentAccount.balances.availableBalance.amount|floatformat:2}}</option>
+							{% endfor %}
+			  			</select>
+					</div>
+			{% endif %}
+			{% endif %}
+			{% if ocbc %}
+			<div><strong>Account number: </strong><br>501999999001</div>
+			{% endif %}
+			<div><strong>Account holder: </strong><br>J. Doe</div>
+		</div>
+		<div class="container">
+			<button class="button" type="submit">Buy</button>
+		</div>
+		{% csrf_token %}
+	</form>
 </section>
 <footer>
 	<div class="container footer">
