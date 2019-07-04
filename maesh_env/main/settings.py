@@ -27,12 +27,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost','192.168.0.119','159.65.7.84','maesh.io']
 
-
-CLIENTID = '6fce2916-d21e-4114-8433-8428d41effae'
-CLIENTSECRET = '527011b7-d982-478e-bd22-d28b54e33829'
-API = 'https://www.dbs.com/sandbox/api/sg/v1'
-API_OCBC = 'https://api.ocbc.com/'
 SITE = 'http://localhost:8000/'#'https://maesh.io:8000/'#'http://159.65.7.84:8000/'#'http://192.168.0.119:8000/'
+
+#DBS Credentials
+API_DBS = 'https://www.dbs.com/sandbox/api/sg/v1'
+CLIENTID_DBS = '6fce2916-d21e-4114-8433-8428d41effae'
+CLIENTSECRET_DBS = '527011b7-d982-478e-bd22-d28b54e33829'
+
+#OCBC Credentials
+API_OCBC = 'https://api.ocbc.com/'
+CLIENTID_OCBC = '1sQ5xa9nwB9i2E4l3BVAfyLMIe8a'
 ACCESS_TOKEN_OCBC = '8c24fe6033a55fb4a8622239a0df7742'
 
 # Application definition

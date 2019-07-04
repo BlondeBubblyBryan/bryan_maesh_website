@@ -1,7 +1,7 @@
 {% extends "../i_love_lamp/index.html" %}
 {% load static %}
 {% block body %}
-
+{% if prototype %}
 <header style="background-color: #ffffff;">
 	<div class="container">
 		<a class="upperleft" href="{% url 'payment_method' %}">
@@ -10,6 +10,7 @@
 		<h2>Checkout</h2>
 	</div>
 </header>
+{% endif %}
 <section class="section">
 	<div class="shape-wrapper">
 		<div class="shape shape-background shape-main gradient gradient-53"></div>
@@ -21,10 +22,10 @@
 </section>
 <section>
 	<div class="container banks">
-		<a class="dot" href="{% url 'dbs_connect_account' %}">
+		<a class="dot" href="{% url 'connect_bank' bank='dbs' %}">
 			<img class="bankimage" style="width:100px;" src="{% static 'i_love_lamp/images/dbs.png' %}" alt="DBS">
 		</a>
-		<a class="dot" href="{% url 'ocbc_connect_account' %}">
+		<a class="dot" href="{% url 'connect_bank' bank='ocbc' %}">
 			<img class="bankimage" style="width:80px;" src="{% static 'i_love_lamp/images/ocbc.png' %}" alt="OCBC">
 		</a>						
 		<a class="dot">
