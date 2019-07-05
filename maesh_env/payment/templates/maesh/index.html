@@ -7,11 +7,13 @@
 	<title>Maesh Payment</title>
 	<link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans:400,700&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa:400,700&display=swap" rel="stylesheet">
+	{% if prototype %}
 	<link href="{% static 'i_love_lamp/css/style.css' %}" rel="stylesheet">
-	<link href="{% static 'i_love_lamp/css/maesh-style.css' %}" rel="stylesheet">
+	{% endif %}
+	<link href="{% static 'maesh/css/style.css' %}" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset='utf-8'>
-	<link rel="shortcut icon" type="image/png" href="{% static 'i_love_lamp/images/i_love_lamp.png' %}"/>
+	<link rel="shortcut icon" type="image/png" href="{% static 'maesh/images/favicon.png' %}"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="{% static 'i_love_lamp/js/javascript.js' %}"></script>	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

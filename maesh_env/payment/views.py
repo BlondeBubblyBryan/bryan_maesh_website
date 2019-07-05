@@ -11,6 +11,10 @@ from django.conf import settings
 
 import os.path
 
+### ***
+#	I Love Lamp Prototype
+### ***
+
 #Product page with what's in the cart
 def product_page(request):
 
@@ -20,6 +24,10 @@ def product_page(request):
 def payment_method(request):
 
 	return render(request, 'i_love_lamp/payment_method.html')
+
+### ***
+#	Maesh Payment
+### ***
 
 #The bank to use for PayNow is chosen
 def paynow_maesh(request):
@@ -43,7 +51,7 @@ def paynow_maesh(request):
 		context['prototype'] = True
 		transaction = Transaction.objects.create(amount='217.00',currency='SGD',UEN='123456789')
 
-	return render(request, 'i_love_lamp/paynow_maesh.html', context)
+	return render(request, 'maesh/paynow_maesh.html', context)
 
 # Connect to bank
 def connect_bank(request,bank=None):
@@ -108,7 +116,7 @@ def payment_maesh(request):
 	my_json = (deposit_accounts.content.decode('utf8').replace("'", '"'))
 	context['deposit_accounts'] = json.loads(my_json)
 
-	return render(request, 'i_love_lamp/payment_maesh.html', context)
+	return render(request, 'maesh/payment_maesh.html', context)
 
 #Once the authorization code is presented, create/update credential with the access token
 def check_credential(auth_code):

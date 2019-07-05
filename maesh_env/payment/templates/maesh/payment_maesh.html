@@ -1,7 +1,7 @@
 {% extends "../maesh/index.html" %}
 {% load static %}
 {% block body %}
-
+{% if prototype %}
 <header style="background-color: #ffffff;">
 	<div class="container">
 		<a class="upperleft" href="{% url 'payment_method' %}">
@@ -10,6 +10,7 @@
 		<h2>Payment</h2>
 	</div>
 </header>
+{% endif %}
 <section class="section">
 	<div class="container">
 		<h1 style="text-align: left;">Confirm payment</h1>
@@ -28,10 +29,10 @@
 	<form method="post" action="{% url 'confirmation' %}">
 		<div class="container account" style="text-align: left; padding-top: 60px;">
 			{% if dbs %}
-			<img class="bankimage" style="width:100px;" src="{% static 'i_love_lamp/images/dbs.png' %}" alt="DBS">
+			<img class="bankimage" style="width:100px;" src="{% static 'maesh/images/dbs.png' %}" alt="DBS">
 			{% endif %}
 			{% if ocbc %}
-			<img class="bankimage" style="width:100px;" src="{% static 'i_love_lamp/images/ocbc.png' %}" alt="OCBC">
+			<img class="bankimage" style="width:100px;" src="{% static 'maesh/images/ocbc.png' %}" alt="OCBC">
 			{% endif %}
 			{% if dbs %}
 			{% if deposit_accounts %}
@@ -59,7 +60,7 @@
 <footer>
 	<div class="container footer">
 		<h6>Pay with</h6>				
-		<img style="width: 80px;height: 40px;" src="{% static 'i_love_lamp/images/paynow.png' %}" alt="PayNow">
+		<img style="width: 80px;height: 40px;" src="{% static 'maesh/images/paynow.png' %}" alt="PayNow">
 	</div>
 </footer>
 {% endblock %}
