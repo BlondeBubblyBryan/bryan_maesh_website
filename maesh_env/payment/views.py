@@ -4,6 +4,7 @@ from payment.models import Credential, Transaction
 
 import json
 import jwt
+import urllib
 
 import requests
 from requests.auth import HTTPBasicAuth
@@ -25,6 +26,14 @@ def payment_method(request):
 
 	return render(request, 'i_love_lamp/payment_method.html')
 
+#Confirmation page
+def confirmed(request):
+
+	context = {}
+	context['status'] = "Confirmed"
+
+	return render(request, 'i_love_lamp/confirmation_page.html',context)
+
 ### ***
 #	Maesh Payment
 ### ***
@@ -33,8 +42,6 @@ def payment_method(request):
 def paynow_maesh(request):
 
 	context = {}
-	#Used to indicate Maesh stylesheet
-	context['maesh'] = True
 
 	#From the query parameters the transaction details are fetched
 	#This can be tampered with, so we'll have to look at a better solution
@@ -42,14 +49,15 @@ def paynow_maesh(request):
 	amount = request.GET.get('amount')
 	currency = request.GET.get('currency')
 	UEN = request.GET.get('UEN')
+	redirect_uri  = request.GET.get('redirect_uri')
 
 	#If there are query parameters, then Prestashop
 	if amount:
-		transaction = Transaction.objects.create(amount=amount,currency=currency,UEN=UEN)
+		transaction = Transaction.objects.create(amount=amount,currency=currency,UEN=UEN,redirect_uri=redirect_uri)
 	#If not, it's the prototype app
 	else:
 		context['prototype'] = True
-		transaction = Transaction.objects.create(amount='217.00',currency='SGD',UEN='123456789')
+		transaction = Transaction.objects.create(amount='217.00',currency='SGD',UEN='123456789',redirect_uri='http://localhost:8000/confirmed')
 
 	return render(request, 'maesh/paynow_maesh.html', context)
 
@@ -88,9 +96,6 @@ def payment_maesh(request):
 
 	context = {}
 
-	#Used to indicate Maesh stylesheet
-	context['maesh'] = True
-
 	#Retrieving the transaction details
 	transaction = Transaction.objects.latest('created')
 	context['transaction'] = transaction
@@ -107,11 +112,13 @@ def payment_maesh(request):
 		context['ocbc'] = True
 
 	#This part for now only works for DBS
+	#Create or update credential
 	auth_code = request.GET.get('code', '')
-	credential = check_credential(auth_code)
+	if auth_code:
+		credential = check_credential(auth_code)
 
 	#This part for now only works for DBS
-	#Retrieving information about the payer
+	#Retrieving deposit accounts that can be charged from
 	deposit_accounts = get_deposit_accounts(credential)
 	my_json = (deposit_accounts.content.decode('utf8').replace("'", '"'))
 	context['deposit_accounts'] = json.loads(my_json)
@@ -121,31 +128,28 @@ def payment_maesh(request):
 #Once the authorization code is presented, create/update credential with the access token
 def check_credential(auth_code):
 
-	credential = None
+	data = get_access_token(auth_code,settings.SITE+'payment_maesh_dbs')
+	decoded_access_token = jwt.decode(data['access_token'], settings.CLIENTSECRET_DBS, algorithms=['HS256'], verify=False) #Verification fails??
 
-	if auth_code:
-		data = get_access_token(auth_code,settings.SITE+'payment_maesh_dbs')
-		decoded_access_token = jwt.decode(data['access_token'], settings.CLIENTSECRET_DBS, algorithms=['HS256'], verify=False) #Verification fails??
+	cin_party_id = decoded_access_token['cin']
+	party_id = decoded_access_token['sub']
 
-		cin_party_id = decoded_access_token['cin']
-		party_id = decoded_access_token['sub']
-
-		credential, created = Credential.objects.get_or_create(
-			party_id=party_id,
-			defaults={
-				'access_token':data['access_token'],
-				'expire_in':data['expire_in'],
-				'token_type':data['token_type'],
-				'refresh_token':data['refresh_token'],
-				'cin_party_id':cin_party_id,
-			}
-		)
-		#If credential is not new, then update
-		if created == False:
-			credential.access_token = data['access_token']
-			credential.expire_in = data['expire_in']
-			credential.refresh_token = data['refresh_token']
-			credential.save()
+	credential, created = Credential.objects.get_or_create(
+		party_id=party_id,
+		defaults={
+			'access_token':data['access_token'],
+			'expire_in':data['expire_in'],
+			'token_type':data['token_type'],
+			'refresh_token':data['refresh_token'],
+			'cin_party_id':cin_party_id,
+		}
+	)
+	#If credential is not new, then update
+	if created == False:
+		credential.access_token = data['access_token']
+		credential.expire_in = data['expire_in']
+		credential.refresh_token = data['refresh_token']
+		credential.save()
 
 	return credential
 
@@ -209,6 +213,65 @@ def refresh_access_token(credential):
 
 	return r1
 
+#Initiate PayNow transfer
+def payNow_transfer(request):
+
+	context = {}
+
+	#Get all information needed to perform transaction
+	credentials = Credential.objects.all()
+	credential = credentials.first()
+	transaction = Transaction.objects.latest('created')
+	account_number = request.POST.get('account')
+
+	response = make_paynow_transfer(credential,transaction,account_number)
+	my_json = (response.content.decode('utf8').replace("'", '"'))
+	data = json.loads(my_json)
+
+	successful = data['status'] == 'Successful'
+
+	if successful:
+		r1 = HttpResponseRedirect(transaction.redirect_uri)
+	else:
+		context['status'] = successful
+		r1 = render(request, 'i_love_lamp/confirmation_page.html',context)
+
+	return r1
+
+#Make PayNow transfer
+def make_paynow_transfer(credential,transaction,account_number):
+
+	headers = {
+		'Content-Type':'application/json',
+		'clientId': settings.CLIENTID_DBS,
+		'accessToken': credential.access_token,
+	}
+
+	payload = {
+		"fundTransferDetl": {
+			"partyId": credential.cin_party_id,
+			"debitAccountId": account_number,
+			"payeeReference": {
+			  "referenceType": "UEN",
+			  "referenceDesc": "UEN",
+			  "reference": transaction.UEN
+			},
+			"amount": transaction.amount,
+			"transferCurrency": transaction.currency,
+			"comments": "for roti",
+			"purpose": "Transfer",
+			"referenceId": "4P3EDAB1C853A004117A32"
+		}
+	}
+
+	response = requests.post(settings.API_DBS+'/transfers/payNow', headers=headers, data=payload)
+
+	return response
+
+### ***
+#	Check statuses in DBS Sandbox
+### ***
+
 #Can use this index page to check a couple of things in the DBS Sandbox. It's not part of the prototype or the Prestashop module
 def index(request):
 
@@ -216,7 +279,8 @@ def index(request):
 
 	#If an authorization code is presented, create a credential with the access token
 	auth_code = request.GET.get('code', '')
-	credential = check_credential(auth_code)
+	if auth_code:
+		credential = check_credential(auth_code)
 
 	credentials = Credential.objects.all()
 
@@ -247,73 +311,38 @@ def account_balance(request):
 
 	return r1
 
-def payNow_transfer_lamp(request):
-	return transfer(request,True,True)
-
-def payNow_transfer(request):
-	return transfer(request,True,False)
-
-def payLah_transfer(request):
-
-	credentials = Credential.objects.all()
-	credential = credentials.first()
-	transaction = Transaction.objects.latest('created')
-
-	#Account number to be used is posted
-	account_number = request.POST.get('account')
-
-	response = make_paylah_transfer(credential,transaction,account_number)
-	my_json = (response.content.decode('utf8').replace("'", '"'))
-	data = json.loads(my_json)
-
-	return HttpResponseRedirect(response)
-
 #Show transfer page
-def transfer(request,payNow=False,lamp=True):
+def transfer(request):
 
 	context = {}
 
 	credentials = Credential.objects.all()
 	credential = credentials.first()
 	transaction = Transaction.objects.latest('created')
+	account_number = request.POST.get('account')
 
 	auth_code = request.GET.get('code', '') 
 
-	#Account number to be used is posted
-	account_number = request.POST.get('account')
+	#If no auth_code is available, initiate transfer, but catch error
+	if not auth_code:
+		response = make_transfer(credential,transaction)    
+		#If response is an error, then 2FA needs to be granted
+		if response.status_code == 403:
+			my_json = (response.content.decode('utf8').replace("'", '"'))
+			data = json.loads(my_json)
+			url = data.get('Error').get('url')+'&client_id='+settings.CLIENTID_DBS+'&state=3309&redirect_uri='+settings.SITE+'transfer'
+			r1 = HttpResponseRedirect(url)
+	#If there is an auth_code available, make a transfer
+	else:
+		access_token_2FA = get_access_token(auth_code,settings.SITE+'transfer')
+		credential.access_token = access_token_2FA['access_token']
 
-	if payNow == True:
-		response = make_paynow_transfer(credential,transaction,account_number)
+		response = make_transfer(credential,transaction)
 		my_json = (response.content.decode('utf8').replace("'", '"'))
 		data = json.loads(my_json)
 
 		context['success'] = data['status']
-
-		if lamp == True:
-			r1 = render(request, 'i_love_lamp/confirmation_page.html',context)
-		else:
-			r1 = render(request, 'dbs/transfer.html',context)
-	else:
-		#If no auth_code is available, initiate transfer, but catch error
-		if not auth_code:
-			response = make_transfer(credential,transaction)    
-			#If response is an error, then 2FA needs to be granted
-			if response.status_code == 403:
-				my_json = (response.content.decode('utf8').replace("'", '"'))
-				data = json.loads(my_json)
-				url = data.get('Error').get('url')+'&client_id='+settings.CLIENTID_DBS+'&state=3309&redirect_uri='+settings.SITE+'transfer'
-				r1 = HttpResponseRedirect(url)
-		#If there is an auth_code available, make a transfer
-		if auth_code:
-			access_token_2FA = get_access_token(auth_code,settings.SITE+'transfer')
-			credential.access_token = access_token_2FA['access_token']
-
-			response = make_transfer(credential,transaction)
-			my_json = (response.content.decode('utf8').replace("'", '"'))
-			data = json.loads(my_json)
-
-			context['success'] = data['status']
-			r1 = render(request, 'dbs/transfer.html',context)
+		r1 = render(request, 'dbs/transfer.html',context)
 
 	return r1
 
@@ -384,85 +413,59 @@ def transaction_history(request):
 
 	return render(request, 'dbs/transaction_history.html', context)
 
-def make_paynow_transfer(credential,transaction,account_number):
+# #This doesn't seem to be working in Sandbox. Get a webpage as response
+# def payLah_transfer(request):
 
-	headers = {
-		'Content-Type':'application/json',
-		'clientId': settings.CLIENTID_DBS,
-		'accessToken': credential.access_token,
-	}
+# 	credentials = Credential.objects.all()
+# 	credential = credentials.first()
+# 	transaction = Transaction.objects.latest('created')
 
-	payload = {
-		"fundTransferDetl": {
-			"partyId": credential.cin_party_id,
-			"debitAccountId": account_number,
-			"payeeReference": {
-			  "referenceType": "UEN",
-			  "referenceDesc": "UEN",
-			  "reference": transaction.UEN
-			},
-			"amount": transaction.amount,
-			"transferCurrency": transaction.currency,
-			"comments": "for roti",
-			"purpose": "Transfer",
-			"referenceId": "4P3EDAB1C853A004117A32"
-		}
-	}
+# 	#Account number to be used is posted
+# 	account_number = request.POST.get('account')
 
-	response = requests.post(settings.API_DBS+'/transfers/payNow', headers=headers, data=payload)
+# 	response = make_paylah_transfer(credential,transaction,account_number)
+# 	my_json = (response.content.decode('utf8').replace("'", '"'))
+# 	data = json.loads(my_json)
 
-	return response
+# 	return HttpResponseRedirect(response)
 
-def make_paylah_transfer(credential,transaction,account_number):
+# #This doesn't seem to be working in Sandbox. Get a webpage as response
+# def make_paylah_transfer(credential,transaction,account_number):
 	
-	headers = {
-		"msgId": "string",
-		"orgId": "string",
-		"timeStamp": "2019-07-04T12:15:35Z"
-	}
+# 	headers = {
+# 		"msgId": "string",
+# 		"orgId": "string",
+# 		"timeStamp": "2019-07-04T12:15:35Z"
+# 	}
 	
-	txnInfo = {
-		"txnMsgId": "string",
-		"txnSource": 0,
-		"txnType": "s",
-		"txnCcy": transaction.currency,
-		"txnAmount": transaction.amount,
-		"returnUrl": "string",
-		"phoneNumber": 0,
-		"payeeShippingAddress": "st",
-		"address": {
-		  "blockNo": "string",
-		  "levelUnit": "string",
-		  "address1": "string",
-		  "address2": "string",
-		  "postalCode": 0
-		},
-		"rmtInf": {
-		  "invoiceDetails": "string",
-		  "paymentDetails": {
-			"referenceNumber2": "string",
-			"referenceNumber3": "string",
-			"referenceNumber4": "string",
-			"referenceNumber5": "string"
-		  },
-		  "qrCode": "string"
-		}
-	}
+# 	txnInfo = {
+# 		"txnMsgId": "string",
+# 		"txnSource": 0,
+# 		"txnType": "s",
+# 		"txnCcy": transaction.currency,
+# 		"txnAmount": transaction.amount,
+# 		"returnUrl": "string",
+# 		"phoneNumber": 0,
+# 		"payeeShippingAddress": "st",
+# 		"address": {
+# 		  "blockNo": "string",
+# 		  "levelUnit": "string",
+# 		  "address1": "string",
+# 		  "address2": "string",
+# 		  "postalCode": 0
+# 		},
+# 		"rmtInf": {
+# 		  "invoiceDetails": "string",
+# 		  "paymentDetails": {
+# 			"referenceNumber2": "string",
+# 			"referenceNumber3": "string",
+# 			"referenceNumber4": "string",
+# 			"referenceNumber5": "string"
+# 		  },
+# 		  "qrCode": "string"
+# 		}
+# 	}
 
-	response = requests.post(settings.API_DBS+'/paylah/v1/purchase/webCheckout', headers=headers, data=txnInfo)
+# 	response = requests.post(settings.API_DBS+'/paylah/v1/purchase/webCheckout', headers=headers, data=txnInfo)
 
-	return response
-
-# def get_account_details(access_token,accountId):
-
-#   headers = {
-#       'Content-Type':'application/json',
-#       'clientId': settings.CLIENTID_DBS,
-#       'accessToken': access_token,
-#   }
-
-#   response = requests.get(settings.API_DBS+'/accounts/'+accountId, headers=headers)
-
-#   my_json = (response.content.decode('utf8').replace("'", '"'))
-
-#   return json.loads(my_json)
+# 	return response
