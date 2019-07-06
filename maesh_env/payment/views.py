@@ -82,11 +82,11 @@ def authorize(bank):
 		response = requests.get(settings.API_DBS+'/oauth/authorize', params=params)
 
 	if bank == 'ocbc':
-		params = (
-			('client_id', settings.CLIENTID_OCBC),
-			('redirect_uri', settings.SITE+'payment_maesh_ocbc'),
-			('scope', 'transactional')
-		)
+		params = {
+			'client_id': settings.CLIENTID_OCBC,
+			'redirect_uri': settings.SITE+'payment_maesh_ocbc',
+			'scope': 'transactional'
+		}
 		response = requests.get(settings.API_OCBC+'ocbcauthentication/api/oauth2/authorize', params=params)
 
 	return response.url
@@ -293,14 +293,14 @@ def make_paynow_transfer_OCBC(credential,transaction,account_number):
 	headers = {
 		"Content-Type": "application/json",
 		"Accept": "application/json",
-		"Authorization": "Bearer 8c24fe6033a55fb4a8622239a0df7742"
+		"Authorization": "Bearer "+settings.ACCESS_TOKEN_OCBC
 	}
 
 	payload = {
 		"TransactionDescription": "Pay taxes",
-		"Amount": 201.75,
+		"Amount": transaction.amount,
 		"ProxyType": "UEN",
-		"ProxyValue": "T01LLXXXXA",
+		"ProxyValue": transaction.UEN,
 		"FromAccountNo": "1795-XXX900",
 		"PurposeCode": "OTHR",
 		"TransactionReferenceNo": "OrgXYZ1212xxx"
