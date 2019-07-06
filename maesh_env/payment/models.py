@@ -18,6 +18,7 @@ class Transaction(models.Model):
 	created = models.DateTimeField(editable=False, default=timezone.now())
 	modified = models.DateTimeField(default=timezone.now())
 	redirect_uri = models.CharField(max_length=500,blank=True)
+	bank = models.CharField(max_length=4, blank=True)
 
 	def save(self, *args, **kwargs):
 		''' On save, update timestamps '''

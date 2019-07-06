@@ -37,7 +37,8 @@ CLIENTSECRET_DBS = '527011b7-d982-478e-bd22-d28b54e33829'
 #OCBC Credentials
 API_OCBC = 'https://api.ocbc.com/'
 CLIENTID_OCBC = '1sQ5xa9nwB9i2E4l3BVAfyLMIe8a'
-ACCESS_TOKEN_OCBC = '8c24fe6033a55fb4a8622239a0df7742'
+CLIENTSECRET_OCBC = 'caHxtf_qg_pdCOBmsiMU5nR_fxAa'
+ACCESS_TOKEN_OCBC = "8c24fe6033a55fb4a8622239a0df7742"
 
 # Application definition
 

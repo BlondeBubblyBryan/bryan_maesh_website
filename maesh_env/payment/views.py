@@ -107,21 +107,26 @@ def payment_maesh(request):
 	#Check which bank is redirected from
 	path = request.path_info
 	if "dbs" in path:
+		transaction.bank = 'DBS'
+		transaction.save()
 		context['dbs'] = True
 	if "ocbc" in path:
+		transaction.bank = 'OCBC'
+		transaction.save()
 		context['ocbc'] = True
 
-	#This part for now only works for DBS
 	#Create or update credential
 	auth_code = request.GET.get('code', '')
+	#This part for now only works for DBS
 	if auth_code:
 		credential = check_credential(auth_code)
-
-	#This part for now only works for DBS
-	#Retrieving deposit accounts that can be charged from
-	deposit_accounts = get_deposit_accounts(credential)
-	my_json = (deposit_accounts.content.decode('utf8').replace("'", '"'))
-	context['deposit_accounts'] = json.loads(my_json)
+		#Retrieving deposit accounts that can be charged from
+		deposit_accounts = get_deposit_accounts(credential)
+		my_json = (deposit_accounts.content.decode('utf8').replace("'", '"'))
+		context['deposit_accounts'] = json.loads(my_json)
+	#This is for OCBC
+	else:
+		credential = None
 
 	return render(request, 'maesh/payment_maesh.html', context)
 
@@ -226,9 +231,13 @@ def payNow_transfer(request):
 
 	response = make_paynow_transfer(credential,transaction,account_number)
 	my_json = (response.content.decode('utf8').replace("'", '"'))
+	print(my_json)
 	data = json.loads(my_json)
 
-	successful = data['status'] == 'Successful'
+	if transaction.bank == 'DBS':
+		successful = data['status'] == 'Successful'
+	if transaction.bank == 'OCBC':
+		successful = data['Success'] == True
 
 	if successful:
 		r1 = HttpResponseRedirect(transaction.redirect_uri)
@@ -240,6 +249,16 @@ def payNow_transfer(request):
 
 #Make PayNow transfer
 def make_paynow_transfer(credential,transaction,account_number):
+
+	if transaction.bank == 'DBS':
+		r1 = make_paynow_transfer_DBS(credential,transaction,account_number)
+	if transaction.bank == 'OCBC':
+		r1 = make_paynow_transfer_OCBC(credential,transaction,account_number)
+
+	return r1
+
+#Make PayNow transfer DBS
+def make_paynow_transfer_DBS(credential,transaction,account_number):
 
 	headers = {
 		'Content-Type':'application/json',
@@ -265,6 +284,29 @@ def make_paynow_transfer(credential,transaction,account_number):
 	}
 
 	response = requests.post(settings.API_DBS+'/transfers/payNow', headers=headers, data=payload)
+
+	return response
+
+#Make PayNow transfer OCBC
+def make_paynow_transfer_OCBC(credential,transaction,account_number):
+
+	headers = {
+		"Content-Type": "application/json",
+		"Accept": "application/json",
+		"Authorization": "Bearer 8c24fe6033a55fb4a8622239a0df7742"
+	}
+
+	payload = {
+		"TransactionDescription": "Pay taxes",
+		"Amount": 201.75,
+		"ProxyType": "UEN",
+		"ProxyValue": "T01LLXXXXA",
+		"FromAccountNo": "1795-XXX900",
+		"PurposeCode": "OTHR",
+		"TransactionReferenceNo": "OrgXYZ1212xxx"
+	}
+
+	response = requests.post("https://api.ocbc.com:8243/transactional/corporate/paynowpayment/1.0", headers=headers, data=json.dumps(payload))
 
 	return response
 
