@@ -25,7 +25,7 @@ SECRET_KEY = 'u8$em6-r#$i91=knt^uud&cy_r33imh4%cx9stx)newdmfd-17'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','192.168.0.119','159.65.7.84','maesh.io']
+ALLOWED_HOSTS = ['localhost','192.168.0.119','159.65.7.84','maesh.io','10.10.30.214']
 
 SITE = 'http://localhost:8000/'#'https://maesh.io:8000/'#'http://159.65.7.84:8000/'#'http://192.168.0.119:8000/'
 
@@ -35,10 +35,15 @@ CLIENTID_DBS = '6fce2916-d21e-4114-8433-8428d41effae'
 CLIENTSECRET_DBS = '527011b7-d982-478e-bd22-d28b54e33829'
 
 #OCBC Credentials
-API_OCBC = 'https://api.ocbc.com/'
+API_OCBC = 'https://api.ocbc.com'
 CLIENTID_OCBC = '1sQ5xa9nwB9i2E4l3BVAfyLMIe8a'
 CLIENTSECRET_OCBC = 'caHxtf_qg_pdCOBmsiMU5nR_fxAa'
 ACCESS_TOKEN_OCBC = "8c24fe6033a55fb4a8622239a0df7742"
+
+#Citibank Credentials
+API_CITI = 'https://sandbox.apihub.citi.com/gcb/api'
+CLIENTID_CITI = 'ff629055-00ed-4fcf-a4a3-8e99b2020a3c'
+CLIENTSECRET_CITI = 'yK4rF0dK2xC5wN3fC7hF3vW6rQ8rY3kP5gE8rF6cT1gD6yP2iP'
 
 # Application definition
 

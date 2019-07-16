@@ -26,3 +26,10 @@ class Transaction(models.Model):
 			self.created = timezone.now()
 		self.modified = timezone.now()
 		return super(Transaction, self).save(*args, **kwargs)
+
+# class API(models.Model):
+
+# 	bank = models.CharField(max_length=10)
+#     url = models.CharField(max_length=100)
+#     client_id = models.CharField(max_length=100)
+#     client_secret = models.CharField(max_length=100)

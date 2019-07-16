@@ -87,9 +87,31 @@ def authorize(bank):
 			'redirect_uri': settings.SITE+'payment_maesh_ocbc',
 			'scope': 'transactional'
 		}
-		response = requests.get(settings.API_OCBC+'ocbcauthentication/api/oauth2/authorize', params=params)
+		response = requests.get(settings.API_OCBC+'/ocbcauthentication/api/oauth2/authorize', params=params)
+
+	if bank == 'citi':
+		params = {
+			'response_type':'code',
+			'client_id': settings.CLIENTID_CITI,
+			'scope': 'external_domestic_transfers',
+			'countryCode':'SG',
+			'businessCode':'GCB',
+			'locale':'en_SG',
+			'state':'12093',
+			'redirect_uri': settings.SITE+'payment_maesh_citi'
+			}
+
+		response = requests.get(settings.API_CITI+'/authCode/oauth2/authorize', params=params)
 
 	return response.url
+
+class Bank:
+	def __init__(self, name, API, client_id, client_secret, grant_type):
+		self.name = name
+		self.API = API
+		self.client_id = client_id
+		self.client_secret = client_secret
+		self.grant_type = grant_type
 
 #Payment is prepared
 def payment_maesh(request):
@@ -107,23 +129,30 @@ def payment_maesh(request):
 	#Check which bank is redirected from
 	path = request.path_info
 	if "dbs" in path:
-		transaction.bank = 'DBS'
+		transaction.bank = 'dbs'
 		transaction.save()
 		context['dbs'] = True
+		bank = Bank(transaction.bank,settings.API_DBS+'/oauth/tokens',settings.CLIENTID_DBS,settings.CLIENTSECRET_DBS,'token')
 	if "ocbc" in path:
-		transaction.bank = 'OCBC'
+		transaction.bank = 'ocbc'
 		transaction.save()
 		context['ocbc'] = True
+		bank = Bank(transaction.bank,settings.API_OCBC,settings.CLIENTID_OCBC,settings.CLIENTSECRET_OCBC,'token')
+	if "citi" in path:
+		transaction.bank = 'citi'
+		transaction.save()
+		context['citi'] = True
+		bank = Bank(transaction.bank,settings.API_CITI+'/authCode/oauth2/token/sg/gcb',settings.CLIENTID_CITI,settings.CLIENTSECRET_CITI,'authorization_code')
 
 	#Create or update credential
 	auth_code = request.GET.get('code', '')
 	#This part for now only works for DBS
 	if auth_code:
-		credential = check_credential(auth_code)
+		credential = check_credential(auth_code,bank)
 		#Retrieving deposit accounts that can be charged from
-		deposit_accounts = get_deposit_accounts(credential)
+		deposit_accounts = get_deposit_accounts(credential,bank)
 		my_json = (deposit_accounts.content.decode('utf8').replace("'", '"'))
-		context['deposit_accounts'] = json.loads(my_json)
+		context['deposit_accounts'] = json.loads(my_json)		
 	#This is for OCBC
 	else:
 		credential = None
@@ -131,67 +160,84 @@ def payment_maesh(request):
 	return render(request, 'maesh/payment_maesh.html', context)
 
 #Once the authorization code is presented, create/update credential with the access token
-def check_credential(auth_code):
+def check_credential(auth_code,bank):
 
-	data = get_access_token(auth_code,settings.SITE+'payment_maesh_dbs')
-	decoded_access_token = jwt.decode(data['access_token'], settings.CLIENTSECRET_DBS, algorithms=['HS256'], verify=False) #Verification fails??
+	data = get_access_token(auth_code,settings.SITE+'payment_maesh_'+bank.name,bank)
+	if bank.name == 'dbs':
+		decoded_access_token = jwt.decode(data['access_token'], settings.CLIENTSECRET_DBS, algorithms=['HS256'], verify=False) #Verification fails??
+		cin_party_id = decoded_access_token['cin']
+		party_id = decoded_access_token['sub']
+		scope = ""
 
-	cin_party_id = decoded_access_token['cin']
-	party_id = decoded_access_token['sub']
+	if bank.name == 'citi':
+		cin_party_id = "Unknown"
+		party_id = "Unknown"
+		scope = data['scope']
+
+	try:
+		expires_in = data['expire_in'] 
+	except:
+		expires_in = data['expires_in']
+		print(data['scope'])
 
 	credential, created = Credential.objects.get_or_create(
 		party_id=party_id,
 		defaults={
 			'access_token':data['access_token'],
-			'expire_in':data['expire_in'],
+			'expire_in':expires_in,
 			'token_type':data['token_type'],
 			'refresh_token':data['refresh_token'],
 			'cin_party_id':cin_party_id,
+			'scope':scope
 		}
 	)
 	#If credential is not new, then update
 	if created == False:
 		credential.access_token = data['access_token']
-		credential.expire_in = data['expire_in']
+		credential.expire_in = expires_in
 		credential.refresh_token = data['refresh_token']
 		credential.save()
 
 	return credential
 
 # Get OAuth access token
-def get_access_token(auth_code,redirect_uri):
+def get_access_token(auth_code,redirect_uri,bank):
 	
 	data = {
-	  'grant_type': 'token',
+	  'grant_type': bank.grant_type,
 	  'redirect_uri': redirect_uri,
 	  'code': auth_code,
 	}
 
-	response = requests.post(settings.API_DBS+'/oauth/tokens', auth=HTTPBasicAuth(settings.CLIENTID_DBS, settings.CLIENTSECRET_DBS), data=data)
+	response = requests.post(bank.API, auth=HTTPBasicAuth(bank.client_id, bank.client_secret), data=data)
 	my_json = (response.content.decode('utf8').replace("'", '"'))
 	
 	return json.loads(my_json)
 
 # Retrieve deposit accounts
-def get_deposit_accounts(credential):
+def get_deposit_accounts(credential,bank):
 
 	headers =   {
 		'Content-Type':'application/json',
-		'clientId': settings.CLIENTID_DBS,
+		'clientId': bank.client_id,
 		'accessToken': credential.access_token,
 	}
 
-	response = requests.get(settings.API_DBS+'/parties/'+credential.cin_party_id+'/deposits', headers=headers)
+	if bank.name == 'dbs':
+		response = requests.get(settings.API_DBS+'/parties/'+credential.cin_party_id+'/deposits', headers=headers)
+	if bank.name == 'citi':
+		response = requests.get(settings.API_DBS+'/parties/'+credential.cin_party_id+'/deposits', headers=headers)
 
-	#If response indicates that the access token has expired
-	if response.status_code == 403:
-		refresh_token = refresh_access_token(credential)
-		#If access token has not been refreshed, get new authorization
-		if refresh_token.status_code != 200:
-			r1 = refresh_token
-	#If everything is normal
-	else:
-		r1 = response
+	# #If response indicates that the access token has expired
+	# if response.status_code == 403:
+	# 	refresh_token = refresh_access_token(credential)
+	# 	#If access token has not been refreshed, get new authorization
+	# 	if refresh_token.status_code != 200:
+	# 		r1 = refresh_token
+	# #If everything is normal
+	# else:
+	# 	r1 = response
+	r1 = response
 
 	return r1
 
@@ -231,12 +277,11 @@ def payNow_transfer(request):
 
 	response = make_paynow_transfer(credential,transaction,account_number)
 	my_json = (response.content.decode('utf8').replace("'", '"'))
-	print(my_json)
 	data = json.loads(my_json)
 
-	if transaction.bank == 'DBS':
+	if transaction.bank == 'dbs':
 		successful = data['status'] == 'Successful'
-	if transaction.bank == 'OCBC':
+	if transaction.bank == 'ocbc':
 		successful = data['Success'] == True
 
 	if successful:
@@ -250,9 +295,9 @@ def payNow_transfer(request):
 #Make PayNow transfer
 def make_paynow_transfer(credential,transaction,account_number):
 
-	if transaction.bank == 'DBS':
+	if transaction.bank == 'dbs':
 		r1 = make_paynow_transfer_DBS(credential,transaction,account_number)
-	if transaction.bank == 'OCBC':
+	if transaction.bank == 'ocbc':
 		r1 = make_paynow_transfer_OCBC(credential,transaction,account_number)
 
 	return r1
