@@ -90,15 +90,15 @@ def payment_maesh(request):
 	bank = request.path_info.replace('/payment_maesh_', '')
 	context[bank] = True
 
-	#Create or update credential for the bank if an authorization code was sent
+	#Create or update credential for the bank with authorization code
 	auth_code = request.GET.get('code', '')
-	if auth_code:
-		transaction.credential = check_credential(auth_code,bank)
-		transaction.save()
-		#Retrieving deposit accounts that can be charged from
-		deposit_accounts = get_deposit_accounts(transaction,bank)
-		my_json = (deposit_accounts.content.decode('utf8').replace("'", '"'))
-		context['deposit_accounts'] = json.loads(my_json)		
+	transaction.credential = check_credential(auth_code,bank)
+	transaction.save()
+
+	#Retrieving deposit accounts that can be charged from
+	deposit_accounts = get_deposit_accounts(transaction)
+	my_json = (deposit_accounts.content.decode('utf8').replace("'", '"'))
+	context['deposit_accounts'] = json.loads(my_json)		
 
 	return render(request, 'maesh/payment_maesh.html', context)
 
@@ -158,17 +158,21 @@ def get_access_token(auth_code,bank):
 	return json.loads(response.content.decode('utf8').replace("'", '"'))
 
 # Retrieve deposit accounts
-def get_deposit_accounts(transaction,bank):
+def get_deposit_accounts(transaction):
 
 	headers =   {
 		'Content-Type':'application/json',
-		'clientId': settings.API[bank]['client_id'],
+		'clientId': settings.API[transaction.credential.bank]['client_id'],
 		'accessToken': transaction.credential.access_token,
 	}
 
-	response = requests.get(settings.API[bank]['url']+'/parties/'+transaction.credential.cin_party_id+'/deposits', headers=headers)
-	# if bank.name == 'citi':
-	# 	response = requests.get(settings.API_DBS+'/parties/'+credential.cin_party_id+'/deposits', headers=headers)
+	endpoint = ''
+	if transaction.credential.bank == 'dbs':
+		endpoint = settings.API[transaction.credential.bank]['url']+'/parties/'+transaction.credential.cin_party_id+'/deposits'
+	if transaction.credential.bank == 'citi':
+		endpoint = ''
+				
+	response = requests.get(endpoint, headers=headers)
 
 	# #If response indicates that the access token has expired
 	# if response.status_code == 403:
@@ -179,9 +183,8 @@ def get_deposit_accounts(transaction,bank):
 	# #If everything is normal
 	# else:
 	# 	r1 = response
-	r1 = response
 
-	return r1
+	return response
 
 # This only works for DBS now
 # If access token has expired, refresh token
@@ -280,7 +283,7 @@ def make_paynow_transfer_OCBC(credential,transaction,account_number):
 	headers = {
 		"Content-Type": "application/json",
 		"Accept": "application/json",
-		"Authorization": "Bearer "+settings.ACCESS_TOKEN_OCBC
+		"Authorization": "Bearer "+settings.API[transaction.credential.bank]['access_token']
 	}
 
 	payload = {
