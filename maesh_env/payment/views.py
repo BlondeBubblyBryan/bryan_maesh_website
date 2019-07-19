@@ -92,13 +92,16 @@ def payment_maesh(request):
 
 	#Create or update credential for the bank with authorization code
 	auth_code = request.GET.get('code', '')
-	transaction.credential = check_credential(auth_code,bank)
-	transaction.save()
+	if bank != 'ocbc':
+		transaction.credential = check_credential(auth_code,bank)
+		transaction.save()
 
 	#Retrieving deposit accounts that can be charged from
-	deposit_accounts = get_deposit_accounts(transaction)
-	my_json = (deposit_accounts.content.decode('utf8').replace("'", '"'))
-	context['deposit_accounts'] = json.loads(my_json)		
+	if bank == 'dbs':
+		deposit_accounts = get_deposit_accounts(transaction,bank)
+		my_json = (deposit_accounts.content.decode('utf8').replace("'", '"'))
+		print(my_json)
+		context['deposit_accounts'] = json.loads(my_json)		
 
 	return render(request, 'maesh/payment_maesh.html', context)
 
@@ -158,20 +161,23 @@ def get_access_token(auth_code,bank):
 	return json.loads(response.content.decode('utf8').replace("'", '"'))
 
 # Retrieve deposit accounts
-def get_deposit_accounts(transaction):
+def get_deposit_accounts(transaction,bank):
 
 	headers =   {
 		'Content-Type':'application/json',
-		'clientId': settings.API[transaction.credential.bank]['client_id'],
+		'clientId': settings.API[bank]['client_id'],
 		'accessToken': transaction.credential.access_token,
 	}
+	print(headers)
 
 	endpoint = ''
-	if transaction.credential.bank == 'dbs':
-		endpoint = settings.API[transaction.credential.bank]['url']+'/parties/'+transaction.credential.cin_party_id+'/deposits'
-	if transaction.credential.bank == 'citi':
+	if bank == 'dbs':
+		endpoint = settings.API[bank]['url']+'/parties/'+transaction.credential.cin_party_id+'/deposits'
+	if bank == 'citi':
 		endpoint = ''
-				
+	
+	print(endpoint)		
+
 	response = requests.get(endpoint, headers=headers)
 
 	# #If response indicates that the access token has expired
@@ -218,6 +224,7 @@ def payNow_transfer(request):
 	#Get all information needed to perform transaction
 	transaction = Transaction.objects.latest('created')
 	account_number = request.POST.get('account')
+	print(account_number)
 
 	response = make_paynow_transfer(transaction,account_number)
 	my_json = (response.content.decode('utf8').replace("'", '"'))
@@ -272,6 +279,9 @@ def make_paynow_transfer_DBS(transaction,account_number):
 			"referenceId": "4P3EDAB1C853A004117A32"
 		}
 	}
+
+	print(headers)
+	print(payload)
 
 	response = requests.post(settings.API[transaction.credential.bank]['url']+'/transfers/payNow', headers=headers, data=payload)
 
