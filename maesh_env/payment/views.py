@@ -5,6 +5,7 @@ from payment.models import Credential, Transaction
 import json
 import jwt
 import urllib
+import time
 
 import requests
 from requests.auth import HTTPBasicAuth
@@ -172,12 +173,15 @@ def get_deposit_accounts(transaction,bank):
 
 	endpoint = ''
 	if bank == 'dbs':
-		endpoint = settings.API[bank]['url']+'/parties/'+transaction.credential.cin_party_id+'/deposits'
+		parties = '/parties/'
+		deposits = '/deposits'
+		endpoint = ("%s%s%s%s" % (settings.API[bank]['url'], parties, transaction.credential.cin_party_id, deposits))
 	if bank == 'citi':
 		endpoint = ''
 	
 	print(endpoint)		
 
+	time.sleep(5)
 	response = requests.get(endpoint, headers=headers)
 
 	# #If response indicates that the access token has expired
