@@ -1,0 +1,36 @@
+{% extends "../maesh/index.html" %}
+{% load static %}
+{% block body %}
+{% if prototype %}
+<header style="background-color: #ffffff;">
+	<div class="container">
+		<a class="upperleft" href="{% url 'payment_method' %}">
+			<i class="fas fa-less-than"></i>
+		</a>
+		<h2>Payment</h2>
+	</div>
+</header>
+{% endif %}
+<section class="section">
+	<div class="container">
+		<h1 style="text-align: left;">Make payment</h1>
+		{{qr|safe}}
+	</div>
+	<div class="container" style="padding-top: 60px;">
+		<div class="shape-wrapper">
+			<div class="shape shape-background shape-right"></div>
+		</div>
+		<div class="price">
+			<h1 style="font-size: 3rem;">S${{amount|floatformat:2}}</h1>
+			<div><strong>To:</strong> {{businessName}}</div>
+			<div><strong>Date: </strong>{% now "F j, Y" %}</div>
+			<div><strong>Time: </strong>{% now "H:i" %}</div>
+		</div>
+	</div>
+</section>
+<footer>
+	<div class="container footer">
+		<h6>Pay with <img style="width: 80px;height: 40px;" src="{% static 'maesh/images/paynow.png' %}" alt="PayNow"> powered by <img style="height: 40px;" src="{% static 'maesh/images/maesh.png' %}" alt="PayNow"></h6>
+	</div>
+</footer>
+{% endblock %}

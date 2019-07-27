@@ -13,6 +13,8 @@ from django.conf import settings
 
 import os.path
 
+from payment.qr import qrcodegen_demo
+
 ### ***
 #	I Love Lamp Prototype
 ### ***
@@ -38,6 +40,44 @@ def confirmed(request):
 ### ***
 #	Maesh Payment
 ### ***
+
+#Display qr code page
+def paynow_qr(request):
+
+	#From the query parameters the transaction details are fetched
+	#This can be tampered with, so we'll have to look at a better solution
+	#Maybe an API is needed, especially if we're transfering receipt data
+	amount = request.GET.get('amount')
+	currency = request.GET.get('currency')
+	UEN = '201426278W' #Hush #'201526304D' #N-Idea Pte Ltd 
+	#UEN = request.GET.get('UEN')
+	businessName = 'Hush Cosmetics Pte Ltd' #This is ignored by DBS
+	redirect_uri  = request.GET.get('redirect_uri')
+
+	qr = qrcodegen_demo.generate_qr(amount,UEN,businessName).to_svg_str(0)
+
+	return render(request, 'maesh/paynow_qr.html', {'qr':qr,'amount':amount,'businessName':businessName})
+
+#Initiate PayNow transfer
+def qr_confirmed(request):
+
+	response = make_paynow_transfer(transaction,account_number)
+	my_json = (response.content.decode('utf8').replace("'", '"'))
+	data = json.loads(my_json)
+
+	if transaction.credential.bank == 'dbs':
+		successful = data['status'] == 'Successful'
+	if transaction.credential.bank == 'ocbc':
+		successful = data['Success'] == True
+
+	if successful:
+		r1 = HttpResponseRedirect(transaction.redirect_uri)
+	else:
+		context['status'] = successful
+		r1 = render(request, 'i_love_lamp/confirmation_page.html',context)
+
+	return r1
+
 
 #The bank to use for PayNow is chosen
 def paynow_maesh(request):

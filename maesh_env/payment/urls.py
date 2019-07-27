@@ -20,5 +20,6 @@ urlpatterns = [
 	path('paynow_maesh', views.paynow_maesh, name='paynow_maesh'),
 	path('payment_maesh_dbs', views.payment_maesh, name='payment_maesh_dbs'),
 	path('payment_maesh_ocbc', views.payment_maesh, name='payment_maesh_ocbc'),
-	path('payment_maesh_citi', views.payment_maesh, name='payment_maesh_citi')
+	path('payment_maesh_citi', views.payment_maesh, name='payment_maesh_citi'),
+	path('paynow_qr', views.paynow_qr, name='paynow_qr')
 ]
