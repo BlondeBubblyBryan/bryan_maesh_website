@@ -31,29 +31,12 @@ from payment.qr.qrcodegen import QrCode, QrSegment
 from binascii import hexlify, unhexlify
 import crc16
 
-def generate_qr(amount,UEN,businessName):
-
-	UENLen = "{:02d}".format(len(UEN))
-	amountLen = "{:02d}".format(len(amount))
-	businessNameLen = "{:02d}".format(len(businessName))
-
-	sgqr = ('00020101021226370009SG.PAYNOW0101202%s%s0301152040000530370254%s%s5802SG59%s%s6009SINGAPORE6304' % (UENLen, UEN, amountLen, amount, businessNameLen, businessName))
-
-	#sgqr = '00020101021126810011SG.COM.NETS01231198500065G9912312359000211111686614000308686614019908604108C251800007SG.SGQR01121809072DD85C020701.000103060790270402010502060604000007082018091552045812530370254'+digits+amount+'5802SG5912SOBA EXPRESS6009Singapore6304'
-	byte_seq = sgqr.encode()
-	crc = crc16.crc16xmodem(byte_seq, 0xffff)
-	finalcrc = '{:04X}'.format(crc & 0xffff)
-
-	# Numeric mode encoding (3.33 bits per digit)
-	qr = QrCode.encode_text(sgqr+finalcrc, QrCode.Ecc.MEDIUM)
-	return qr
-
 def main():
 	"""The main application program."""
-	# do_basic_demo()
-	qr = do_variety_demo()
-	# do_segment_demo()
-	# do_mask_demo()
+	do_basic_demo()
+	do_variety_demo()
+	do_segment_demo()
+	do_mask_demo()
 	return qr
 
 # ---- Demo suite ----
@@ -73,8 +56,6 @@ def do_variety_demo():
 	"""Creates a variety of QR Codes that exercise different features of the library, and prints each one to the console."""
 
 	amount = '9.56'
-	print("{:02d}".format(len(str(amount))))
-
 	sgqr = '00020101021126810011SG.COM.NETS01231198500065G9912312359000211111686614000308686614019908604108C251800007SG.SGQR01121809072DD85C020701.00010306079027040201050206060400000708201809155204581253037025404'+amount+'5802SG5912SOBA EXPRESS6009Singapore6304'
 	byte_seq = sgqr.encode()
 	crc = crc16.crc16xmodem(byte_seq, 0xffff)
@@ -82,26 +63,26 @@ def do_variety_demo():
 
 	# Numeric mode encoding (3.33 bits per digit)
 	qr = QrCode.encode_text(sgqr+finalcrc, QrCode.Ecc.MEDIUM)
-	# print_qr(qr)
+	print_qr(qr)
 	
 	# Alphanumeric mode encoding (5.5 bits per character)
-	# qr = QrCode.encode_text("DOLLAR-AMOUNT:$39.87 PERCENTAGE:100.00% OPERATIONS:+-*/", QrCode.Ecc.HIGH)
-	# print_qr(qr)
+	qr = QrCode.encode_text("DOLLAR-AMOUNT:$39.87 PERCENTAGE:100.00% OPERATIONS:+-*/", QrCode.Ecc.HIGH)
+	print_qr(qr)
 	
 	# Unicode text as UTF-8
-	# qr = QrCode.encode_text(u"\u3053\u3093\u306B\u3061\u0077\u0061\u3001\u4E16\u754C\uFF01\u0020\u03B1\u03B2\u03B3\u03B4", QrCode.Ecc.QUARTILE)
-	# print_qr(qr)
+	qr = QrCode.encode_text(u"\u3053\u3093\u306B\u3061\u0077\u0061\u3001\u4E16\u754C\uFF01\u0020\u03B1\u03B2\u03B3\u03B4", QrCode.Ecc.QUARTILE)
+	print_qr(qr)
 	
 	# Moderately large QR Code using longer text (from Lewis Carroll's Alice in Wonderland)
-	# qr = QrCode.encode_text(
-		# "Alice was beginning to get very tired of sitting by her sister on the bank, "
-		# "and of having nothing to do: once or twice she had peeped into the book her sister was reading, "
-		# "but it had no pictures or conversations in it, 'and what is the use of a book,' thought Alice "
-		# "'without pictures or conversations?' So she was considering in her own mind (as well as she could, "
-		# "for the hot day made her feel very sleepy and stupid), whether the pleasure of making a "
-		# "daisy-chain would be worth the trouble of getting up and picking the daisies, when suddenly "
-		# "a White Rabbit with pink eyes ran close by her.", QrCode.Ecc.HIGH)
-	# print_qr(qr)
+	qr = QrCode.encode_text(
+		"Alice was beginning to get very tired of sitting by her sister on the bank, "
+		"and of having nothing to do: once or twice she had peeped into the book her sister was reading, "
+		"but it had no pictures or conversations in it, 'and what is the use of a book,' thought Alice "
+		"'without pictures or conversations?' So she was considering in her own mind (as well as she could, "
+		"for the hot day made her feel very sleepy and stupid), whether the pleasure of making a "
+		"daisy-chain would be worth the trouble of getting up and picking the daisies, when suddenly "
+		"a White Rabbit with pink eyes ran close by her.", QrCode.Ecc.HIGH)
+	print_qr(qr)
 	return qr
 
 def do_segment_demo():

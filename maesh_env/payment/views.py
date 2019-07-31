@@ -13,7 +13,7 @@ from django.conf import settings
 
 import os.path
 
-from payment.qr import qrcodegen_demo
+from payment.qr import sgqrcodegen
 
 ### ***
 #	I Love Lamp Prototype
@@ -49,35 +49,29 @@ def paynow_qr(request):
 	#Maybe an API is needed, especially if we're transfering receipt data
 	amount = request.GET.get('amount')
 	currency = request.GET.get('currency')
-	UEN = '201426278W' #Hush #'201526304D' #N-Idea Pte Ltd 
+	UEN = '201426278W' #Hush
 	#UEN = request.GET.get('UEN')
 	businessName = 'Hush Cosmetics Pte Ltd' #This is ignored by DBS
+	referenceCode = request.GET.get('reference')
 	redirect_uri  = request.GET.get('redirect_uri')
 
-	qr = qrcodegen_demo.generate_qr(amount,UEN,businessName).to_svg_str(0)
+	transaction = Transaction.objects.create(amount=amount,currency=currency,UEN=UEN,redirect_uri=redirect_uri)
 
-	return render(request, 'maesh/paynow_qr.html', {'qr':qr,'amount':amount,'businessName':businessName})
+	qr = sgqrcodegen.generate_qr(amount,UEN,businessName).to_svg_str(0)
 
-#Initiate PayNow transfer
-def qr_confirmed(request):
+	return render(request, 'maesh/paynow_qr.html', {'qr':qr,'amount':amount,'businessName':businessName, 'referenceCode':referenceCode, 'id':transaction.id})
 
-	response = make_paynow_transfer(transaction,account_number)
-	my_json = (response.content.decode('utf8').replace("'", '"'))
-	data = json.loads(my_json)
+#Redirect to webshop with confirmation or cancellation
+def qr_redirect(request):
 
-	if transaction.credential.bank == 'dbs':
-		successful = data['status'] == 'Successful'
-	if transaction.credential.bank == 'ocbc':
-		successful = data['Success'] == True
+	transaction_id = request.POST.get('id')
+	transaction = Transaction.objects.get(id=transaction_id)
 
-	if successful:
+	#If customer indicates order is paid
+	if request.POST.get('paid'):
 		r1 = HttpResponseRedirect(transaction.redirect_uri)
-	else:
-		context['status'] = successful
-		r1 = render(request, 'i_love_lamp/confirmation_page.html',context)
 
 	return r1
-
 
 #The bank to use for PayNow is chosen
 def paynow_maesh(request):

@@ -154,8 +154,33 @@ section {
     cursor: pointer;
 }
 
+.cancel, .cancel:focus {
+    background: #EBEBEB;
+    border-color: #EBEBEB;
+    color: #000000;
+}
+
 @media (max-width: 768px) {
     .button, .button:focus {
         padding: 3px 6px;
     }
+}
+
+@media screen and (min-width: 1025px) {
+  .mobile{
+    display:none;
+  }
+  .desktop{
+    display:inline-block;
+  }
+}
+
+@media only screen and (max-device-width : 1024px) {
+  .mobile{
+    display:inline-block;
+    align-content: center;
+  }
+  .desktop{
+    display:none;
+  }
 }

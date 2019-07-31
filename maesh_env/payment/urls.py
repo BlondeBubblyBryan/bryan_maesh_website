@@ -14,6 +14,7 @@ urlpatterns = [
 	re_path(r'^connect_bank/(?P<bank>.*)/$', views.connect_bank, name='connect_bank'),
 	path('transfer', views.transfer, name='transfer'),
 	path('confirmation', views.payNow_transfer, name='confirmation'),
+	path('redirect', views.qr_redirect, name='redirect'),
 	path('confirmed', views.confirmed, name='confirmed'),
 	path('product_page', views.product_page, name='product_page'),
 	path('payment_method', views.payment_method, name='payment_method'),

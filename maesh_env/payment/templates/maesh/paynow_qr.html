@@ -13,24 +13,44 @@
 {% endif %}
 <section class="section">
 	<div class="container">
-		<h1 style="text-align: left;">Make payment</h1>
-		{{qr|safe}}
+		<h1>Make payment</h1>
+
+		<div class="mobile">Choose your bank's e-wallet:</div>
+		<div class="desktop">Scan the QR code with any app that accepts <img style="width: 80px;height: 40px;top: -2px;position: relative;" src="{% static 'maesh/images/paynow.png' %}" alt="PayNow"></div>
 	</div>
-	<div class="container" style="padding-top: 60px;">
+	<div class="container mobile" style="padding-top: 30px;">
+			<!-- <button class="button mobile" onclick="launchiOSApp('dbspaylah://qrcode=000202579')">Pay with PayLah!</button> ?txnref=fdsajkyu -->
+		<a class="mobile" href="http://www.dbs.com.sg/personal/mobile/paylink/index.html?tranRef=O3gQn6KiWl"><img class="bankimage" style="width:200px;" src="{% static 'maesh/images/paylah.png' %}" alt="DBS PayLah!"></a>
+	</div>
+	<div class="container desktop" style="padding-top: 30px;">
+		<div>{{qr|safe}}</div>
+	</div>
+	<div class="container" style="padding-top: 30px;">
 		<div class="shape-wrapper">
 			<div class="shape shape-background shape-right"></div>
 		</div>
 		<div class="price">
 			<h1 style="font-size: 3rem;">S${{amount|floatformat:2}}</h1>
 			<div><strong>To:</strong> {{businessName}}</div>
+			<div><strong>Reference code:</strong> {{referenceCode}}</div>
 			<div><strong>Date: </strong>{% now "F j, Y" %}</div>
 			<div><strong>Time: </strong>{% now "H:i" %}</div>
 		</div>
 	</div>
+	<div class="container desktop" style="padding-top: 30px;">
+		<form method="post" action="{% url 'redirect' %}">
+			<input style="display: none;" name="id" value={{id}}>
+			<div class="container">
+				<button class="button" name="paid" type="submit">I paid</button>
+			</div>
+			{% csrf_token %}
+		</form>
+	</div>
 </section>
-<footer>
+<footer style="margin-bottom: 40px">
+	<script src="{% static 'maesh/js/script.js' %}"></script>	
 	<div class="container footer">
-		<h6>Pay with <img style="width: 80px;height: 40px;" src="{% static 'maesh/images/paynow.png' %}" alt="PayNow"> powered by <img style="height: 40px;" src="{% static 'maesh/images/maesh.png' %}" alt="PayNow"></h6>
+		<h6>Powered by <img style="height: 40px;" src="{% static 'maesh/images/maesh.png' %}" alt="PayNow"></h6>
 	</div>
 </footer>
 {% endblock %}
