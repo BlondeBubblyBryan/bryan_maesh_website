@@ -57,7 +57,7 @@ def paynow_qr(request):
 
 	transaction = Transaction.objects.create(amount=amount,currency=currency,UEN=UEN,redirect_uri=redirect_uri)
 
-	qr = sgqrcodegen.generate_qr(amount,UEN,businessName).to_svg_str(0)
+	qr = sgqrcodegen.generate_qr(amount,UEN,businessName,referenceCode).to_svg_str(0)
 
 	return render(request, 'maesh/paynow_qr.html', {'qr':qr,'amount':amount,'businessName':businessName, 'referenceCode':referenceCode, 'id':transaction.id})
 
@@ -72,6 +72,30 @@ def qr_redirect(request):
 		r1 = HttpResponseRedirect(transaction.redirect_uri)
 
 	return r1
+
+# def webcheckout_paylah():
+
+# 	headers = {
+# 		"msgId": "string",
+# 		"orgId": "string",
+# 		"timeStamp": "2019-08-01T06:46:43Z"
+# 	}
+# 	txnInfo = {
+# 		"txnMsgId": "string",
+# 		"txnSource": 0,
+# 		"txnType": "s",
+# 		"txnCcy": "SGD",
+# 		"txnAmount": 50,
+# 		"returnUrl": "string",
+# 		"phoneNumber": 0,
+# 		"payeeShippingAddress": "st",
+# 		"address": {},
+# 		"rmtInf": {}
+# 	}
+# 	auth=HTTPBasicAuth(settings.API[bank]['client_id'], settings.API[bank]['client_secret'])
+# 	bank = 'dbs'
+# 	response = requests.post(settings.API[bank]['url']+'/paylah/v1/purchase/webCheckout')
+# 	return response
 
 #The bank to use for PayNow is chosen
 def paynow_maesh(request):

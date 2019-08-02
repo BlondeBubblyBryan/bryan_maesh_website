@@ -25,7 +25,7 @@ SECRET_KEY = 'u8$em6-r#$i91=knt^uud&cy_r33imh4%cx9stx)newdmfd-17'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','10.202.1.158','192.168.1.70','maesh.io']
+ALLOWED_HOSTS = ['localhost','10.202.1.171','192.168.1.70','maesh.io','172.20.10.2']
 
 SITE = 'http://localhost:8000/'#'https://maesh.io:8000/'#'http://159.65.7.84:8000/'#'http://192.168.0.119:8000/'
 
