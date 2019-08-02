@@ -65,6 +65,14 @@ h1, .h1 {
   text-align: center!important;
 }
 
+.header .shape-main {
+  background-color: #5d3edc;
+}
+
+.header .shape-top {
+  background-color: #ff4a59;
+}
+
 .header .shape-main, .banner .shape-main {
   bottom: 0;
   width: 100%;
