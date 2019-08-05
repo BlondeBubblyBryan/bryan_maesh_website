@@ -24,11 +24,11 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'flowerflower',
-        'USER': 'nzbt_db@nzbt-db',
-        'PASSWORD': 'Spring123.',
-        'HOST': 'nzbt-db.postgres.database.azure.com',
-        'PORT': '5432',
+        'NAME': 'payments',
+        'USER': 'maesh',
+        'PASSWORD': 'z6E*A$R#09suwTjlM!DN',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
