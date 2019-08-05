@@ -2,6 +2,8 @@ asn1crypto==0.24.0
 certifi==2019.6.16
 cffi==1.12.3
 chardet==3.0.4
+crc16==0.1.1
+crcmod==1.7
 cryptography==2.7
 Django==2.2.2
 idna==2.8
