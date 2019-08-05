@@ -17,10 +17,11 @@ class Transaction(models.Model):
 	amount = models.FloatField()
 	currency = models.CharField(max_length=3)
 	UEN = models.CharField(max_length=10)
-	created = models.DateTimeField(editable=False, default=timezone.now())
-	modified = models.DateTimeField(default=timezone.now())
+	created = models.DateTimeField(editable=False, default=timezone.now)
+	modified = models.DateTimeField(default=timezone.now)
 	redirect_uri = models.CharField(max_length=500,blank=True)
 	credential = models.ForeignKey(Credential, on_delete=models.CASCADE, blank=True, null=True)
+	reference_code = models.CharField(max_length=10)
 
 	def save(self, *args, **kwargs):
 		''' On save, update timestamps '''

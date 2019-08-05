@@ -67,8 +67,11 @@ def qr_redirect(request):
 	transaction_id = request.POST.get('id')
 	transaction = Transaction.objects.get(id=transaction_id)
 
+	r1 = ""
 	#If customer indicates order is paid
 	if request.POST.get('paid'):
+		r1 = HttpResponseRedirect(transaction.redirect_uri)
+	else: #This should redirect to a page if not successfully paid
 		r1 = HttpResponseRedirect(transaction.redirect_uri)
 
 	return r1
