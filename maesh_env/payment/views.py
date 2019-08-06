@@ -49,17 +49,16 @@ def paynow_qr(request):
 	#Maybe an API is needed, especially if we're transfering receipt data
 	amount = request.GET.get('amount')
 	currency = request.GET.get('currency')
-	UEN = '201426278W' #Hush
-	#UEN = request.GET.get('UEN')
-	businessName = 'Hush Cosmetics Pte Ltd' #This is ignored by DBS
+	UEN = request.GET.get('UEN') #UEN = '201426278W' #Hush
+	companyName = request.GET.get('company_name') #This is ignored by DBS #'Hush Cosmetics Pte Ltd' 
 	referenceCode = request.GET.get('reference')
 	redirect_uri  = request.GET.get('redirect_uri')
 
 	transaction = Transaction.objects.create(amount=amount,currency=currency,UEN=UEN,redirect_uri=redirect_uri)
 
-	qr = sgqrcodegen.generate_qr(amount,UEN,businessName,referenceCode).to_svg_str(0)
+	qr = sgqrcodegen.generate_qr(amount,UEN,companyName,referenceCode).to_svg_str(0)
 
-	return render(request, 'maesh/paynow_qr.html', {'qr':qr,'amount':amount,'businessName':businessName, 'referenceCode':referenceCode, 'id':transaction.id})
+	return render(request, 'maesh/paynow_qr.html', {'qr':qr,'amount':amount,'companyName':companyName, 'referenceCode':referenceCode, 'id':transaction.id})
 
 #Redirect to webshop with confirmation or cancellation
 def qr_redirect(request):
