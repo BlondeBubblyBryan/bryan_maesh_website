@@ -7,9 +7,9 @@ DEBUG = False
 SECRET_KEY = os.environ['SECRET_KEY']
 X_FRAME_OPTIONS = 'DENY'
 
-ALLOWED_HOSTS = ['payments.maesh.io']
+ALLOWED_HOSTS = ['payment.maesh.io','localhost']
 
-SITE = 'http://payments.maesh.io:8000/'
+SITE = 'http://payment.maesh.io/'
 
 # To only have cookies to be sent over https
 SESSION_COOKIE_SECURE = True
