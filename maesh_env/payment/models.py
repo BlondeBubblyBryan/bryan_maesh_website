@@ -17,6 +17,7 @@ class Transaction(models.Model):
 	amount = models.FloatField()
 	currency = models.CharField(max_length=3)
 	UEN = models.CharField(max_length=10)
+	company_name = models.CharField(max_length=50)
 	created = models.DateTimeField(editable=False, default=timezone.now)
 	modified = models.DateTimeField(default=timezone.now)
 	redirect_uri = models.CharField(max_length=500,blank=True)

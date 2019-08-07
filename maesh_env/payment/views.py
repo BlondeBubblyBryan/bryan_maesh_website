@@ -54,7 +54,7 @@ def paynow_qr(request):
 	referenceCode = request.GET.get('reference')
 	redirect_uri  = request.GET.get('redirect_uri')
 
-	transaction = Transaction.objects.create(amount=amount,currency=currency,UEN=UEN,redirect_uri=redirect_uri)
+	transaction = Transaction.objects.create(amount=amount,currency=currency,UEN=UEN,company_name=companyName,reference_code=referenceCode,redirect_uri=redirect_uri)
 
 	qr = sgqrcodegen.generate_qr(amount,UEN,companyName,referenceCode).to_svg_str(0)
 

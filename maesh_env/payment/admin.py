@@ -1,5 +1,8 @@
 from django.contrib import admin
 
-from .models import Credential
+from .models import Transaction
 
-admin.site.register(Credential)
+class TransactionAdmin(admin.ModelAdmin):
+    list_display = ('id','company_name','reference_code','amount', 'currency', 'UEN')
+
+admin.site.register(Transaction, TransactionAdmin)

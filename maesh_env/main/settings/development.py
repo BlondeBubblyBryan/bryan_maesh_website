@@ -9,6 +9,7 @@ SECRET_KEY = 'u8$em6-r#$i91=knt^uud&cy_r33imh4%cx9stx)newdmfd-17'
 ALLOWED_HOSTS = ['localhost','10.202.1.171','192.168.1.70','maesh.io','172.20.10.2']
 
 SITE = 'http://localhost:8000/'
+LOCAL_DEV = True
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
