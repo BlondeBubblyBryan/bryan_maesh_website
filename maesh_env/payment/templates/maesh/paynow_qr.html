@@ -11,7 +11,7 @@
 	</div>
 </header>
 {% endif %}
-<section class="section">
+<section id="yes" class="section">
 	<div class="container">
 		<h1>Make payment</h1>
 
@@ -22,14 +22,17 @@
 			<!-- <button class="button mobile" onclick="launchiOSApp('dbspaylah://qrcode=000202579')">Pay with PayLah!</button> ?txnref=fdsajkyu -->
 		<a class="mobile" href="http://www.dbs.com.sg/personal/mobile/paylink/index.html?tranRef=O3gQn6KiWl"><img class="bankimage" style="width:200px;" src="{% static 'maesh/images/paylah.png' %}" alt="DBS PayLah!"></a>
 	</div>
-	<div class="container desktop" style="padding-top: 30px;">
-		<div>{{qr|safe}}</div>
+	<div  class="container desktop" style="padding-top: 30px;">
+		<div id="container">
+			<div>{{qr|safe}}</div>
+			<button type="button" id="btn-downloadQR">Generate QR</button>
+		</div>
 	</div>
 	<div class="container" style="padding-top: 30px;">
 		<div class="shape-wrapper">
 			<div class="shape shape-background shape-right"></div>
 		</div>
-		<div class="price">
+		<div id="information" class="price">
 			<h1 style="font-size: 3rem;">S${{amount|floatformat:2}}</h1>
 			<div><strong>To:</strong> {{companyName}}</div>
 			<div><strong>Reference code:</strong> {{referenceCode}}</div>
@@ -48,6 +51,7 @@
 	</div>
 </section>
 <footer style="margin-bottom: 40px">
+	<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 	<script src="{% static 'maesh/js/script.js' %}"></script>	
 	<div class="container footer">
 		<h6>Powered by <img style="height: 40px;" src="{% static 'maesh/images/maesh.png' %}" alt="PayNow"></h6>
