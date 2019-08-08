@@ -13,11 +13,10 @@ function downloadQR(){
     windowWidth: screen.scrollWidth,
     windowHeight: screen.scrollHeight,
 }).then(canvas => {
-    // a = document.createElement('a'); 
-    // document.body.appendChild(a); 
-    // a.download = "maesh_qr.png"; 
-    // a.href =  canvas.toDataURL();
-    // a.click();
-    $( "#qrsvg" ).replaceWith(canvas.toDataURL());
+    a = document.createElement('a'); 
+    document.body.appendChild(a); 
+    a.download = "maesh_qr.png"; 
+    a.href =  canvas.toDataURL();
+    a.click();
   });  
 }
