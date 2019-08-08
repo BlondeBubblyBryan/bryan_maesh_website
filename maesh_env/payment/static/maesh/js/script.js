@@ -8,8 +8,8 @@ $(document).ready(function () {
 //Download the QR function
 function downloadQR(){
   var screen = document.querySelector("#screen");
-  var qr = document.querySelector("#qrsvg");
-  html2canvas(qr, {
+  // var qr = document.querySelector("#qrsvg");
+  html2canvas(screen, {
     windowWidth: screen.scrollWidth,
     windowHeight: screen.scrollHeight,
 }).then(canvas => {
