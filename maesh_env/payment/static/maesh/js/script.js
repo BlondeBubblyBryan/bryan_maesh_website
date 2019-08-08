@@ -8,14 +8,16 @@ $(document).ready(function () {
 //Download the QR function
 function downloadQR(){
   var screen = document.querySelector("#screen");
-  html2canvas(screen, {
+  var qr = document.querySelector("#qrsvg");
+  html2canvas(qr, {
     windowWidth: screen.scrollWidth,
-    windowHeight: screen.scrollHeight
+    windowHeight: screen.scrollHeight,
 }).then(canvas => {
-    a = document.createElement('a'); 
-    document.body.appendChild(a); 
-    a.download = "test.png"; 
-    a.href =  canvas.toDataURL();
-    a.click();
+    // a = document.createElement('a'); 
+    // document.body.appendChild(a); 
+    // a.download = "maesh_qr.png"; 
+    // a.href =  canvas.toDataURL();
+    // a.click();
+    $( "#qrsvg" ).replaceWith(canvas.toDataURL());
   });  
 }
