@@ -8,6 +8,10 @@ def generate_qr(amount,UEN,businessName,referenceCode):
 	businessNameLen = "{:02d}".format(len(businessName))
 	referenceCodeLen = "{:02d}".format(len(referenceCode))
 	referenceCodeRootLen = "{:02d}".format(len(referenceCode) + 4) #The +4 is the 01 in the nested layer and the length of the nested layer i.e. referenceCodeLen
+	# grabMerchantCode = '36d821d6-2180-42d0-b184-8d5053b212d6'
+	# grabMerchantLen = "{:02d}".format(len(grabMerchantCode))
+	# grab = '00'+'08'+'com.grab'+'01'+grabMerchantLen+grabMerchantCode
+	# grabLen = "{:02d}".format(len(grab))
 
 	sgqr = ('00020101021226370009SG.PAYNOW0101202%s%s0301152040000530370254%s%s5802SG59%s%s6009SINGAPORE62%s01%s%s6304' % (UENLen, UEN, amountLen, amount, businessNameLen, businessName, referenceCodeRootLen, referenceCodeLen, referenceCode))
 
