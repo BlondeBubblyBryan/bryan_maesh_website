@@ -9,7 +9,7 @@ X_FRAME_OPTIONS = 'DENY'
 
 ALLOWED_HOSTS = ['payment.maesh.io','localhost']
 
-SITE = 'http://payment.maesh.io/'
+SITE = 'https://payment.maesh.io/'
 LOCAL_DEV = False
 
 # To only have cookies to be sent over https
