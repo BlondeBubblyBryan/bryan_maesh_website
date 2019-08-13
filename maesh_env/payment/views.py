@@ -49,7 +49,7 @@ def paynow_qr(request):
 		transaction_id = request.GET.get('txnid')
 		print(transaction_id)
 		transaction = Transaction.objects.get(transaction_id=transaction_id)
-		print(transaction)
+		print(transaction.amount)
 	#This option is not preferred, since it can be tampered with
 	except:
 		amount = request.GET.get('amount')
@@ -61,7 +61,7 @@ def paynow_qr(request):
 
 		transaction = Transaction.objects.create(amount=amount,currency=currency,UEN=UEN,company_name=companyName,reference_code=referenceCode,redirect_uri=redirect_uri,transaction_id="123456abcdefghijklmnopqrstuvwxyz")
 
-	qr = sgqrcodegen.generate_qr(transaction.amount,transaction.UEN,transaction.company_name,transaction.reference_code).to_svg_str(0)
+	qr = sgqrcodegen.generate_qr(str(transaction.amount),transaction.UEN,transaction.company_name,transaction.reference_code).to_svg_str(0)
 
 	return render(request, 'maesh/paynow_qr.html', {'qr':qr,'amount':transaction.amount,'companyName':transaction.company_name, 'referenceCode':transaction.reference_code, 'id':transaction.id})
 
