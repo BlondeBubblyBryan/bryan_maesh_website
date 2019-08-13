@@ -15,6 +15,10 @@ import os.path
 
 from payment.qr import sgqrcodegen
 
+# Errors
+def handler500(request):
+	return HttpResponseRedirect("https://maesh.io")
+
 ### ***
 #	I Love Lamp Prototype
 ### ***
@@ -44,14 +48,16 @@ def confirmed(request):
 #Display qr code page
 def paynow_qr(request):
 
-	#If transaction id is detected, then retrieve from database
 	try:
 		transaction_id = request.GET.get('txnid')
-		print(transaction_id)
-		transaction = Transaction.objects.get(transaction_id=transaction_id)
-		print(transaction.amount)
-	#This option is not preferred, since it can be tampered with
 	except:
+		pass
+
+	#If transaction id is detected, then retrieve from database
+	if transaction_id:
+		transaction = Transaction.objects.get(transaction_id=transaction_id)
+	#This option is not preferred, since it can be tampered with
+	else:
 		amount = request.GET.get('amount')
 		currency = request.GET.get('currency')
 		UEN = request.GET.get('UEN') #UEN = '201426278W' #Hush
