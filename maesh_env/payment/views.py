@@ -56,10 +56,10 @@ def paynow_qr(request):
 
 	# transaction = Transaction.objects.create(amount=amount,currency=currency,UEN=UEN,company_name=companyName,reference_code=referenceCode,redirect_uri=redirect_uri)
 
-
 	transaction_id = request.GET.get('txnid')
 
 	transaction = Transaction.objects.get(transaction_id=transaction_id)
+	transaction = transaction[0]
 
 	qr = sgqrcodegen.generate_qr(transaction.amount,transaction.UEN,transaction.companyName,transaction.referenceCode).to_svg_str(0)
 
