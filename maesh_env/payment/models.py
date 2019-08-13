@@ -23,6 +23,7 @@ class Transaction(models.Model):
 	redirect_uri = models.CharField(max_length=500,blank=True)
 	credential = models.ForeignKey(Credential, on_delete=models.CASCADE, blank=True, null=True)
 	reference_code = models.CharField(max_length=10)
+	transaction_id = models.CharField(max_length=32)
 
 	def save(self, *args, **kwargs):
 		''' On save, update timestamps '''

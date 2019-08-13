@@ -32,6 +32,7 @@ class TransactionInput(graphene.InputObjectType):
 	companyName = graphene.String()
 	redirectUri = graphene.String()
 	referenceCode = graphene.String()
+	transactionID = graphene.String()
 
 # Create mutations for transactions
 class CreateTransaction(graphene.Mutation):
