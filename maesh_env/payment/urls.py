@@ -2,10 +2,16 @@ from django.urls import path, re_path
 from django.conf import settings
 
 from . import views
+
 from django.contrib import admin
 from django.contrib.staticfiles import views as static
 
 from django.views.generic.base import RedirectView
+
+#Used for GraphQL
+from . import schema
+from graphene_django.views import GraphQLView
+from django.views.decorators.csrf import csrf_exempt
 
 app_name = 'payment'
 
@@ -34,6 +40,8 @@ if settings.LOCAL_DEV:
 		path('payment_maesh_dbs', views.payment_maesh, name='payment_maesh_dbs'),
 		path('payment_maesh_ocbc', views.payment_maesh, name='payment_maesh_ocbc'),
 		path('payment_maesh_citi', views.payment_maesh, name='payment_maesh_citi'),
+		#GraphQL
+    	path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))), #In production you'd set this to false
 	])
 else:
 	urlpatterns.extend([
