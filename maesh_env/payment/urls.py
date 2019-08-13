@@ -15,6 +15,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 app_name = 'payment'
 
+handler500 = 'payment.views.handler500'
+
 urlpatterns = [
 	#Needed for production only
     path('admin/', admin.site.urls),
