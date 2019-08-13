@@ -47,8 +47,9 @@ def paynow_qr(request):
 	#If transaction id is detected, then retrieve from database
 	try:
 		transaction_id = request.GET.get('txnid')
-
+		print(transaction_id)
 		transaction = Transaction.objects.get(transaction_id=transaction_id)
+		print(transaction)
 	#This option is not preferred, since it can be tampered with
 	except:
 		amount = request.GET.get('amount')

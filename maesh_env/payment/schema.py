@@ -45,7 +45,7 @@ class CreateTransaction(graphene.Mutation):
 	@staticmethod
 	def mutate(root, info, input=None):
 		ok = True
-		transaction_instance = Transaction(amount=input.amount,currency=input.currency,UEN=input.UEN,company_name=input.companyName,redirect_uri=input.redirectUri,reference_code=input.referenceCode)
+		transaction_instance = Transaction(amount=input.amount,currency=input.currency,UEN=input.UEN,company_name=input.companyName,redirect_uri=input.redirectUri,reference_code=input.referenceCode,transaction_id=input.transactionID)
 		transaction_instance.save()
 		return CreateTransaction(ok=ok, transaction=transaction_instance)
 
