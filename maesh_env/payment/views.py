@@ -44,25 +44,25 @@ def confirmed(request):
 #Display qr code page
 def paynow_qr(request):
 
-	#From the query parameters the transaction details are fetched
-	#This can be tampered with, so we'll have to look at a better solution
-	#Maybe an API is needed, especially if we're transfering receipt data
-	amount = request.GET.get('amount')
-	currency = request.GET.get('currency')
-	UEN = request.GET.get('UEN') #UEN = '201426278W' #Hush
-	companyName = request.GET.get('company_name') #This is ignored by DBS #'Hush Cosmetics Pte Ltd' 
-	referenceCode = request.GET.get('reference')
-	redirect_uri  = request.GET.get('redirect_uri')
+	#If transaction id is detected, then retrieve from database
+	try:
+		transaction_id = request.GET.get('txnid')
 
-	transaction = Transaction.objects.create(amount=amount,currency=currency,UEN=UEN,company_name=companyName,reference_code=referenceCode,redirect_uri=redirect_uri,transaction_id="djkf")
+		transaction = Transaction.objects.get(transaction_id=transaction_id)
+	#This option is not preferred, since it can be tampered with
+	except:
+		amount = request.GET.get('amount')
+		currency = request.GET.get('currency')
+		UEN = request.GET.get('UEN') #UEN = '201426278W' #Hush
+		companyName = request.GET.get('company_name') #This is ignored by DBS #'Hush Cosmetics Pte Ltd' 
+		referenceCode = request.GET.get('reference')
+		redirect_uri  = request.GET.get('redirect_uri')
 
-	# transaction_id = request.GET.get('txnid')
+		transaction = Transaction.objects.create(amount=amount,currency=currency,UEN=UEN,company_name=companyName,reference_code=referenceCode,redirect_uri=redirect_uri,transaction_id="123456abcdefghijklmnopqrstuvwxyz")
 
-	# transaction = Transaction.objects.get(transaction_id=transaction_id)
+	qr = sgqrcodegen.generate_qr(transaction.amount,transaction.UEN,transaction.company_name,transaction.reference_code).to_svg_str(0)
 
-	qr = sgqrcodegen.generate_qr(transaction.amount,transaction.UEN,transaction.companyName,transaction.referenceCode).to_svg_str(0)
-
-	return render(request, 'maesh/paynow_qr.html', {'qr':qr,'amount':transaction.amount,'companyName':transaction.companyName, 'referenceCode':transaction.referenceCode, 'id':transaction.id})
+	return render(request, 'maesh/paynow_qr.html', {'qr':qr,'amount':transaction.amount,'companyName':transaction.company_name, 'referenceCode':transaction.reference_code, 'id':transaction.id})
 
 #Redirect to webshop with confirmation or cancellation
 def qr_redirect(request):
