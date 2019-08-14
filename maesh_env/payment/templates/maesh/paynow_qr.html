@@ -20,14 +20,14 @@
 <!-- 	<div class="container mobile" style="padding-top: 30px;">
 		<a class="mobile" href="http://www.dbs.com.sg/personal/mobile/paylink/index.html?tranRef=O3gQn6KiWl"><img class="bankimage" style="width:200px;" src="{% static 'maesh/images/paylah.png' %}" alt="DBS PayLah!"></a>
 	</div> -->
-	<div  class="container" style="padding-top: 30px;">
+	<div  class="container" style="padding-top: 25px;">
 		<div id="container">
-			<div class="mobile" style="padding-bottom: 30px;">Take a screenshot and upload it in your bank's e-wallet:</div>
+			<div class="mobile" style="padding-bottom: 25px;">Take a screenshot and upload it in your bank's e-wallet:</div>
 			<div>{{qr|safe}}</div>
 			<!-- <button id="downloadQR" class="button">Download QR</button> -->
 		</div>
 	</div>
-	<div class="container" style="padding-top: 30px;">
+	<div class="container" style="padding-top: 25px;">
 		<div class="shape-wrapper">
 			<div class="shape shape-background shape-right"></div>
 		</div>
@@ -35,11 +35,10 @@
 			<h1 style="font-size: 3rem;">S${{amount|floatformat:2}}</h1>
 			<div><strong>To:</strong> {{companyName}}</div>
 			<div><strong>Reference code:</strong> {{referenceCode}}</div>
-			<div><strong>Date: </strong>{% now "F j, Y" %}</div>
-			<div><strong>Time: </strong>{% now "H:i" %}</div>
+			<div><strong>Date: </strong>{% now "F j, Y" %} - {% now "H:i" %}</div>
 		</div>
 	</div>
-	<div class="container" style="padding-top: 30px;">
+	<div class="container" style="padding-top: 25px;">
 		<form method="post" action="{% url 'redirect' %}">
 			<input style="display: none;" name="id" value={{id}}>
 			<div class="container">
