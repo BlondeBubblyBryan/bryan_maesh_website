@@ -52,7 +52,12 @@
 	<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 	<script src="{% static 'maesh/js/script.js' %}"></script>	
 	<div class="container footer">
-		<h6>Powered by <a href="https://maesh.io"><img style="height: 40px;" src="{% static 'maesh/images/maesh.png' %}" alt="PayNow"></a></h6>
+		<div>
+			<h6>Powered by <a href="https://maesh.io" target="_blank"><img style="height: 40px;" src="{% static 'maesh/images/maesh.png' %}" alt="PayNow"></a></h6>
+		</div>
+		<div>
+			<h6 style="margin-top: 10px;"><a style="color:#5d3edc;" href="https://maesh.io" target="_blank"><strong>What is Maesh?</strong></a></h6>
+		</div>
 	</div>
 </footer>
 {% endblock %}
