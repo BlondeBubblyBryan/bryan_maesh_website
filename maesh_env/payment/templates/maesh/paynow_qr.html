@@ -32,7 +32,7 @@
 			<div class="shape shape-background shape-right"></div>
 		</div>
 		<div id="information" class="price">
-			<h1 style="font-size: 3rem;">S${{amount|floatformat:2}}</h1>
+			<h1 style="font-size: 2.5rem;">S${{amount|floatformat:2}}</h1>
 			<div><strong>To:</strong> {{companyName}}</div>
 			<div><strong>Reference code:</strong> {{referenceCode}}</div>
 			<div><strong>Date: </strong>{% now "F j, Y" %} - {% now "H:i" %}</div>
@@ -52,7 +52,7 @@
 	<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 	<script src="{% static 'maesh/js/script.js' %}"></script>	
 	<div class="container footer">
-		<h6>Powered by <img style="height: 40px;" src="{% static 'maesh/images/maesh.png' %}" alt="PayNow"></h6>
+		<h6>Powered by <a href="https://maesh.io"><img style="height: 40px;" src="{% static 'maesh/images/maesh.png' %}" alt="PayNow"></a></h6>
 	</div>
 </footer>
 {% endblock %}
