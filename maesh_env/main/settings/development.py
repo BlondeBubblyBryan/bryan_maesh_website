@@ -94,3 +94,8 @@ ACCESS_TOKEN = {
         'grant_type':'authorization_code',
     },
 }
+
+SALT_EDGE = {
+    "app_id" : "BuOgKt4pJIYHXJvnQ5JWsJDncLUFvOx_UjMW_UJiH_M",
+    "secret" : "BIwi-knfi5GG_oNvyd-R4as5D_RNHNy_BvZjTrJ0n7M"
+}
