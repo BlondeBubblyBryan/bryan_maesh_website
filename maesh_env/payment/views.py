@@ -69,19 +69,19 @@ def paynow_qr(request):
 
 	qr = sgqrcodegen.generate_qr(str(transaction.amount),transaction.UEN,transaction.company_name,transaction.reference_code).to_svg_str(0)
 
-	return render(request, 'maesh/paynow_qr.html', {'qr':qr,'amount':transaction.amount,'companyName':transaction.company_name, 'referenceCode':transaction.reference_code, 'id':transaction.id})
+	return render(request, 'maesh/paynow_qr.html', {'qr':qr,'amount':transaction.amount,'companyName':transaction.company_name, 'referenceCode':transaction.reference_code,'transaction_id':transaction.transaction_id})
 
 #Redirect to webshop with confirmation or cancellation
 def qr_redirect(request):
 
 	transaction_id = request.POST.get('id')
-	transaction = Transaction.objects.get(id=transaction_id)
+	transaction = Transaction.objects.get(transaction_id=transaction_id)
+	transaction.paid = True;
+	transaction.save()
 
 	r1 = ""
 	#If customer indicates order is paid
-	if request.POST.get('paid'):
-		r1 = HttpResponseRedirect(transaction.redirect_uri)
-	else: #This should redirect to a page if not successfully paid
+	if request.POST:
 		r1 = HttpResponseRedirect(transaction.redirect_uri)
 
 	return r1

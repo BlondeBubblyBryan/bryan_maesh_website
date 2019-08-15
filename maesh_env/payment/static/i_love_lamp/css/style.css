@@ -89,9 +89,12 @@ h5,
 .image, .circle {
   width: 20%;
   flex-direction: column;
-  display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.circle {
+  display: flex;
 }
 
 .product .image {

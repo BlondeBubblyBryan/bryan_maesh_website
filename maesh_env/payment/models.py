@@ -24,6 +24,7 @@ class Transaction(models.Model):
 	credential = models.ForeignKey(Credential, on_delete=models.CASCADE, blank=True, null=True)
 	reference_code = models.CharField(max_length=10)
 	transaction_id = models.CharField(max_length=32)
+	paid = models.BooleanField(default=False)
 
 	def save(self, *args, **kwargs):
 		''' On save, update timestamps '''
