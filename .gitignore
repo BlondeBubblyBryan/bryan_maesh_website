@@ -7,6 +7,8 @@ maesh_env/pip-selfcheck.json
 */*.pyc
 */*/*.pyc
 maesh_env/db.sqlite3
+main/db.sqlite3
 maesh_env/main/db.sqlite3
+*/*/.DS_Store
 */.DS_Store
 .DS_Store

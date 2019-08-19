@@ -1,16 +1,23 @@
 import graphene
 from graphene_django.types import DjangoObjectType, ObjectType
 from payment.models import Transaction
+import graphql_jwt
+from django.contrib.auth import get_user_model
 
 # Create a GraphQL type for the Transaction model
 class TransactionType(DjangoObjectType):
 	class Meta:
 		model = Transaction
 
+class UserType(DjangoObjectType):
+    class Meta:
+        model = get_user_model()
+
 # Create a Query type
 class Query(ObjectType):
 	transaction = graphene.Field(TransactionType, id=graphene.Int())
 	transactions = graphene.List(TransactionType)
+	viewer = graphene.Field(UserType)
 
 	def resolve_transaction(self, info, **kwargs):
 		id = kwargs.get('id')
@@ -22,6 +29,12 @@ class Query(ObjectType):
 
 	def resolve_transactions(self, info, **kwargs):
 		return Transaction.objects.all()
+
+	def resolve_viewer(self, info, **kwargs):
+		user = info.context.user
+		if not user.is_authenticated:
+			raise Exception('Authentication credentials were not provided')
+		return user
 
 # Create Input Object Types
 class TransactionInput(graphene.InputObjectType):
@@ -71,5 +84,8 @@ class UpdateTransaction(graphene.Mutation):
 class Mutation(graphene.ObjectType):
 	create_transaction = CreateTransaction.Field()
 	update_transaction = UpdateTransaction.Field()
+	token_auth = graphql_jwt.ObtainJSONWebToken.Field()
+	verify_token = graphql_jwt.Verify.Field()
+	refresh_token = graphql_jwt.Refresh.Field()
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
