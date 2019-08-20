@@ -3,12 +3,14 @@ from graphene_django.types import DjangoObjectType, ObjectType
 from payment.models import Transaction
 import graphql_jwt
 from django.contrib.auth import get_user_model
+from graphql_jwt.decorators import login_required, superuser_required
 
 # Create a GraphQL type for the Transaction model
 class TransactionType(DjangoObjectType):
 	class Meta:
 		model = Transaction
 
+# Create a GraphQL type for the User model
 class UserType(DjangoObjectType):
     class Meta:
         model = get_user_model()
@@ -17,8 +19,8 @@ class UserType(DjangoObjectType):
 class Query(ObjectType):
 	transaction = graphene.Field(TransactionType, id=graphene.Int())
 	transactions = graphene.List(TransactionType)
-	viewer = graphene.Field(UserType)
 
+	@superuser_required
 	def resolve_transaction(self, info, **kwargs):
 		id = kwargs.get('id')
 
@@ -27,14 +29,9 @@ class Query(ObjectType):
 
 		return None
 
+	@superuser_required
 	def resolve_transactions(self, info, **kwargs):
 		return Transaction.objects.all()
-
-	def resolve_viewer(self, info, **kwargs):
-		user = info.context.user
-		if not user.is_authenticated:
-			raise Exception('Authentication credentials were not provided')
-		return user
 
 # Create Input Object Types
 class TransactionInput(graphene.InputObjectType):
@@ -47,7 +44,7 @@ class TransactionInput(graphene.InputObjectType):
 	referenceCode = graphene.String()
 	transactionID = graphene.String()
 
-# Create mutations for transactions
+# Mutation to create transaction
 class CreateTransaction(graphene.Mutation):
 	class Arguments:
 		input = TransactionInput(required=True)
@@ -56,12 +53,14 @@ class CreateTransaction(graphene.Mutation):
 	transaction = graphene.Field(TransactionType)
 
 	@staticmethod
+	@login_required
 	def mutate(root, info, input=None):
 		ok = True
 		transaction_instance = Transaction(amount=input.amount,currency=input.currency,UEN=input.UEN,company_name=input.companyName,redirect_uri=input.redirectUri,reference_code=input.referenceCode,transaction_id=input.transactionID,paid=False)
 		transaction_instance.save()
 		return CreateTransaction(ok=ok, transaction=transaction_instance)
 
+# Mutation to update transaction
 class UpdateTransaction(graphene.Mutation):
 	class Arguments:
 		id = graphene.Int(required=True)
@@ -71,6 +70,7 @@ class UpdateTransaction(graphene.Mutation):
 	transaction = graphene.Field(TransactionType)
 
 	@staticmethod
+	@superuser_required
 	def mutate(root, info, id, input=None):
 		ok = False
 		transaction_instance = Transaction.objects.get(pk=id)
@@ -81,6 +81,7 @@ class UpdateTransaction(graphene.Mutation):
 			return UpdateTransaction(ok=ok, transaction=transaction_instance)
 		return UpdateTransaction(ok=ok, transaction=None)
 
+#All mutations available
 class Mutation(graphene.ObjectType):
 	create_transaction = CreateTransaction.Field()
 	update_transaction = UpdateTransaction.Field()
