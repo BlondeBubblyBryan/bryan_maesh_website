@@ -47,7 +47,7 @@ if settings.LOCAL_DEV:
 	])
 else:
 	urlpatterns.extend([
-		path('', RedirectView.as_view(url='https://maesh.io', permanent=True), name='maesh_home_page'),
+		# path('', RedirectView.as_view(url='https://maesh.io', permanent=True), name='maesh_home_page'),
 		#GraphQL
     	path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=False))), #In production you'd set this to false
 	])
