@@ -114,8 +114,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join( os.path.dirname(BASE_DIR), 'payment/static/')
 
-CORS_ORIGIN_ALLOW_ALL = True
-
-CORS_ORIGIN_WHITELIST = [
-    "https://maesh.io"
-]
+CORS_ORIGIN_ALLOW_ALL = False
