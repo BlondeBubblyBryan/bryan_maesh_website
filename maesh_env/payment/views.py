@@ -86,30 +86,6 @@ def qr_redirect(request):
 
 	return r1
 
-# def webcheckout_paylah():
-
-# 	headers = {
-# 		"msgId": "string",
-# 		"orgId": "string",
-# 		"timeStamp": "2019-08-01T06:46:43Z"
-# 	}
-# 	txnInfo = {
-# 		"txnMsgId": "string",
-# 		"txnSource": 0,
-# 		"txnType": "s",
-# 		"txnCcy": "SGD",
-# 		"txnAmount": 50,
-# 		"returnUrl": "string",
-# 		"phoneNumber": 0,
-# 		"payeeShippingAddress": "st",
-# 		"address": {},
-# 		"rmtInf": {}
-# 	}
-# 	auth=HTTPBasicAuth(settings.API[bank]['client_id'], settings.API[bank]['client_secret'])
-# 	bank = 'dbs'
-# 	response = requests.post(settings.API[bank]['url']+'/paylah/v1/purchase/webCheckout')
-# 	return response
-
 #The bank to use for PayNow is chosen
 def paynow_maesh(request):
 
@@ -240,7 +216,6 @@ def get_deposit_accounts(transaction,bank):
 		'clientId': settings.API[bank]['client_id'],
 		'accessToken': transaction.credential.access_token,
 	}
-	print(headers)
 
 	endpoint = ''
 	if bank == 'dbs':
@@ -250,8 +225,6 @@ def get_deposit_accounts(transaction,bank):
 	if bank == 'citi':
 		endpoint = ''
 	
-	print(endpoint)		
-
 	time.sleep(5)
 	response = requests.get(endpoint, headers=headers)
 
@@ -354,9 +327,6 @@ def make_paynow_transfer_DBS(transaction,account_number):
 			"referenceId": "4P3EDAB1C853A004117A32"
 		}
 	}
-
-	print(headers)
-	print(payload)
 
 	response = requests.post(settings.API[transaction.credential.bank]['url']+'/transfers/payNow', headers=headers, data=payload)
 
@@ -529,6 +499,31 @@ def transaction_history(request):
 	context['data'] = data
 
 	return render(request, 'dbs/transaction_history.html', context)
+
+# def webcheckout_paylah():
+
+# 	headers = {
+# 		"msgId": "string",
+# 		"orgId": "string",
+# 		"timeStamp": "2019-08-01T06:46:43Z"
+# 	}
+# 	txnInfo = {
+# 		"txnMsgId": "string",
+# 		"txnSource": 0,
+# 		"txnType": "s",
+# 		"txnCcy": "SGD",
+# 		"txnAmount": 50,
+# 		"returnUrl": "string",
+# 		"phoneNumber": 0,
+# 		"payeeShippingAddress": "st",
+# 		"address": {},
+# 		"rmtInf": {}
+# 	}
+# 	bank = 'dbs'
+# 	auth = HTTPBasicAuth(settings.API[bank]['client_id'], settings.API[bank]['client_secret'])
+# 	response = requests.post(settings.API[bank]['url']+'/paylah/v1/purchase/webCheckout', auth=auth, headers=headers, data=txnInfo)
+# 	print(vars(response))
+# 	return response
 
 # #This doesn't seem to be working in Sandbox. Get a webpage as response
 # def payLah_transfer(request):

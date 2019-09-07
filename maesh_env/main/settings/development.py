@@ -6,7 +6,7 @@ DEBUG = True
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'u8$em6-r#$i91=knt^uud&cy_r33imh4%cx9stx)newdmfd-17'
 
-ALLOWED_HOSTS = ['localhost','10.202.1.171','192.168.1.70','maesh.io','172.20.10.2']
+ALLOWED_HOSTS = ['localhost','10.202.1.171','192.168.1.70','maesh.io','172.20.10.2','10.10.3.126']
 
 SITE = 'http://localhost:8000/'
 LOCAL_DEV = True
