@@ -43,7 +43,7 @@ class TransactionInput(graphene.InputObjectType):
 	companyName = graphene.String()
 	redirectUri = graphene.String()
 	referenceCode = graphene.String()
-	transactionID = graphene.String()
+	transactionID = graphene.String() #THIS CAN BE DELETED AFTER COMPOUND COFFEE UPDATES
 
 # Mutation to create transaction
 class CreateTransaction(graphene.Mutation):
