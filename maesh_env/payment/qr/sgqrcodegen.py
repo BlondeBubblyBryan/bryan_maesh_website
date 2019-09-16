@@ -13,9 +13,23 @@ def generate_qr(amount,UEN,businessName,referenceCode):
 	# grab = '00'+'08'+'com.grab'+'01'+grabMerchantLen+grabMerchantCode
 	# grabLen = "{:02d}".format(len(grab))
 
-	sgqr = ('00020101021226370009SG.PAYNOW0101202%s%s0301152040000530370254%s%s5802SG59%s%s6009SINGAPORE62%s01%s%s6304' % (UENLen, UEN, amountLen, amount, businessNameLen, businessName, referenceCodeRootLen, referenceCodeLen, referenceCode))
+	id00 = '000201' #Payload Format Indicator
+	id01 = '010212' #Point of Initiation Method
+	id26 = ('26370009SG.PAYNOW0101202%s%s03011' % (UENLen, UEN)) #SG PayNow
+	# id27 = '27810011SG.COM.NETS01231198500065G9912312359000211111510795000308510795019908AC0EE4AB'
+	# id51 = '51810007SG.SGQR01121809052DD729020700.00010306408897040201050315906040000070820180905'
+	id52 = '52040000' #Merchant Category Code
+	id53 = '5303702' #Transaction Currency
+	id54 = ('54%s%s' % (amountLen, amount)) # Amount
+	id58 = '5802SG' #Country Code
+	id59 = ('59%s%s' % (businessNameLen, businessName)) #Merchant Name
+	id60 = '6009SINGAPORE' #Merchant City
+	id62 = ('62%s01%s%s' % (referenceCodeRootLen, referenceCodeLen, referenceCode)) #Reference code
+	id63 = '6304' #CRC
 
-	#sgqr = '00020101021126810011SG.COM.NETS01231198500065G9912312359000211111686614000308686614019908604108C251800007SG.SGQR01121809072DD85C020701.000103060790270402010502060604000007082018091552045812530370254'+digits+amount+'5802SG5912SOBA EXPRESS6009Singapore6304'
+	sgqr = id00 + id01 + id26 + id52 + id53 + id54 + id58 + id59 + id60 + id62 + id63
+
+	# sgqr = '00020101021126810011SG.COM.NETS01231198500065G9912312359000211111686614000308686614019908604108C251800007SG.SGQR01121809072DD85C020701.00010306079027040201050206060400000708201809155204581253037025802SG5912SOBC EXPRESS6009Singapore6304'
 	byte_seq = sgqr.encode()
 	crc = crc16.crc16xmodem(byte_seq, 0xffff)
 	finalcrc = '{:04X}'.format(crc & 0xffff)
