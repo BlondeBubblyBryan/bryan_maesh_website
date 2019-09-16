@@ -4,6 +4,7 @@ from payment.models import Transaction
 import graphql_jwt
 from django.contrib.auth import get_user_model
 from graphql_jwt.decorators import login_required, superuser_required
+import hashlib
 
 # Create a GraphQL type for the Transaction model
 class TransactionType(DjangoObjectType):
@@ -56,7 +57,7 @@ class CreateTransaction(graphene.Mutation):
 	@login_required
 	def mutate(root, info, input=None):
 		ok = True
-		transaction_instance = Transaction(amount=input.amount,currency=input.currency,UEN=input.UEN,company_name=input.companyName,redirect_uri=input.redirectUri,reference_code=input.referenceCode,transaction_id=input.transactionID,paid=False)
+		transaction_instance = Transaction(amount=input.amount,currency=input.currency,UEN=input.UEN,company_name=input.companyName,redirect_uri=input.redirectUri,reference_code=input.referenceCode,transaction_id=hashlib.md5(input.referenceCode.encode("utf-8")).hexdigest(),paid=False)
 		transaction_instance.save()
 		return CreateTransaction(ok=ok, transaction=transaction_instance)
 
