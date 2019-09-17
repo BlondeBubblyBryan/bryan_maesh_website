@@ -13,19 +13,18 @@
 {% endif %}
 <section id="screen" class="section">
 	<div class="container">
-		<h1>Make payment</h1>
+		<h1>Make Payment</h1>
+		<h4 class="desktop">Scan QR code with any <img style="height: 50px;" src="{% static 'maesh/images/paynow.png' %}" alt="PayNow"> app</h4>
+		<h4 class="mobile" style="padding-bottom: 25px;">Take a screenshot and upload it in your bank's e-wallet:</h4>
 		<!-- <div class="mobile">Choose your bank's e-wallet<br>Enter the amount of S${{amount|floatformat:2}} and the reference code {{referenceCode}}:</div>
 		<div class="desktop">Scan the QR code with any app that accepts <img style="width: 80px;height: 40px;top: -2px;position: relative;" src="{% static 'maesh/images/paynow.png' %}" alt="PayNow"></div> -->
 	</div>
 <!-- 	<div class="container mobile" style="padding-top: 30px;">
 		<a class="mobile" href="http://www.dbs.com.sg/personal/mobile/paylink/index.html?tranRef=O3gQn6KiWl"><img class="bankimage" style="width:200px;" src="{% static 'maesh/images/paylah.png' %}" alt="DBS PayLah!"></a>
 	</div> -->
-	<div  class="container" style="padding-top: 25px;">
-		<div id="container">
-			<div class="mobile" style="padding-bottom: 25px;">Take a screenshot and upload it in your bank's e-wallet:</div>
-			<div>{{qr|safe}}</div>
-			<!-- <button id="downloadQR" class="button">Download QR</button> -->
-		</div>
+	<div class="container" id="container" style="padding-top: 25px;">
+		<div>{{qr|safe}}</div>
+		<!-- <button id="downloadQR" class="button">Download QR</button> -->
 	</div>
 	<div class="container" style="padding-top: 25px;">
 		<div class="shape-wrapper">
@@ -33,9 +32,9 @@
 		</div>
 		<div id="information" class="price">
 			<h1 style="font-size: 2.5rem;">S${{amount|floatformat:2}}</h1>
-			<div><strong>To:</strong> {{companyName}}</div>
-			<div><strong>Reference code:</strong> {{referenceCode}}</div>
-			<div><strong>Date: </strong>{% now "F j, Y" %} - {% now "H:i" %}</div>
+			<div style="font-size: 0.9rem;"><strong>To:</strong> {{companyName}}</div>
+			<div style="font-size: 0.9rem;"><strong>Reference code:</strong> {{referenceCode}}</div>
+			<div style="font-size: 0.9rem;"><strong>Date: </strong>{% now "F j, Y" %} - {% now "H:i" %}</div>
 		</div>
 	</div>
 	<div class="container" style="padding-top: 25px;">

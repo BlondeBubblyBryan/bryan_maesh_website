@@ -174,7 +174,7 @@ section {
   }
 }
 
-@media only screen and (max-device-width : 1024px) {
+@media screen and (max-width : 1024px) {
   .mobile{
     display:inline-block;
     align-content: center;
