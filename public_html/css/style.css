@@ -168,7 +168,6 @@ h1, .h1 {
 .btn-3 {
   color: #fff;
   background-color: #5d3edc;
-  border-color: #5d3edc;
 }
 
 .btn-4 {
@@ -271,6 +270,11 @@ a {
 
 .on-mobile {
   display: none;
+}
+
+#mobile {
+  background-color: #fff;
+  color: #000;
 }
 
 .color-1 {
