@@ -165,11 +165,18 @@ h1, .h1 {
   box-shadow: 0 1px 9px 1px rgba(0, 0, 0, 0.15);
 }
 
+.btn-3 {
+  color: #fff;
+  background-color: #5d3edc;
+  border-color: #5d3edc;
+}
+
 .btn-4 {
   color: #fff;
   background-color: #ff4a59;
   border-color: #ff4a59;
 }
+
 .btn-rounded {
     border-radius: 10rem;
 }
@@ -256,6 +263,14 @@ a {
   background: #f4f8fb;
   -webkit-transform: skew(0,-8deg);
   transform: skew(0,-8deg);
+}
+
+.on-desktop {
+  display: block;
+}
+
+.on-mobile {
+  display: none;
 }
 
 .color-1 {
@@ -381,4 +396,9 @@ a.globalFooterCard svg {
   .screen  {
     margin-top: 3rem!important;
   }
+}
+
+.banks {
+  height: 50px;
+  border-radius: 20%;
 }
