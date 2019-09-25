@@ -6,7 +6,7 @@
 <style type="text/css">
 	.st0{fill:#5d3edc;}
 	.st1{fill:#D1D3D4;}
-	.st2{fill:#1B1D21;}
+	.st2{fill:#1B1D21; stroke: #000; stroke-width: 2;}
 	.st3{fill:#ff4a59;}
 </style>
 <path class="st0" d="M428.7,733.2l29.5,47.8l29.6-21.6v62.7h76.8v-62.8l8.5,24.1l31.5-55.1c0,0-1.4-72.1-11.7-67.5
