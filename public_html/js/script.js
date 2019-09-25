@@ -11,3 +11,7 @@ $("#mobile").click(function(){
 	$(this).css({'background-color': '#5d3edc', 'color': '#fff'});
 	$("#desktop").css({'background-color': '#fff', 'color': '#000'});
 });
+
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+});

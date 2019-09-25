@@ -253,6 +253,10 @@ a {
   background: #f6f9fc;
 }
 
+#how-does-it-work:before {
+  height: 115%;
+}
+
 .footer {
   background: transparent;
   overflow: hidden;
@@ -271,6 +275,11 @@ a {
   background: #f4f8fb;
   -webkit-transform: skew(0,-8deg);
   transform: skew(0,-8deg);
+}
+
+#footer-consumer {
+  margin-top: 0px; 
+  padding-top: 0px;
 }
 
 .color-1 {
@@ -398,7 +407,7 @@ a.card svg {
   }
 }
 
-/*Merchants page only*/
+/*Merchants page only
 
 .banks {
   height: 50px;

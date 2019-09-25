@@ -59,6 +59,58 @@
 	drift.SNIPPET_VERSION = '0.3.1';
 	drift.load('ia4in8hwgdvr');
 	</script>
+	<script>
+	drift.on("ready", function(api) {
+	  drift.api.startInteraction({ interactionId: 1451017, goToConversation: true }) /* <-- your playbook's interaction ID here */
+	});
+	</script>
+	<!-- place this script tag after the Drift embed tag -->
+	<script>
+	  (function() {
+	    /* Add this class to any elements you want to use to open Drift.
+	     *
+	     * Examples:
+	     * - <a class="drift-open-chat">Questions? We're here to help!</a>
+	     * - <button class="drift-open-chat">Chat now!</button>
+	     *
+	     * You can have any additional classes on those elements that you
+	     * would ilke.
+	     */
+	    var DRIFT_CHAT_SELECTOR = '.drift-open-chat'
+	    /* http://youmightnotneedjquery.com/#ready */
+	    function ready(fn) {
+	      if (document.readyState != 'loading') {
+	        fn();
+	      } else if (document.addEventListener) {
+	        document.addEventListener('DOMContentLoaded', fn);
+	      } else {
+	        document.attachEvent('onreadystatechange', function() {
+	          if (document.readyState != 'loading')
+	            fn();
+	        });
+	      }
+	    }
+	    /* http://youmightnotneedjquery.com/#each */
+	    function forEachElement(selector, fn) {
+	      var elements = document.querySelectorAll(selector);
+	      for (var i = 0; i < elements.length; i++)
+	        fn(elements[i], i);
+	    }
+	    function openSidebar(driftApi, event) {
+	      event.preventDefault();
+	      driftApi.sidebar.open();
+	      return false;
+	    }
+	    ready(function() {
+	      drift.on('ready', function(api) {
+	        var handleClick = openSidebar.bind(this, api)
+	        forEachElement(DRIFT_CHAT_SELECTOR, function(el) {
+	          el.addEventListener('click', handleClick);
+	        });
+	      });
+	    });
+	  })();
+	</script>
 	<!-- End of Async Drift Code -->
 </head>
 <body>
@@ -102,7 +154,7 @@
 		        	</div>
 					<ul>
 						<li class="m-0">Know directly if you paid</li>
-						<li class="m-0">See the payment in your bank overview right away</li>
+						<li class="m-0">See the deducted payment in your bank overview</li>
 					</ul>
 				</a>
 				<a class="card normal-card">
@@ -128,7 +180,7 @@
 						<div class="media-body mt-3 mt-md-0">
 							<div class="card-title">
 								<div class="icon">1️⃣</div>
-								<h5 class="mt-0 mb-1">Select PayNow <span style="font-weight: 300;">powered by Maesh</span></h5>
+								<h5 class="mt-0 mb-1">Select PayNow<br><span style="font-weight: 300;">powered by Maesh at <a href="" class="drift-open-chat" data-toggle="tooltip" title="Click here if you want us to add an online merchant!">your online merchant</a></span></h5>
 							</div>
 							<div style="margin:15px;">
 								<img src="images/PayNow.png" alt="PayNow" style="height:70px;">
@@ -141,7 +193,7 @@
 						<div class="media-body mt-3 mt-md-0">
 							<div class="card-title">
 								<div class="icon">2️⃣</div>
-								<h5 class="mt-0 mb-1">Scan the QR <span style="font-weight: 300;">with any PayNow app on your smart phone</span></h5>
+								<h5 class="mt-0 mb-1">Scan the QR<br><span style="font-weight: 300;">with any PayNow app on your smart phone</span></h5>
 							</div>
 							<div style="margin:15px;">
 								<img src="images/qr-code.png" alt="QR-code" class="mt-2 mb-2 ml-3 mr-3" style="height: 100px;">
@@ -202,10 +254,10 @@
 			</div>
 		</div>
 	</footer>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://www.google.com/recaptcha/api.js?hl=en"></script>
-  <script src="js/script.js"></script>
+	<script src="https://www.google.com/recaptcha/api.js?hl=en"></script>
+ 	<script src="js/script.js"></script>
 </body>
 </html>
