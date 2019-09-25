@@ -447,19 +447,13 @@ a.normal-card {
   padding: 0px 0px;
 }
 
-@media (min-width: 768px) {
-  .media-body .card-title {
-    padding: 0px 40px;
-  }
-}
-
 .icon {
   font-size: 2rem;
   width: 40px;
 }
 
 .media-body .icon {
-  width: 100px;
+  margin-right: 20px;
 }
 
 .main {
