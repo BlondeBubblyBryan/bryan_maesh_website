@@ -115,3 +115,14 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join( os.path.dirname(BASE_DIR), 'payment/static/')
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+#Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_BACKEND = 'keuring.email_backend.DKIMBackend' #This is used to authenticate with DKIM
+EMAIL_HOST = 'mail.zxcs.nl'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'hello@maesh.io'
+EMAIL_HOST_PASSWORD = 'Rb7IDAg7U4C6'
+EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = "Maesh<hello@maesh.io>"
+# EMAIL_SUBJECT_PREFIX = "maesh.io"

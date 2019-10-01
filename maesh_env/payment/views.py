@@ -7,6 +7,12 @@ import jwt
 import urllib
 import time
 
+#For e-mail
+from django.core.mail import send_mail, EmailMessage
+from django.core.mail import get_connection, EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
 import requests
 from requests.auth import HTTPBasicAuth
 from django.conf import settings
@@ -67,6 +73,10 @@ def paynow_qr(request):
 
 		transaction = Transaction.objects.create(amount=amount,currency=currency,UEN=UEN,company_name=companyName,reference_code=referenceCode,redirect_uri=redirect_uri,transaction_id="123456abcdefghijklmnopqrstuvwxyz")
 
+	#Send email that transaction has been initiated
+	email = sendEmail(transaction)
+	email.send()
+
 	qr = sgqrcodegen.generate_qr(str(transaction.amount),transaction.UEN,transaction.company_name,transaction.reference_code).to_svg_str(0)
 
 	return render(request, 'maesh/paynow_qr.html', {'qr':qr,'amount':transaction.amount,'companyName':transaction.company_name, 'referenceCode':transaction.reference_code,'transaction_id':transaction.transaction_id})
@@ -85,6 +95,19 @@ def qr_redirect(request):
 		r1 = HttpResponseRedirect(transaction.redirect_uri)
 
 	return r1
+
+#Send new transaction e-mail
+def sendEmail(transaction):
+
+    from_email = "Maesh<hello@maesh.io>"
+    context = {'transaction':transaction}
+    html_content = render_to_string('maesh/transaction_email.html', context) # render with dynamic value
+    text_content = strip_tags(html_content) # Strip the html tag. So people can see the pure text at least.
+
+    msg = EmailMultiAlternatives("New Transaction: "+transaction.company_name, text_content, from_email, ["michael@maesh.io"])
+    msg.attach_alternative(html_content, "text/html")
+
+    return msg
 
 #The bank to use for PayNow is chosen
 def paynow_maesh(request):

@@ -234,7 +234,7 @@
 				<div class="col-md-4">
 					<div class="media flex-column flex-lg-row align-items-center align-items-md-start">
 						<div class="media-body mt-3 mt-md-0">
-							<h5 class="mt-0 mb-1">1. Select PayNow powered by Maesh</h5>
+							<h5 class="mt-0 mb-1">1. Select PayNow <span style="font-weight: 300;">powered by Maesh</span></h5>
 							<img src="images/PayNow.png" alt="PayNow" class="mt-2 mb-2" style="height:70px;">
 							<p class="color-2 m-0">Your customer clicks on our payment method</p>
 						</div>
@@ -243,18 +243,18 @@
 				<div class="col-md-4 on-desktop">
 					<div class="media flex-column flex-lg-row align-items-center align-items-md-start">
 						<div class="media-body mt-3 mt-md-0">
-							<h5 class="mt-0 mb-1">2. Scan the QR code with smart phone</h5>
+							<h5 class="mt-0 mb-1">2. Scan the QR code <span style="font-weight: 300;">with smart phone</span></h5>
 							<div style="margin:15px;">
 								<img src="images/qr-code.png" alt="QR-code" class="mt-2 mb-2 ml-3 mr-3" style="height: 100px;">
 							</div>
-							<p class="color-2 m-0">Your customer scans the QR code displayed on desktop with any PayNow app of the <a href="https://www.abs.org.sg/consumer-banking/pay-now" target="_blank">9 participating banks</a> in Singapore</p>
+							<p class="color-2 m-0">Your customer scans the dynamic QR code displayed on desktop with any PayNow app of the <a href="https://www.abs.org.sg/consumer-banking/pay-now" target="_blank">9 participating banks</a> in Singapore</p>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-4 on-mobile">
 					<div class="media flex-column flex-lg-row align-items-center align-items-md-start">
 						<div class="media-body mt-3 mt-md-0">
-							<h5 class="mt-0 mb-1">2. Select the preferred bank app</h5>
+							<h5 class="mt-0 mb-1">2. Select <span style="font-weight: 300;">the preferred</span> bank app</h5>
 							<div style="margin:15px;">
 								<img src="images/apps/dbs.jpg" alt="DBS POSB logo" class="mt-2 mb-2 ml-3 mr-3 banks">
 								<img src="images/apps/ocbc.jpg" alt="OCBC Bank logo" class="mt-2 mb-2 ml-3 mr-3 banks">
@@ -273,7 +273,7 @@
 				<div class="col-md-4">
 					<div class="media flex-column flex-lg-row align-items-center align-items-md-start">
 						<div class="media-body mt-3 mt-md-0">
-							<h5 class="mt-0 mb-1">3. Authorize and Pay</h5>
+							<h5 class="mt-0 mb-1">3. Authorize <span style="font-weight: 300;">and</span> Pay</h5>
 							<div style="margin:15px;">
 								<img src="images/password.svg" alt="Password Authentication" class="mt-2 mb-2" style="height:70px;">
 								<img src="images/fingerprint.svg" alt="Fingerprint Authentication" class="mt-2 mb-2" style="height:70px;">
@@ -289,6 +289,63 @@
 			</div>
 		</div>
 	</section>
+	<section id="comparison">
+		<div class="-mt-4 container flex flex-col sm:flex-row sm:items-center">
+			<div class="rounded-t-md rounded-b-md sm:rounded-md sm:shadow-lg sm:w-3/5 sm:z-10">
+				<div class="bg-additional font-bold px-10 py-6 rounded-t-md uppercase">Additional Payment Method</div>
+	            <div class="bg-white p-4 rounded-b-md sm:pb-10 sm:pt-8 sm:px-10 sm:rounded-b-md text-blue-darker">
+	            	<ul id="additional">
+	            		<li class="mb-6">➽ With PayNow you offer your customer an extra option to pay</li>
+	            		<li class="mb-6">➽ Maesh complements credit card payments through e.g. Stripe or PayPal</li>
+	            	</ul>
+	            	<p class="mb-4 text-blue-darker uppercase font-bold text-center" style="margin-top: 2rem;"> But no hefty fees</p>
+	            </div>
+	        </div>
+			<div class="rounded-b-md sm:rounded-md sm:shadow-lg sm:-ml-4 sm:w-3/5">
+				<div class="bg-compare font-bold px-10 py-6 rounded-t-md uppercase">Compare transaction costs</div>
+	            <div class="bg-white p-6 text-sm sm:pb-10 sm:pt-8 sm:px-10 sm:rounded-t-md rounded-b-md">
+	            	<div class="slidecontainer py-3">
+	            		<input class="slider" value="30" min="0" max="250" name="rangeslider" type="range" />
+	            	</div>
+	            	<table class="w-full text-blue-darker text-sm">
+	            		<tbody>
+	            			<tr class="border-gray-dark  sm:border-0 ">
+	            				<td class="pr-5 pl-2 py-3 sm:pl-0 border-r"></td>
+	            				<td class="px-3 py-3 border-r"><span class="font-bold uppercase">Stripe</span></td>
+	            				<td class="px-3 pr-6 py-3 sm:pr-0"><span class="font-bold uppercase">Maesh</span></td>
+	            			</tr>
+	            			<tr class="border-gray-dark ">
+	            				<td class="pr-2 pl-2 py-3 sm:pl-0 border-r">Percentage</td>
+	            				<td class="px-3 py-3 border-r"><span id="stripe-percentage">3.4</span>%</td>
+	            				<td class="px-3 pr-6 py-3 sm:pr-0"><span id="maesh-percentage">1.5</span>%</td>
+	            			</tr>
+	            			<tr class="border-gray-dark ">
+	            				<td class="pr-5 pl-2 py-3 sm:pl-0 border-r">Fixed</td>
+	            				<td class="px-3 py-3 border-r">S$<span id="stripe-fixed">0.50</span></td>
+	            				<td class="px-3 pr-6 py-3 sm:pr-0">S$<span id="maesh-fixed">0.00</span></td>
+	            			</tr>
+	            			<tr class="border-gray-dark ">
+	            				<td class="pr-5 pl-2 py-3 sm:pl-0 border-r"><strong>Total cost</strong></td>
+	            				<td class="px-3 py-3 border-r"><div class="bg-gray-darkest font-bold px-2 py-1 rounded-sm">S$<span id="stripe-cost"></span></div></td>
+	            				<td class="px-3 pr-6 py-3 sm:pr-0"><div class="bg-gray-darkest font-bold px-2 py-1 rounded-sm">S$<span id="maesh-cost"></span></div></td>
+	            			</tr>
+	            			<tr class="border-gray-dark ">
+	            				<td class="pr-5 pl-2 py-1 sm:pl-0"></td>
+	            				<td class="px-1 py-1 text-right">Fees saved</td>
+	            				<td class="px-3 pr-6 py-1 sm:pr-0"><div class="font-bold px-2 py-1 rounded-sm">S$<span id="cost-saved"></span></div></td>
+	            			</tr>
+	            			<tr class="border-gray-dark ">
+	            				<td class="pr-5 pl-2 py-1 sm:pl-0"></td>
+	            				<td class="px-1 py-1 text-right">Margin improvement</td>
+	            				<td class="px-3 pr-6 py-1 sm:pr-0"><div class="bg-green font-bold px-2 py-1 rounded-sm"><span id="margin"></span></div></td>
+	            			</tr>
+	            		</tbody>
+	            	</table>
+	            </div>
+		    </div>
+		</div>
+	</section>
+
 	<section class="section banner gradient gradient-53 color-1 shadow-lg">
 		<div class="shape-wrapper">
 			<div class="shape shape-background shape-main gradient gradient-53"></div>
@@ -296,10 +353,9 @@
 		</div>
 		<div class="container">
 			<div class="section-heading text-center">
-				<h2 class="color-1">Credit cards are still used in 67% of online purchases in Singapore*</h2>
-				<h3 class="color-1 lead" style="font-size: x-large;">On a S$30 order that's S$1.67 or 5.6% in transaction fees</h3>
+				<h2 class="color-1">Yes, that's not a typo. 1.5% transaction fees</h2>
+				<h3 class="color-1 lead" style="font-size: x-large;">And no set-up or monthly fees</h3>
 			</div>
-			<p class="color-1 lead" style="text-align: right;font-size: small;">* Global Payments Report 2018</p>
 			<div class="row">
 				<div class="col-md-12 text-center">
 					<button type="button" class="btn btn-rounded btn-lg btn-4 shadow mt-1 px-4" data-toggle="modal" data-target="#signUp">I want lower fees</button>
@@ -323,9 +379,11 @@
 					</div>
 				</a>
 				<a class="card">
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-					<h5 class="bold mt-0 mb-1">Little to no cost</h5>
-					<p class="m-0">1.5% transaction fees; no set-up or monthly fees</p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-cw"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+					<h5 class="bold mt-0 mb-1">No more hassle</h5>
+					<p class="m-0"><em>Already using PayNow?</em></p>
+					<p class="m-0">Maesh will fully automate your payments</p>
+
 				</a>
 				<a class="card">
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-key"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path></svg>
