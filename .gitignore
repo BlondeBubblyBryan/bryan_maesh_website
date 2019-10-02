@@ -1,14 +1,2 @@
-.Python
-maesh_env/bin/
-maesh_env/include/
-maesh_env/lib/
-maesh_env/pip-selfcheck.json
-*.pyc
-*/*.pyc
-*/*/*.pyc
-maesh_env/db.sqlite3
-main/db.sqlite3
-maesh_env/main/db.sqlite3
-*/*/.DS_Store
 */.DS_Store
 .DS_Store
