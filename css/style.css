@@ -207,7 +207,7 @@ h1, .h1 {
   border-radius: 0.25rem;
 }
 
-.btn:focus, .btn:hover {
+.btn:focus:not(:disabled):not(.disabled), .btn:hover:not(:disabled):not(.disabled) {
   -webkit-transform: translateY(-3px);
   transform: translateY(-3px);
   -webkit-box-shadow: 0 13px 27px -5px rgba(50,50,93,.25), 0 8px 16px -8px rgba(0,0,0,.3), 0 -6px 16px -6px rgba(0,0,0,.025);
@@ -637,8 +637,7 @@ a.normal-card {
 }
 
 .border-r {
-  border-color: #e6ebf1;
-  border-right-width: 1px;
+  border-right: 1px solid #e6ebf1;
 }
 
 @media (min-width: 576px) {
@@ -679,10 +678,6 @@ a.normal-card {
   padding-right: 1.5rem;
   padding-bottom: 1.5rem;
   padding-left: 1.5rem;
-}
-
-*, :after, :before {
-  border: 0 solid currentColor;
 }
 
 .slidecontainer {
