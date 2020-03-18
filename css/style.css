@@ -447,8 +447,6 @@ a.normal-card {
   height: 15px;
   z-index: -1;
   background-color: #33ffc1;
-  top:-30px;
-  left: 20px;
 }
 
 .image {
@@ -482,6 +480,12 @@ a.normal-card {
 
 #quick.main:before {
   width: 40px;
+}
+
+#quick, #transparent, #safe {
+  z-index: -1;
+  top:-30px;
+  left: 20px;
 }
 
 #transparent.main:before {
@@ -776,4 +780,31 @@ a.normal-card {
   .valueprop {
     margin-top: 7rem;
   }
+}
+
+.testimonial {
+  display: inline-block;
+  margin: 0 auto 45px;
+  padding: 20px;
+  border-radius: 24px;
+  box-shadow: 0 7px 20px rgba(0,0,0,.07);
+  font-weight: 300;
+  text-align: center;
+  line-height: 1;
+  background-color: #f9fbfd; 
+  width: 70%;
+  border-style: dashed;
+  border-width: initial;
+  border-color: #33ffc1;
+}
+
+.title {
+  top: -5px;
+  z-index: 1;
+}
+
+.title::before {
+  width: 100px;
+  height: 5px;
+  top: 22px;
 }
