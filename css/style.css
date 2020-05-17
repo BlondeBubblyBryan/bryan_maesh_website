@@ -55,6 +55,7 @@ h1, .h1 {
 
 .section-heading {
     position: relative;
+    padding: 20px 0px;
 }
 
 .row {
