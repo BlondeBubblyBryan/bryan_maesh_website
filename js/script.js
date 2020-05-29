@@ -52,8 +52,8 @@ function updateSlider(passObj) {
   nextObj.find("span.bar > span").css("width", percentage + "%");
   nextObj.find("span.bar-btn > span").text("S$"+amount);
 
-  stripeCost.innerHTML = calculateCost(value, $("#stripe-percentage").html(), $("#stripe-fixed").html())
-  maeshCost.innerHTML = calculateCost(value, $("#maesh-percentage").html(), $("#maesh-fixed").html())
+  stripeCost.innerHTML = calculateCost(value, $("#stripe-percentage").html(), $("#stripe-fixed").html());
+  maeshCost.innerHTML = calculateCost(value, $("#maesh-percentage").html(), $("#maesh-fixed").html());
   costSaved.innerHTML = (stripeCost.innerHTML - maeshCost.innerHTML).toFixed(2);
   margin.innerHTML = ((costSaved.innerHTML / value) * 100).toFixed(1);
   if (!(isFinite(margin.innerHTML))) {
@@ -65,6 +65,9 @@ function updateSlider(passObj) {
 
 //Calculate the transaction fees
 function calculateCost(orderValue, percentage, fixed) {
-	return (orderValue * Number(percentage)/100 + Number(fixed)).toFixed(2)
+	return (orderValue * Number(percentage)/100 + Number(fixed)).toFixed(2);
 }
 
+
+document.querySelector('#prototype-video').playbackRate = 1.5;
+document.querySelector('#prototype-video').play();

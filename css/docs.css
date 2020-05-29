@@ -1,7 +1,3 @@
-html {
-  font-size: 62.5% !important;
-}
-
 body {
   font-weight: 400;
   font-family: 'Open Sans', sans-serif;
@@ -53,7 +49,7 @@ button.primary, a.button.primary {
 }
 
 button.primary:hover, a.button.primary:hover {
-  background: #3c1eb4;
+  background: #261370;
 }
 
 button.secondary, a.button.secondary {
@@ -126,6 +122,10 @@ h1, .h1 {
     max-width: 560px;
 }
 
+.shape-wrapper {
+  height: 15vh;
+}
+
 .header {
   text-align: center!important;
 }
@@ -141,7 +141,7 @@ h1, .h1 {
 .header .shape-main, .banner .shape-main {
   bottom: 0;
   width: 100%;
-  height: 210%;
+  height: 10vh;
   -webkit-transform-origin: 0 100%;
   transform-origin: 0 100%;
   -webkit-transform: translate(65%, -30%) rotate(-60deg);
@@ -892,4 +892,133 @@ a.normal-card {
   .carousel-inner {
     width: 100%;
   }
+}
+
+
+html {
+  font-size: 62.5%;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+header.section.header {
+  padding: 6vh 2vh 3vh 2vh;
+}
+
+.shape.shape-main {
+  height: 100% !important;
+}
+
+.shape.shape-top {
+  left: 30% !important;
+}
+
+img.logo {
+  height: 60px;
+}
+
+@media (max-width: 600) {
+  .container.header-container {
+    padding-left: 0px;
+    margin-left: 5px;
+  }
+
+  .container {
+    width: 90%;
+  }
+
+  .navbar-button-group {
+    display: none;
+  }
+
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+div.navbar-collapse.collapse{
+  justify-content: space-between;
+}
+
+.alert {
+  margin-bottom: 5vh;
+}
+
+h1, h2 {
+  line-height: 1.5;
+}
+
+.table-of-contents-container {
+  height: fit-content;
+  padding-top: 5vh;
+}
+
+.table-of-contents {
+  background-color: #f6f6f6;
+  padding: 20px 10px;
+  border-radius: 5px;
+  text-align: center;
+  height: auto;
+}
+
+.table-of-contents-links {
+  text-align: left;
+}
+
+.table-of-contents-versioning {
+  text-align: left;
+  margin-left: 20px;
+}
+
+.download.button {
+  margin: 3vh auto;
+  display: inline-block;
+}
+p.subtext {
+  font-size: 1.2rem;
+  text-transform: capitalize;
+}
+.step-image {
+  width: 70%;
+  display: block;
+  margin: 3vh;
+}
+
+a.navbar-brand {
+  margin-right: 4vw;
+}
+.dropdown-item {
+  font-size: 1.4rem;
+}
+
+@media (min-width: 992px){
+  .navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: .8rem;
+    padding-left: .8rem;
+  }
+}
+.nav.button {
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+h1.article-title {
+  margin: 2rem 0rem;
+}
+
+h2.section-title {
+  margin: 2rem 0rem;
+}
+
+main {
+  margin-bottom: 25vh;
+}
+
+footer {
+  z-index: -1;
 }
