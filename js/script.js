@@ -71,3 +71,7 @@ function calculateCost(orderValue, percentage, fixed) {
 
 document.querySelector('#prototype-video').playbackRate = 1.5;
 document.querySelector('#prototype-video').play();
+
+navigatePluginPage(path){
+  window.location.href = './docs/'+path;
+}
