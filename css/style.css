@@ -1,8 +1,12 @@
+html {
+  font-size: 62.5%;
+}
+
 body {
+  font-size: 2rem;
   font-weight: 400;
-  font-family: 'Quattrocento Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-style: normal;
-  font-size: 18px;
   text-rendering: optimizeLegibility !important;
   -webkit-font-smoothing: antialiased !important;
 }
@@ -25,6 +29,9 @@ header, section {
   text-decoration: none;
 }
 
+p {
+  font-family: 'Open Sans', sans-serif;
+}
 
 h1,
 h2,
@@ -45,8 +52,24 @@ h1, .h1 {
   font-size: 3rem !important;
 }
 
+h2, .h2 {
+  font-size: 2.7rem;
+}
+
+h3, .h3 {
+  font-size: 2.5rem;
+}
+
+h4, .h4 {
+  font-size: 2.2rem;
+}
+
+h5, .h5 {
+  font-size: 2rem;
+}
+
 .font-lg  {
-  font-size: 2.5rem !important;
+  font-size: 4rem !important;
 }
 
 .section {
@@ -56,6 +79,11 @@ h1, .h1 {
 .section-heading {
     position: relative;
     padding: 20px 0px;
+}
+
+
+td {
+  font-size: 1.5rem;
 }
 
 .row {
@@ -178,13 +206,60 @@ h1, .h1 {
 }
 
 .lead {
-  font-size: 1.25rem;
+  font-size: 2rem;
 }
 
 .shadow {
   -webkit-box-shadow: 0 1px 9px 1px rgba(0, 0, 0, 0.15);
   box-shadow: 0 1px 9px 1px rgba(0, 0, 0, 0.15);
 }
+
+.cta.button {
+  box-sizing: border-box;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.6rem;
+  padding: 1rem;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.cta.button.secondary {
+  background-color: white;
+  color: #ff4a59;
+  height: auto;
+  display: inline-block;
+}
+
+.cta.button:hover {
+  color: #fff;
+  background-color: #c71c2b; 
+}
+
+.danger.button:hover {
+  background-color: #c71c2b;
+  color: white;
+}
+
+
+#desktop, #mobile {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+}
+
+#desktop {
+  border-radius: 5px 0 0 5px;
+}
+
+#desktop:hover {
+  color: white;
+  background-color: #261370;
+}
+
+#mobile {
+  border-radius: 0 5px 5px 0;
+
+}
+
 
 .btn-3 {
   color: #fff;
@@ -207,9 +282,8 @@ h1, .h1 {
   text-decoration: none;
   letter-spacing: 1.45px;
   font-weight: 400;
-  text-transform: uppercase;
   padding: 0.5rem 1.25rem;
-  font-size: 0.75rem;
+  font-size: 1.2rem;
   line-height: 1.5;
   border-radius: 0.25rem;
   white-space: normal;
@@ -218,7 +292,7 @@ h1, .h1 {
 
 .btn-lg {
   padding: 0.5rem 1rem;
-  font-size: 1.5rem;
+  font-size: 2.4rem;
   line-height: 1.5;
   border-radius: 0.25rem;
 }
@@ -584,6 +658,24 @@ a.normal-card {
   .sm\:z-10 {
     z-index: 10;
   }
+
+}
+
+
+@media (max-width: 576px) {
+  div.shape.shape-background.shape-main {
+    height: 300%;
+  }
+  
+  div.shape.shape-background.shape-top {
+    height: 40%;
+  } 
+  #slider-comparison-container {
+    margin-top: 5vh;
+  }
+  #pitch-container {
+    box-shadow: none;
+  }
 }
 
 @media (min-width: 576px) {
@@ -602,8 +694,8 @@ a.normal-card {
 }
 
 .py-6 {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
 }
 
 .font-bold {
@@ -625,18 +717,18 @@ a.normal-card {
 }
 
 .px-10 {
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
 }
 
 @media (min-width: 576px) {
   .sm\:px-10 {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
   .sm\:py-6 {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
   }
 }
 
@@ -693,11 +785,11 @@ a.normal-card {
 }
 
 .p-6 {
-  padding: 1.5rem;
-  padding-top: 1.5rem;
-  padding-right: 1.5rem;
-  padding-bottom: 1.5rem;
-  padding-left: 1.5rem;
+  padding: 2.5rem;
+  padding-top: 2.5rem;
+  padding-right: 2.5rem;
+  padding-bottom: 2.5rem;
+  padding-left: 2.5rem;
 }
 
 .slidecontainer {
