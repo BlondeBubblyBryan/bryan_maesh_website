@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 	<title>Online payment gateway in Singapore - Maesh</title>
-	<link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset='utf-8'>
@@ -63,7 +65,7 @@
 </head>
 <body>
 	<div class="banner">
-		<a href="https://medium.com/maesh/maesh-stands-with-businesses-against-covid-19-b55067599da" target="_blank">
+		<a href="https://medium.com/maesh/maesh-stands-with-businesses-against-covid-19-b55067599da" rel="noreferrer" target="_blank">
 			<span>
 				We're offering discounts to help businesses affected by COVID-19. Read more here.
 			</span>
@@ -82,12 +84,22 @@
 						<img src="images/maesh.png" alt="maesh" style="width:100px;">
 					</div>
 					<h5 class="font-lg mb-5">The cheapest online payment solution in Singapore 🇸🇬</h5>
-					<p class="lead valueprop">Maesh enables your customers to pay with <a href="https://www.abs.org.sg/consumer-banking/pay-now" target="_blank"><img src="images/PayNow.png" alt="PayNow" class="paynow"></a><br>You get lower transaction fees for your online business</p>
+					<p class="lead valueprop">Maesh enables your customers to pay with <a href="https://www.abs.org.sg/consumer-banking/pay-now" rel="noreferrer" target="_blank"><img src="images/PayNow.png" alt="PayNow" class="paynow"></a><br>You get lower transaction fees for your online business</p>
 					<!-- <p class="lead">Saved merchants S$-.-- on transaction fees</p> -->
 					<div class="mt-5 align-items-center">
 						<div class="container">
-  							<!-- Button to Open the Modal -->
-  							<button type="button" class="btn btn-rounded btn-lg btn-4 shadow mt-1 px-4" data-toggle="modal" data-target="#signUp">I want lower fees</button>
+							  <!-- Button to Open the Modal -->
+							  <div>
+								<a href="./docs/woocommerce.html" class="cta secondary button btn btn-rounded btn-lg btn-4 shadow mt-1 px-4">
+									WooCommerce
+								</a>
+								<a href="./docs/prestashop.html" class="cta secondary button btn btn-rounded btn-lg btn-4 shadow mt-1 px-4">
+									Prestashop
+								</a>
+								<button type="button" class="cta button btn btn-rounded btn-lg btn-4 shadow mt-1 px-4" data-toggle="modal" data-target="#signUp">
+									Other platforms
+								</button>
+							  </div>
   							<!-- The Modal -->
   							<div class="modal" id="signUp">
     							<div class="modal-dialog modal-dialog-centered">
@@ -217,7 +229,11 @@
 				</div>
 				<div class="col-md-6 col-lg-5 ml-lg-auto">
 					<div class="screen">
-						<img src="images/Maesh_PayNow_Prototype.gif" alt="Maesh Prototype" style="height:500px;    border-radius: 16%/8%;">
+						<div   style="height:500px; width: 250px; overflow: hidden;  margin: auto;  border-radius: 16%/8%;" >
+							<video id="prototype-video" height="500" autoplay muted loop>
+								<source src="images/Maesh_PayNow_Prototype.mp4" alt="Maesh Prototype" type="video/mp4"/>
+							</video>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -230,7 +246,7 @@
 			</div>
 			<div style="display: flex; align-items: flex-end; justify-content: center;">
 				<div>
-					<button type="button" class="btn btn-rounded btn-3 shadow mt-1 px-4" id="desktop">On Desktop</button>
+					<button type="button" class="primary button btn btn-rounded btn-3 shadow mt-1 px-4" id="desktop">On Desktop</button>
 				</div>
 				<div>
 					<h6 class="mt-0 mb-1" style="color: #ff4a59;"><strong>COMING SOON</strong></h6>
@@ -254,7 +270,7 @@
 							<div style="margin:15px;">
 								<img src="images/qr-code.png" alt="QR-code" class="mt-2 mb-2 ml-3 mr-3" style="height: 100px;">
 							</div>
-							<p class="color-2 m-0">Your customer scans the dynamic QR code displayed on desktop with any PayNow app of the <a href="https://www.abs.org.sg/consumer-banking/pay-now" target="_blank">9 participating banks</a> in Singapore</p>
+							<p class="color-2 m-0">Your customer scans the dynamic QR code displayed on desktop with any PayNow app of the <a href="https://www.abs.org.sg/consumer-banking/pay-now"  rel="noreferrer" target="_blank">9 participating banks</a> in Singapore</p>
 						</div>
 					</div>
 				</div>
@@ -273,7 +289,7 @@
 								<img src="images/apps/bank-of-china.jpg" alt="Bank of China logo" class="mt-2 mb-2 ml-3 mr-3 banks">
 								<img src="images/apps/icbc.jpg" alt="ICBC logo" class="mt-2 mb-2 ml-3 mr-3 banks">
 							</div>
-							<p class="color-2 m-0">Your customer chooses any PayNow app of the <a href="https://www.abs.org.sg/consumer-banking/pay-now" target="_blank">9 participating banks</a> in Singapore and gets redirected</p>
+							<p class="color-2 m-0">Your customer chooses any PayNow app of the <a href="https://www.abs.org.sg/consumer-banking/pay-now" rel="noreferrer" target="_blank">9 participating banks</a> in Singapore and gets redirected</p>
 						</div>
 					</div>
 				</div>
@@ -326,8 +342,8 @@
 		</div>
 	</section>
 	<section id="comparison">
-		<div class="-mt-4 container flex flex-col sm:flex-row sm:items-center">
-			<div class="rounded-t-md rounded-b-md sm:rounded-md sm:shadow-lg sm:w-3/5 sm:z-10">
+		<div id="pitch-container" class="-mt-4 container flex flex-col sm:flex-row sm:items-center">
+			<div id="benefits-container" class="rounded-t-md rounded-b-md sm:rounded-md sm:shadow-lg sm:w-3/5 sm:z-10">
 				<div class="bg-additional font-bold px-10 py-6 rounded-t-md uppercase">Additional Payment Method</div>
 	            <div class="bg-white p-4 rounded-b-md sm:pb-10 sm:pt-8 sm:px-10 sm:rounded-b-md text-blue-darker">
 	            	<ul id="additional">
@@ -337,7 +353,7 @@
 	            	<p class="mb-4 text-blue-darker uppercase font-bold text-center" style="margin-top: 2rem;"> But no hefty fees</p>
 	            </div>
 	        </div>
-			<div class="rounded-b-md sm:rounded-md sm:shadow-lg sm:-ml-4 sm:w-3/5">
+			<div id="slider-comparison-container" class="rounded-b-md sm:rounded-md sm:shadow-lg sm:-ml-4 sm:w-3/5">
 				<div class="bg-compare font-bold px-10 py-6 rounded-t-md uppercase">Compare transaction costs</div>
 	            <div class="bg-white p-6 text-sm sm:pb-10 sm:pt-8 sm:px-10 sm:rounded-t-md rounded-b-md">
 	            	<div class="slidecontainer py-3">
@@ -390,11 +406,11 @@
 		<div class="container">
 			<div class="section-heading text-center">
 				<h2 class="color-1">No set-up or monthly fees. 1.0% + S$0.25 transaction fees</h2>
-				<h3 class="color-1 lead" style="font-size: x-large;">Yes, that's not a typo</h3>
+				<h3 class="color-1 lead" style="font-size: x-large;">No, that's not a typo</h3>
 			</div>
 			<div class="row">
 				<div class="col-md-12 text-center">
-					<button type="button" class="btn btn-rounded btn-lg btn-4 shadow mt-1 px-4" data-toggle="modal" data-target="#signUp">I want lower fees</button>
+					<button type="button" class="danger button btn btn-rounded btn-lg btn-4 shadow mt-1 px-4" data-toggle="modal" data-target="#signUp">I want lower fees</button>
 				</div>
 			</div>
 		</div>
@@ -410,8 +426,9 @@
 						<li class="m-0">Plugin available for:</li>
 					</ul>
 					<div style="display:flex;">
-						<img src="images/woocommerce.png" alt="maesh" style="width:80px; height:55px">
-						<img src="images/prestashop.png" alt="maesh" style="width:80px; height:55px">
+							<img id="woocommerce-plugin-image"  onclick="window.location.href ='./docs/woocommerce.html' " src="images/woocommerce.png" alt="maesh" style="cursor: pointer; width:80px">
+							<img id="prestashop-module-image"  onclick="window.location.href ='./docs/prestashop.html' "  src="images/prestashop.png" alt="maesh" style="cursor: pointer; width:80px; height:55px">
+
 					</div>
 				</a>
 				<a class="card">
@@ -437,7 +454,7 @@
 					<div style="font-size: small;"><a href="https://www.f10.ch/pressreleases/these-are-the-startups-accepted-into-the-f10-incubation-program-in-singapore/"><strong> F10 Fintech Incubator & Accelerator</strong></a> in Singapore:</div>
 					<div style="justify-content: center; align-items: center;">
 						<a href="https://www.f10.ch/pressreleases/these-are-the-startups-accepted-into-the-f10-incubation-program-in-singapore/"><img src="images/Batch_1_Singapore_Emblem.png" alt="Batch I Singapore Incubation Program 2020 F10" style="height:80px; position:relative"></a>
-						<a href="https://www.f10.ch/"><img src="images/f10_logo.jpg" alt="F10 Fintech Incubator & Accelerator" style="height:40px; position:relative"></a>
+						<a href="https://www.f10.ch/"><img src="images/f10_logo.png" alt="F10 Fintech Incubator & Accelerator" style="height:40px; position:relative"></a>
 					</div>
 				</div>
 				<div class="col-lg-4 text-center" style="margin: 10px 0px 20px 0px;">
