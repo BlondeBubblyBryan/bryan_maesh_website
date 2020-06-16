@@ -1,4 +1,4 @@
-cd ./css
+cd ./public/css
 npx cleancss -o docs.min.css doc.css
 npx cleancss -o style.min.css style.css
 cd ..

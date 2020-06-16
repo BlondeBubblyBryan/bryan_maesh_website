@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+	<title>Prestashop Maesh Integration</title>
+	<link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset='utf-8'>
+	<link rel="shortcut icon" type="image/png" href="images/favicon.png" />
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<link href="../css/docs.min.css" rel="stylesheet">
+
+	<link rel="shortcut icon" type="image/png" href="../images/favicon.png"/>
+
+
+	<meta prefix="og: http://ogp.me/ns#" property="og:title"
+		content="Maesh - The best online payment solution in Singapore 🇸🇬">
+	<meta prefix="og: http://ogp.me/ns#" property="og:url" content="https://maesh.io/">
+	<meta prefix="og: http://ogp.me/ns#" property="og:image" content="https://maesh.io/images/Logo-Maesh.png">
+	<meta prefix="og: http://ogp.me/ns#" property="og:description" content="It's simply cheaper">
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110811143-5"></script>
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+		integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+		crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<header class="section header" style="pointer-events: all;">
+		<div class="container header-container">
+
+			<nav class="navbar navbar-expand-lg navbar-light">
+				<a class="navbar-brand" href="https://maesh.io">
+					<img class="logo" src='../images/maesh-docs.png' alt="maesh">
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav">
+
+						<li class="nav-item">
+							<a class="nav-link" href="https://maesh.io">Home</a>
+						</li>
+						<!-- <li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown-Plugins" role="button"
+								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Plugins
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown-Plugins">
+								<a class="dropdown-item" href="./prestashop.html">Prestashop</a>
+								<a class="dropdown-item" href="./woocommerce.html">WooCommerce</a>
+							</div>
+						</li> -->
+						<!-- <li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown-Developer" role="button"
+								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Developers
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown-Developer">
+								<a class="dropdown-item" href="#">Javascript</a>
+								<a class="dropdown-item" href="#">React.js</a>
+							</div>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Support</a>
+						</li> -->
+					</ul>
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="primary nav button" href="https://dashboard.maesh.io/accounts/signup?platform=presta">
+								Signup
+							</a>
+
+						</li>
+						<li>
+							<a class="secondary nav button" href="https://dashboard.maesh.io/accounts/login">
+								Login
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+		<div class="shape-wrapper">
+			<div class="shape shape-background shape-main"></div>
+			<div class="shape shape-background shape-top"></div>
+		</div>
+	</header>
+	<main>
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-lg-9">
+					<div class="alert alert-warning" role="alert">
+						Maesh is currently only available in Singapore for payments in SGD. 
+					</div>
+		
+					<h1 class="article-title">
+						Prestashop Module
+					</h1>
+		
+					<p>
+						Learn how to integrate the Maesh module into your Prestashop store to start accepting bank app payments.  No setup fees, no monthly fees. Start accepting PayNow payments in minutes with Maesh.
+					</p>
+
+					<hr/>
+
+					<h2 id="prerequisites" class="section-title">
+						1. Prerequisites
+					</h2>
+					<ul>
+						<li>
+							Running Prestashop store
+						</li>
+						<li>
+							Access to the admin site of your Prestashop store
+						</li>
+						<li>
+							A valid UEN tied to your business that is registered with PayNow corporate
+						</1i>
+					</ul>
+					<h2 id="installation" class="section-title">
+						2. Installing the Module
+					</h2>
+					<ol>
+						<li>
+							Download the Maesh Prestashop module  <a href="https://downloads.maesh.io/maesh_prestashop_v2.0.3.zip" target="new" > here </a>.
+						</li>
+						<li>
+							Login to your admin dashboard.
+							<img class="step-image" src="../images/docs/prestashop/prestashop-login.png"/>
+						</li>
+						<li>
+							Navigate to your Module Manager and click on Upload a module.
+							<img class="step-image" src="../images/docs/prestashop/navigate-upload.png"/>
+						</li>
+						<li>
+							Upload the Maesh Prestashop module to your site. No need to unzip - Prestashop can handle the plugin in the same format as you've downloaded it.
+							<img class="step-image" src="../images/docs/prestashop/upload-module.png"/>
+						</li>
+					</ol>
+					<h2 id="configuration" class="section-title">
+						3. Configuring the Plugin
+					</h2>
+					<ol>
+						<li>
+							Create a maesh.io account. You can sign up for it <a href="https://dashboard.maesh.io/accounts/signup?platform=presta"> here </a>. Or if you already have an account, you can log in  <a href="https://dashboard.maesh.io/accounts/login"> here </a>.
+							<img class="step-image" src="../images/docs/prestashop/signup-step.png"/>
+						</li>
+						<li>
+							Generate a refresh token under the settings tab of the Maesh dashboard.
+							<img class="step-image" src="../images/docs/prestashop/token-step.png"/>
+						</li>
+						<li>
+							Back on your Prestashop module manager, scroll to the Maesh module and click Configure.
+							<img class="step-image" src="../images/docs/prestashop/config-module.png"/>
+						</li>
+						<li>
+							<p>
+								Paste the refresh token generated by the Maesh dashboard into the refresh token field. Don't forget to click save!
+							</p>
+
+							<img class="step-image" src="../images/docs/prestashop/paste-token.png"/>
+						</li>
+						<li>
+							You're all set! If you encounter any problems, contact us at <a href="mailto:hello@maesh.io?subject=Prestashop Setup Support"> hello@maesh.io </a>
+						</li>
+					</ol>
+					<h2 id="notes" class="section-title">
+						4. Notes
+					</h2>
+					<ul>
+						<li>
+							Feel free to message us at <a href="mailto:hello@maesh.io?subject=Feedback"> hello@maesh.io </a> for any questions, concerns or suggestions - we're always looking for ways to serve you better!
+						</li>
+						<li>
+							For transactions valued greater than S$1000, customers must add Maesh as a payee for the transaction to succeed. You may disable this option in the Maesh module configuration page. 
+						</li>
+					</ul>
+				</div>
+				<div class="col-3 table-of-contents-container d-none d-md-block  sticky-top">
+					<div class="table-of-contents">
+
+						<a href="https://downloads.maesh.io/maesh_woocommerce_v2.0.4.zip" target="new" class="primary download button">
+							Download Module
+						</a>
+
+						<hr/>
+						<div class="table-of-contents-links">
+							<ol>
+								<a href="#prerequisites">
+									<li>
+										Prerequisites
+									</li>
+								</a>
+								<a href="#installation">
+									<li>
+										Installing the Module 
+									</li>
+								</a>
+								<a href="#configuration">
+									<li>
+										Configuring the Module 
+									</li>
+								</a>
+								<a href="#notes">
+									<li>
+										Notes
+									</li>
+								</a>
+							</ol>
+						</div>
+						<hr/>
+						<div  class="table-of-contents-versioning">
+							<p class="subtext">
+								Module Version: 2.0.3
+							</p>
+							<p class="subtext">
+								Page Last Updated: 2 June 2020
+							</p>
+						</div>
+					</div>
+				</div>
+	
+			</div>
+		</div>
+	</main>
+	<footer id="footer" class="footer">
+		<div class="container" style="margin-top: 40px;">
+			<div class="row" style="padding: 0px;">
+				<div class="col-lg-4 text-center">
+					<div style="font-size: small;">Maesh got selected into the first cohort of</div>
+					<div style="font-size: small;"><a href="https://www.f10.ch/pressreleases/these-are-the-startups-accepted-into-the-f10-incubation-program-in-singapore/"><strong> F10 Fintech Incubator & Accelerator</strong></a> in Singapore:</div>
+					<div style="justify-content: center; align-items: center;">
+						<a href="https://www.f10.ch/pressreleases/these-are-the-startups-accepted-into-the-f10-incubation-program-in-singapore/"><img src="../images/Batch_1_Singapore_Emblem.png" alt="Batch I Singapore Incubation Program 2020 F10" style="height:80px; position:relative"></a>
+						<a href="https://www.f10.ch/"><img src="../images/f10_logo.png" alt="F10 Fintech Incubator & Accelerator" style="height:40px; position:relative"></a>
+					</div>
+				</div>
+				<div class="col-lg-4 text-center" style="margin: 10px 0px 20px 0px;">
+					<p style="font-size: small;">As featured on:</p>
+					<a href="https://fintechnews.sg/38722/fintech/10-fintech-startups-accepted-into-first-f10-incubation-program-in-singapore/"><img src="../images/singapore-fintechnews.png" alt="Singapore Fintech News featuring Maesh" style="height:40px; position:relative"></a>
+				</div>
+				<div class="col-lg-4 text-center">
+					<p style="font-size: small;">Maesh is <a target="blank" href="images/Maesh_SFA_FinTech_Certificate.pdf"><strong>FinTech certified</strong></a> and member of the Singapore Fintech Association:</p>
+					<a href="https://singaporefintech.org/"><img src="../images/SFA_logo.png" alt="Singapore Fintech Association Logo" style="height:40px; position:relative"></a>
+				</div>
+			</div>
+			<div class="row" style="padding: 0px; margin-top:20px">
+				<div class="col-lg-12 text-center">
+				<p><strong>© Maesh <script type="text/javascript">document.write(new Date().getFullYear());</script></strong> - Online payment gateway<br><span class="small">Maesh Pte. Ltd. (201936523Z)</span></p>
+				<p><strong>Made with ❤️ in Singapore</strong></p>
+			</div>
+			<div class="row" style="padding: 0px; margin: auto; width:90%">
+				<div class="col-lg-12 text-center">
+					<p style="font-size: small;">Maesh Pte. Ltd. has been granted <a href="https://www.mas.gov.sg/regulation/payments/entities-that-have-notified-mas-pursuant-to-the-ps-esp-r">an exemption by the Monetary Authority Singapore (MAS)</a> from holding a license under the Payment Services Act for providing Merchant Acquisition Services until January 28, 2021. Maesh Pte. Ltd. is allowed to continue to provide such services pursuant to the Payment Services (Exemption for Specified Period) Regulations 2019.</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+
+</body>
+
+</html>
