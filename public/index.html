@@ -8,7 +8,9 @@
 	<title>Online payment gateway in Singapore - Maesh</title>
 	<link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
+	<link href="css/hljs.css" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset='utf-8'>
 	<link rel="shortcut icon" type="image/png" href="images/favicon.png" />
@@ -77,59 +79,78 @@
 		}();
 		drift.SNIPPET_VERSION = '0.3.1';
 		drift.load('ia4in8hwgdvr');
+
+		
 	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
 	<!-- End of Async Drift Code -->
 </head>
 
 <body>
-	<div class="banner">
-		<a href="https://medium.com/maesh/maesh-stands-with-businesses-against-covid-19-b55067599da" rel="noreferrer"
-			target="_blank">
-			<span>
+	<!-- <div class="banner">
+		<a href="https://medium.com/maesh/maesh-stands-with-businesses-against-covid-19-b55067599da" rel="noreferrer" target="_blank">
+			<span class="banner-text">
 				We're offering discounts to help businesses affected by COVID-19. Read more here.
 			</span>
 		</a>
+	</div> -->
+	<div class="maesh-nav">
+		<nav class="navbar navbar-expand-lg navbar-light">
+			<a class="navbar-brand" href="https://maesh.io">
+				<img src="images/maesh-horizontal.png" alt="maesh" class="brand-icon"/>
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto">
+					<li>
+						<a href="https://dashboard.maesh.io/accounts/login" style="float: right;" class="link-button button btn btn-rounded btn-lg btn-4 shadow mt-1 px-4">
+							Login
+						</a> 
+					</li>
+					<li class="nav-item">
+						<a href="https://dashboard.maesh.io/accounts/signup" style="float: right;" class="primary button btn btn-rounded btn-lg btn-4 shadow mt-1 px-4">
+							Signup
+						</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
 	</div>
 	<header class="section header">
-		<div class="shape-wrapper">
-			<div class="shape shape-background shape-main"></div>
-			<div class="shape shape-background shape-top"></div>
-			<!-- 				<button type="button" class="btn btn-rounded btn-lg btn-4 shadow mt-1 px-4" data-toggle="modal" data-target="#signUp">➽ Consumers</button>
- -->
-		</div>
+		<div class="shape-wrapper lead">
+				<div class="shape shape-background shape-main"></div>
+				<div class="shape shape-background shape-top"></div>
+<!-- 				<button type="button" class="btn btn-rounded btn-lg btn-4 shadow mt-1 px-4" data-toggle="modal" data-target="#signUp">➽ Consumers</button>
+ -->		</div>
 		<div class="container overflow-hidden">
-			<div class="row align-items-center">
-				<div class="col-md-6 col-lg-6">
-					<div class="mb-5">
-						<img src="images/maesh.png" alt="maesh" style="width:100px;">
-					</div>
-					<h5 class="font-lg mb-5">The cheapest online payment solution in Singapore 🇸🇬</h5>
-					<p class="lead valueprop">Maesh enables your customers to pay with <a
-							href="https://www.abs.org.sg/consumer-banking/pay-now" rel="noreferrer" target="_blank"><img
-								src="images/PayNow.png" alt="PayNow" class="paynow"></a><br>You get lower transaction
-						fees for your online business</p>
+			<div class="row align-items-center first-section" style="padding: 8vh 0 5vh 0;">
+				<div class="col-md-6 col-lg-7">
+					<h5 class="font-lg mb-5 headline">The cheapest online payment solution in Singapore <img src="./images/sg-icon.png" style="height: 4rem;"/></h5>
+					<p class="lead valueprop">Secure, cheap and easy - Maesh lets your customers pay with <a href="https://www.abs.org.sg/consumer-banking/pay-now" rel="noreferrer" target="_blank"><img src="images/PayNow.png" alt="PayNow" class="paynow"></a><br>    
+					You get transaction fees as low as <span style="font-size: 2rem; font-weight: bold;">1.0% + S$0.25</span>  for your online business in minutes</p>
 					<!-- <p class="lead">Saved merchants S$-.-- on transaction fees</p> -->
 					<div class="mt-5 align-items-center">
-						<div class="container">
-							<!-- Button to Open the Modal -->
-							<div>
-								<a href="https://docs.maesh.io/woocommerce"
-									class="cta secondary button btn btn-rounded btn-lg btn-4 shadow mt-1 px-4">
+						<div class="container landing">
+							  <!-- Button to Open the Modal -->
+								<!-- <a href="https://docs.maesh.io" class="primary button btn btn-rounded btn-lg btn-4 shadow mt-1 px-4">
+									I want lower fees
+								</a> -->
+								<!-- <a href="https://docs.maesh.io/woocommerce" class="secondary button btn btn-rounded btn-lg btn-4 shadow mt-1 px-4">
 									WooCommerce
 								</a>
-								<a href="https://docs.maesh.io/prestashop"
-									class="cta secondary button btn btn-rounded btn-lg btn-4 shadow mt-1 px-4">
+								<a href="https://docs.maesh.io/prestashop" class="secondary button btn btn-rounded btn-lg btn-4 shadow mt-1 px-4">
 									Prestashop
 								</a>
-								<!-- <a href="https://docs.maesh.io/js-library" class="cta secondary button btn btn-rounded btn-lg btn-4 shadow mt-1 px-4">
-									JS/React.js
-								</a> -->
-
-								<button type="button" class="cta button btn btn-rounded btn-lg btn-4 shadow mt-1 px-4"
-									data-toggle="modal" data-target="#signUp">
-									Other platforms
+ 								-->
+								<button type="button" class="cta primary button btn-4 shadow mt-1 px-4" data-toggle="modal" data-target="#signUp">
+									I want lower fees
 								</button>
-							</div>
 							<!-- The Modal -->
 							<div class="modal" id="signUp">
 								<div class="modal-dialog modal-dialog-centered">
@@ -173,8 +194,8 @@
 													style="max-width:400px;padding:17px 0px 17px 0px;">
 													<form id="sib-form" method="POST"
 														action="https://sibforms.com/serve/MUIEAJ9KME6Idfo7oLPEsrov-Fnh39mfd4dWYqXyPs7of72rnvRuXsky7dxiXPsO3FWlizWxIMQFuVSKXZCkJLSgaC2TM9lI6QAO2Qvl8rm02FFjm7iejgsn-LYwEXGB3V5Xgo_0ZaYeD26aUclN_ChvaEpX0YH4uDqqUpw2tESrPWa3swrSM90Q3T7pQxrWzyMpb6qoEqQtCztj">
-														<div>
-															We'd love to work with you. Leave your details here and
+														<div class="modal-instructions">
+															We'd love to work with you! Leave your details here and
 															we'll get back to you ASAP.
 														</div>
 														<div style="display: flex; justify-content: space-between;">
@@ -250,10 +271,10 @@
 															</div>
 														</div>
 														<div>
-															<div class="sib-form-block" style="text-align: left">
+															<div class="sib-form-block" style="text-align: right;padding-right: 0; margin-top: 20px;">
 																<button class="btn btn-rounded btn-4 shadow mt-1 px-4"
 																	form="sib-form" type="submit"
-																	style="font-weight: 700; font-size: 1rem;">Confirm</button>
+																	style="font-weight: 700; font-size: 1rem; margin-right: 0;">Confirm</button>
 																<div class="sib-loader" style="display: none;">
 																	<div style="background: #5d3edc;"></div>
 																	<div style="background: #5d3edc;"></div>
@@ -299,7 +320,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6 col-lg-5 ml-lg-auto">
+				<div class="col-md-6 col-lg-4 ml-lg-auto" id="maesh-demo">
 					<div class="screen">
 						<div
 							style="height:500px; width: 250px; overflow: hidden;  margin: auto;  border-radius: 16%/8%;">
@@ -315,290 +336,447 @@
 	</header>
 	<section id="conversion-rate" class="section">
 		<div class="container">
-			<div class="section-heading text-center">
-				<h2 style="color: #5d3edc">Offer a seamless user experience</h2>
-			</div>
-			<div style="display: flex; align-items: flex-end; justify-content: center;">
-				<div>
-					<button type="button" class="primary button btn btn-rounded btn-3 shadow mt-1 px-4" id="desktop">On
-						Desktop</button>
-				</div>
-				<div>
-					<button type="button" class="btn btn-rounded btn-3 shadow mt-1 px-4" id="mobile-qr">On Mobile
-						(QR)</button>
-				</div>
-				<div>
-					<h6 class="mt-0 mb-1" style="color: #ff4a59;"><strong>COMING SOON</strong></h6>
-					<button type="button" class="btn btn-rounded btn-3 shadow mt-1 px-4" id="mobile-redirect">On Mobile
-						(Redirect)</button>
-				</div>
-			</div>
 			<div class="row">
-				<div class="col-md-4">
-					<div class="media flex-column flex-lg-row align-items-center align-items-md-start">
-						<div class="media-body mt-3 mt-md-0">
-							<h5 class="mt-0 mb-1">1. Select PayNow <span style="font-weight: 300;">powered by
-									Maesh</span></h5>
-							<img src="images/PayNow.png" alt="PayNow" class="mt-2 mb-2" style="height:70px;">
-							<p class="color-2 m-0">Your customer clicks on our payment method</p>
-						</div>
+				<div class="col-md-12 col-lg-5" style="display: flex;">
+					<div style="align-self: center;">
+						<h1 class="instruction-header">
+							Secure + Easy = Better Conversion Rates
+						</h1>
+						<p class="instruction-text">
+							Maesh uses PayNow and its bank-grade security to receive payments from your customers. And since we use bank apps, not credit cards, you can worry much less about fraud.						</p>
+						<p class="instruction-text">
+							Plus, our user friendly payments interface also boosts conversion rates!						
+						</p>
 					</div>
 				</div>
-				<div class="col-md-4 on-desktop">
-					<div class="media flex-column flex-lg-row align-items-center align-items-md-start">
-						<div class="media-body mt-3 mt-md-0">
-							<h5 class="mt-0 mb-1">2. Scan the QR code <span style="font-weight: 300;">with smart
-									phone</span></h5>
-							<div style="margin:15px;">
-								<img src="images/qr-code.png" alt="QR-code" class="mt-2 mb-2 ml-3 mr-3"
-									style="height: 100px;">
+				<div class="col-md-12 col-lg-7">
+					<div class="container">
+
+						<div class="row instruction-section">
+							<div class="col-md-4">
+								<div class="media flex-column flex-lg-row align-items-center align-items-md-start">
+									<div class="media-body mt-3 mt-md-0">
+										<img src="images/PayNow.png" alt="PayNow" class="mt-2 mb-2" style="height:70px;">
+										<p class="color-2 m-0">1. Customer selects PayNow powered by Maesh</p>
+									</div>
+								</div>
 							</div>
-							<p class="color-2 m-0">Your customer scans the dynamic QR code displayed on desktop with any
-								PayNow app of the <a href="https://www.abs.org.sg/consumer-banking/pay-now"
-									rel="noreferrer" target="_blank">9 participating banks</a> in Singapore</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 on-mobile-redirect">
-					<div class="media flex-column flex-lg-row align-items-center align-items-md-start">
-						<div class="media-body mt-3 mt-md-0">
-							<h5 class="mt-0 mb-1">2. Select <span style="font-weight: 300;">the preferred</span> bank
-								app
-							</h5>
-							<div style="margin:15px;">
-								<img src="images/apps/paylah.jpg" alt="PayLah! logo" class="mt-2 mb-2 ml-3 mr-3 banks">
-								<img src="images/apps/ocbc.jpg" alt="OCBC Bank logo" class="mt-2 mb-2 ml-3 mr-3 banks">
-								<img src="images/apps/uob.jpg" alt="UOB logo" class="mt-2 mb-2 ml-3 mr-3 banks">
-								<img src="images/apps/citi-bank.jpg" alt="Citi Bank logo"
-									class="mt-2 mb-2 ml-3 mr-3 banks">
-								<img src="images/apps/hsbc.jpg" alt="HSBC logo" class="mt-2 mb-2 ml-3 mr-3 banks">
-								<img src="images/apps/standard-chartered.jpg" alt="Standard Chartered logo"
-									class="mt-2 mb-2 ml-3 mr-3 banks">
-								<img src="images/apps/maybank.jpg" alt="Maybank logo" class="mt-2 mb-2 ml-3 mr-3 banks">
-								<img src="images/apps/bank-of-china.jpg" alt="Bank of China logo"
-									class="mt-2 mb-2 ml-3 mr-3 banks">
-								<img src="images/apps/icbc.jpg" alt="ICBC logo" class="mt-2 mb-2 ml-3 mr-3 banks">
+							<div class="col-md-4 on-desktop">
+								<div class="media flex-column flex-lg-row align-items-center align-items-md-start">
+									<div class="media-body mt-3 mt-md-0">
+										<div style="margin:15px;">
+											<img src="images/qr-code.png" alt="QR-code" class="mt-2 mb-2 ml-3 mr-3"
+												style="height: 100px;">
+										</div>
+										<p class="color-2 m-0">2. Your customer scans the QR code displayed onscreen with any
+											PayNow app of the <a href="https://www.abs.org.sg/consumer-banking/pay-now"
+												rel="noreferrer" target="_blank">9 participating banks</a> in Singapore</p>
+									</div>
+								</div>
 							</div>
-							<p class="color-2 m-0">Your customer chooses any PayNow app of the <a
-									href="https://www.abs.org.sg/consumer-banking/pay-now" rel="noreferrer"
-									target="_blank">9 participating banks</a> in Singapore and gets redirected</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 on-mobile-qr">
-					<div class="media flex-column flex-lg-row align-items-center align-items-md-start">
-						<div class="media-body mt-3 mt-md-0">
-							<h5 class="mt-0 mb-1">2. Take a screenshot of the QR code <span
-									style="font-weight: 300;">and </span> upload</h5>
-							<div style="margin:15px;">
-								<img src="images/qr-code.png" alt="QR-code" class="mt-2 mb-2 ml-3 mr-3"
-									style="height: 100px;">
+							<div class="col-md-4 on-mobile-redirect">
+								<div class="media flex-column flex-lg-row align-items-center align-items-md-start">
+									<div class="media-body mt-3 mt-md-0">
+										<div style="margin:15px;">
+											<img src="images/apps/paylah.jpg" alt="PayLah! logo" class="mt-2 mb-2 ml-2 mr-2 banks">
+											<img src="images/apps/ocbc.jpg" alt="OCBC Bank logo" class="mt-2 mb-2 ml-2 mr-2 banks">
+											<img src="images/apps/uob.jpg" alt="UOB logo" class="mt-2 mb-2 ml-2 mr-2 banks">
+											<img src="images/apps/citi-bank.jpg" alt="Citi Bank logo"
+												class="mt-2 mb-2 ml-2 mr-2 banks">
+											<img src="images/apps/hsbc.jpg" alt="HSBC logo" class="mt-2 mb-2 ml-2 mr-2 banks">
+											<img src="images/apps/standard-chartered.jpg" alt="Standard Chartered logo"
+												class="mt-2 mb-2 ml-2 mr-2 banks">
+											<img src="images/apps/maybank.jpg" alt="Maybank logo" class="mt-2 mb-2 ml-2 mr-2 banks">
+											<img src="images/apps/bank-of-china.jpg" alt="Bank of China logo"
+												class="mt-2 mb-2 ml-2 mr-2 banks">
+											<img src="images/apps/icbc.jpg" alt="ICBC logo" class="mt-2 mb-2 ml-2 mr-2 banks">
+										</div>
+										<p class="color-2 m-0">2. Your customer chooses any PayNow app of the <a
+												href="https://www.abs.org.sg/consumer-banking/pay-now" rel="noreferrer"
+												target="_blank">9 participating banks</a> in Singapore and gets redirected</p>
+									</div>
+								</div>
 							</div>
-							<p class="color-2 m-0">Your customer can upload the QR code screenshot into any
-								PayNow app of the <a href="https://www.abs.org.sg/consumer-banking/pay-now"
-									rel="noreferrer" target="_blank">9 participating banks</a> in Singapore</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="media flex-column flex-lg-row align-items-center align-items-md-start">
-						<div class="media-body mt-3 mt-md-0">
-							<h5 class="mt-0 mb-1">3. Authorize <span style="font-weight: 300;">and</span> Pay</h5>
-							<div style="margin:15px;">
-								<img src="images/password.svg" alt="Password Authentication" class="mt-2 mb-2"
-									style="height:70px;">
-								<img src="images/fingerprint.svg" alt="Fingerprint Authentication" class="mt-2 mb-2"
-									style="height:70px;">
-								<img src="images/face-recognition.svg" alt="Face Recognition" class="mt-2 mb-2"
-									style="height:70px;">
+							<div class="col-md-4 on-mobile-qr">
+								<div class="media flex-column flex-lg-row align-items-center align-items-md-start">
+									<div class="media-body mt-3 mt-md-0">
+										<div style="margin:15px;">
+											<img src="images/qr-code.png" alt="QR-code" class="mt-2 mb-2 ml-3 mr-3"
+												style="height: 100px;">
+										</div>
+										<p class="color-2 m-0">2. Your customer can upload the QR code screenshot into any
+											PayNow app of the <a href="https://www.abs.org.sg/consumer-banking/pay-now"
+												rel="noreferrer" target="_blank">9 participating banks</a> in Singapore</p>
+									</div>
+								</div>
 							</div>
-							<p class="color-2 m-0">The customer authorizes the payment in app with bank grade security
-							</p>
+							<div class="col-md-4">
+								<div class="media flex-column flex-lg-row align-items-center align-items-md-start">
+									<div class="media-body mt-3 mt-md-0">
+										<div style="margin:15px;">
+											<img src="images/password.svg" alt="Password Authentication" class="mt-2 mb-2"
+												style="height:70px;">
+											<img src="images/fingerprint.svg" alt="Fingerprint Authentication" class="mt-2 mb-2"
+												style="height:70px;">
+											<img src="images/face-recognition.svg" alt="Face Recognition" class="mt-2 mb-2"
+												style="height:70px;">
+										</div>
+										<p class="color-2 m-0">3. The customer authorizes the payment in app with bank grade security
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="instruction-toggle">
+						<div>
+							<button type="button" class="primary button btn btn-rounded btn-3 shadow mt-1 px-4" id="desktop">On
+								Desktop</button>
+						</div>
+						<div>
+							<button type="button" class="btn btn-rounded btn-3 shadow mt-1 px-4" id="mobile-qr">On Mobile
+								(QR)</button>
+						</div>
+						<div>
+							<h6 class="mt-0 mb-1" style="color: #ff4a59;"><strong>COMING SOON</strong></h6>
+							<button type="button" class="btn btn-rounded btn-3 shadow mt-1 px-4" id="mobile-redirect">On Mobile
+								(Redirect)</button>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="section-heading text-center">
-				<h5 class="font-lg mb-5">That's it!</h5>
 			</div>
 		</div>
+
 	</section>
-	<section id="testimonial">
-		<div style="display: flex; justify-content: center;">
-			<div class="testimonial">
-				<h5>
-					<div class="main title">Testimonials</div>
-				</h5>
-				<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-					<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span class="sr-only">Previous</span>
-					</a>
-					<div class="carousel-inner">
-						<div class="carousel-item active">
-							<div style="font-size: 24px;"><em>"Maesh is a great option for reducing your transaction
-									costs and they provide tremendous, fast support. Highly recommended to all
-									e-commerce stores.”</em></div>
-							<div style="font-size: 16px; margin: 10px;">Kenneth Ong, Chief Alchemist at <a
-									href="https://compoundcoffee.com/">Compound Coffee Co.</a></div>
-						</div>
-						<div class="carousel-item">
-							<div style="font-size: 24px;"><em>"There has been an increase in the number of purchases via
-									Scan QR and Pay. And it's absolutely wonderful, because I don't have to pay the
-									exorbitant prices of Stripe.”</em></div>
-							<div style="font-size: 16px; margin: 10px;">Heetesh Alwani, Brewlegger at <a
-									href="https://binjaibrew.com/">Binjai Brew</a></div>
-						</div>
+	<section id="fees" style="height: 40vh; margin-top: 10vh;">
+		<div class="shape-wrapper2" style="
+		width: 100%;
+		height: 100%; z-index: -1;
+	">
+			<div class="shape shape-background shape-main gradient gradient-53" style="border-radius: 0;">
+				<div class="container" style="height: 100%;
+				display: flex;
+				text-align: center;">
+					<div class="section-heading text-center" style="margin: auto">
+						<h2 class="color-1">No set-up or monthly fees. Just 1.0% + S$0.25 per transaction.</h2>
+						<h3 class="color-1 lead" style="font-size: x-large;">No, that's not a typo</h3>
 					</div>
-					<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-						<span class="sr-only">Next</span>
-					</a>
 				</div>
 			</div>
 		</div>
+
 	</section>
 	<section id="comparison">
-		<div id="pitch-container" class="-mt-4 container flex flex-col sm:flex-row sm:items-center">
-			<div id="benefits-container" class="rounded-t-md rounded-b-md sm:rounded-md sm:shadow-lg sm:w-3/5 sm:z-10">
-				<div class="bg-additional font-bold px-10 py-6 rounded-t-md uppercase">Additional Payment Method</div>
-				<div class="bg-white p-4 rounded-b-md sm:pb-10 sm:pt-8 sm:px-10 sm:rounded-b-md text-blue-darker">
-					<ul id="additional">
-						<li class="mb-6">➽ With PayNow you offer your customer an extra option to pay</li>
-						<li class="mb-6">➽ Maesh complements credit card payments through e.g. Stripe or PayPal</li>
-					</ul>
-					<p class="mb-4 text-blue-darker uppercase font-bold text-center" style="margin-top: 2rem;"> But no
-						hefty fees</p>
-				</div>
-			</div>
-			<div id="slider-comparison-container" class="rounded-b-md sm:rounded-md sm:shadow-lg sm:-ml-4 sm:w-3/5">
-				<div class="bg-compare font-bold px-10 py-6 rounded-t-md uppercase">Compare transaction costs</div>
-				<div class="bg-white p-6 text-sm sm:pb-10 sm:pt-8 sm:px-10 sm:rounded-t-md rounded-b-md">
-					<div class="slidecontainer py-3">
-						<input class="slider" value="30" min="0" max="250" name="rangeslider" type="range" />
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-lg-7 order-md-2 order-lg-1" style="display: flex;">
+					<div id="pitch-container" class="-mt-4 container flex flex-col sm:flex-row sm:items-center">
+						<div id="slider-comparison-container" class="rounded-b-md sm:rounded-md sm:shadow-lg sm:-ml-4 sm:w-3/5">
+							<div class="bg-compare font-bold px-10 py-6 rounded-t-md uppercase">Compare transaction costs</div>
+							<div class="bg-white p-6 text-sm sm:pb-10 sm:pt-8 sm:px-10 sm:rounded-t-md rounded-b-md">
+								<div class="slidecontainer py-3">
+									<input class="slider" value="30" min="0" max="250" name="rangeslider" type="range" />
+								</div>
+								<table class="w-full text-blue-darker text-sm">
+									<tbody>
+										<tr class="border-gray-dark  sm:border-0 ">
+											<td class="pr-5 pl-2 py-3 sm:pl-0 border-r"></td>
+											<td class="px-3 py-3 border-r"><span class="font-bold uppercase">Stripe</span></td>
+											<td class="px-3 pr-6 py-3 sm:pr-0"><span class="font-bold uppercase">Maesh</span></td>
+										</tr>
+										<tr class="border-gray-dark ">
+											<td class="pr-2 pl-2 py-3 sm:pl-0 border-r">Percentage</td>
+											<td class="px-3 py-3 border-r"><span id="stripe-percentage">3.4</span>%</td>
+											<td class="px-3 pr-6 py-3 sm:pr-0"><span id="maesh-percentage">1.0</span>%</td>
+										</tr>
+										<tr class="border-gray-dark ">
+											<td class="pr-5 pl-2 py-3 sm:pl-0 border-r">Fixed</td>
+											<td class="px-3 py-3 border-r">S$<span id="stripe-fixed">0.50</span></td>
+											<td class="px-3 pr-6 py-3 sm:pr-0">S$<span id="maesh-fixed">0.25</span></td>
+										</tr>
+										<tr class="border-gray-dark ">
+											<td class="pr-5 pl-2 py-3 sm:pl-0 border-r"><strong>Total cost</strong></td>
+											<td class="px-3 py-3 border-r">
+												<div class="bg-gray-darkest font-bold px-2 py-1 rounded-sm">S$<span
+														id="stripe-cost"></span></div>
+											</td>
+											<td class="px-3 pr-6 py-3 sm:pr-0">
+												<div class="bg-gray-darkest font-bold px-2 py-1 rounded-sm">S$<span
+														id="maesh-cost"></span></div>
+											</td>
+										</tr>
+										<tr class="border-gray-dark ">
+											<td class="pr-5 pl-2 py-1 sm:pl-0"></td>
+											<td class="px-1 py-1 text-right">Fees saved</td>
+											<td class="px-3 pr-6 py-1 sm:pr-0">
+												<div class="font-bold px-2 py-1 rounded-sm">S$<span id="cost-saved"></span></div>
+											</td>
+										</tr>
+										<tr class="border-gray-dark ">
+											<td class="pr-5 pl-2 py-1 sm:pl-0"></td>
+											<td class="px-1 py-1 text-right">Margin improvement</td>
+											<td class="px-3 pr-6 py-1 sm:pr-0">
+												<div class="bg-green font-bold px-2 py-1 rounded-sm"><span id="margin"></span></div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
 					</div>
-					<table class="w-full text-blue-darker text-sm">
-						<tbody>
-							<tr class="border-gray-dark  sm:border-0 ">
-								<td class="pr-5 pl-2 py-3 sm:pl-0 border-r"></td>
-								<td class="px-3 py-3 border-r"><span class="font-bold uppercase">Stripe</span></td>
-								<td class="px-3 pr-6 py-3 sm:pr-0"><span class="font-bold uppercase">Maesh</span></td>
-							</tr>
-							<tr class="border-gray-dark ">
-								<td class="pr-2 pl-2 py-3 sm:pl-0 border-r">Percentage</td>
-								<td class="px-3 py-3 border-r"><span id="stripe-percentage">3.4</span>%</td>
-								<td class="px-3 pr-6 py-3 sm:pr-0"><span id="maesh-percentage">1.0</span>%</td>
-							</tr>
-							<tr class="border-gray-dark ">
-								<td class="pr-5 pl-2 py-3 sm:pl-0 border-r">Fixed</td>
-								<td class="px-3 py-3 border-r">S$<span id="stripe-fixed">0.50</span></td>
-								<td class="px-3 pr-6 py-3 sm:pr-0">S$<span id="maesh-fixed">0.25</span></td>
-							</tr>
-							<tr class="border-gray-dark ">
-								<td class="pr-5 pl-2 py-3 sm:pl-0 border-r"><strong>Total cost</strong></td>
-								<td class="px-3 py-3 border-r">
-									<div class="bg-gray-darkest font-bold px-2 py-1 rounded-sm">S$<span
-											id="stripe-cost"></span></div>
-								</td>
-								<td class="px-3 pr-6 py-3 sm:pr-0">
-									<div class="bg-gray-darkest font-bold px-2 py-1 rounded-sm">S$<span
-											id="maesh-cost"></span></div>
-								</td>
-							</tr>
-							<tr class="border-gray-dark ">
-								<td class="pr-5 pl-2 py-1 sm:pl-0"></td>
-								<td class="px-1 py-1 text-right">Fees saved</td>
-								<td class="px-3 pr-6 py-1 sm:pr-0">
-									<div class="font-bold px-2 py-1 rounded-sm">S$<span id="cost-saved"></span></div>
-								</td>
-							</tr>
-							<tr class="border-gray-dark ">
-								<td class="pr-5 pl-2 py-1 sm:pl-0"></td>
-								<td class="px-1 py-1 text-right">Margin improvement</td>
-								<td class="px-3 pr-6 py-1 sm:pr-0">
-									<div class="bg-green font-bold px-2 py-1 rounded-sm"><span id="margin"></span></div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+				</div>
+				<div class="col-md-12 col-lg-5 order-md-1 order-lg-2" style="display: flex;">
+					<div style="align-self: center;">
+						<h1 class="comparison-header">
+							Better margins with Maesh
+						</h1>
+						<p  class="instruction-text">
+							Maesh helps you cut transaction fees by <b>half</b>, so you can get more out of every sale you make.
+						</p>
+						<p class="instruction-text">
+							And you only pay when you make a sale with Maesh. No monthly fees, setup fees, or any other unpleasant surprises.	
+						</p>
+						<p class="instruction-text">
+							Already using PayNow? Maesh will automate these payments for you so you can focus on more important things!
+						</p>
+					</div>
 				</div>
 			</div>
 		</div>
+
 	</section>
 
-	<section class="section banner gradient gradient-53 color-1 shadow-lg" style="margin: 20px 0px">
-		<div class="shape-wrapper">
-			<div class="shape shape-background shape-main gradient gradient-53"></div>
-			<div class="shape shape-background shape-top gradient gradient-35"></div>
-		</div>
+	<section id="comparison">
 		<div class="container">
-			<div class="section-heading text-center">
-				<h2 class="color-1">No set-up or monthly fees. 1.0% + S$0.25 transaction fees</h2>
-				<h3 class="color-1 lead" style="font-size: x-large;">No, that's not a typo</h3>
+			<h1 class="instruction-header" style="text-align: center;">
+				Easy Integration
+			</h1>
+			<div class="row">
+				<div class="col-md-12 col-lg-12" style="display: flex;">
+					<div class="row" style="align-items: center; margin: auto;">
+						<div class="col-md-12 col-lg-9" style="display: flex; justify-content: center;">
+							<a href="https://www.npmjs.com/package/maesh-test">
+								<img src="./images/react.png" class="platform-icon small-only" />
+							</a>
+							<a href="https://docs.maesh.io/js-library">
+								<img src="./images/js.png" class="platform-icon small-only" />
+							</a>
+							<a>
+							<div class="code-demo-container">
+								<div style="height: 2rem; width: 100%; background-color: gray; border-radius: 20px 20px 0 0; font-family: 'Roboto Mono';">	
+								</div>
+								<div style="color: white; margin-left: 2rem">
+<pre><code class="javascript" style="display: block;">
+const maesh = Maesh();
+
+maesh.create({ 
+	api_key : 'YOUR_API_KEY', 
+	dom_element_id : ​'maesh'​, 
+	currency: ​'SGD'​, 
+	amount: ​21700​, 
+	gotoUrl: ​'https://merchant.com/success'​, 
+	referenceCode: ​'ABCDEFGH' 
+})
+</code></pre>
+								</div>
+							</div>
+							</a>
+						</div>
+						<div class="col-md-12 col-lg-3" id="ecommerce-stores">
+							<a href="https://docs.maesh.io/woocommerce"><img src="./images/woocommerce.png" class="platform-icon" /></a>
+							<a href="https://docs.maesh.io/prestashop"><img src="./images/prestashop.png" class="platform-icon" /></a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12 col-lg-12" style="display: flex; margin: 40px auto; text-align: center;">
+					<div style="align-self: center; width: 100%;">
+						<p class="integration-text">
+							Maesh works right out of the box with WooCommerce, PrestaShop and bespoke codebases, and can work side by side with your other payment methods for a hassle-free integration.
+
+							Just plug it in and start saving!	
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+	<section id="merchants">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="instruction-header">
+						What our merchants are saying
+					</h1>
+				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-12 text-center">
-					<button type="button" class="danger button btn btn-rounded btn-lg btn-4 shadow mt-1 px-4"
-						data-toggle="modal" data-target="#signUp">I want lower fees</button>
+				<div class="col-md-6 col-lg-6 col-sm-12 testimonial">
+					<div style="font-size: 1.7rem;">
+							"Maesh is a great option for reducing your transaction
+						costs and they provide tremendous, fast support. Highly recommended to all
+						e-commerce stores.”
+					</div>
+					<div class="testimonial-author">
+						<div class="testimonial-name">
+							<p>
+								<b>
+									Kenneth Ong
+								</b> <br/>
+								Chief Alchemist at <a href="https://compoundcoffee.com/">Compound Coffee Co.</a>
+							</p>
+						</div>
+						<div>
+							<img class="merchant-image" src="./images/compound_coffee.png"/>	
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-6 col-sm-12 testimonial">
+					<div style="font-size: 1.7rem;">
+							"There has been an increase in the number of purchases via
+							Scan QR and Pay. And it's absolutely wonderful, because I don't have to pay the
+							exorbitant prices of Stripe.”
+					</div>
+					<div class="testimonial-author">
+						<div  class="testimonial-name">
+							<p>
+								<b>
+									Heetesh Alwani
+								</b> <br/> 
+								Brewlegger at <a href="https://binjaibrew.com/">Binjai Brew</a>
+							</p>
+						</div>
+						<div>
+							<img class="merchant-image" src="./images/binjaibrew.jpg"/>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	<section class="section cards">
+
+	<section>
 		<div class="container">
-			<div class="container-xl">
-				<a class="card">
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-						stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-						class="feather feather-git-pull-request">
-						<circle cx="18" cy="18" r="3"></circle>
-						<circle cx="6" cy="6" r="3"></circle>
-						<path d="M13 6h3a2 2 0 0 1 2 2v7"></path>
-						<line x1="6" y1="9" x2="6" y2="21"></line>
-					</svg>
-					<h5 class="bold mt-0 mb-1">Easy implementation</h5>
-					<ul>
-						<li class="m-0">Few lines of code</li>
-						<li class="m-0">Plugin available for:</li>
-					</ul>
-					<div style="display:flex;">
-						<img id="woocommerce-plugin-image"
-							onclick="window.location.href = 'https://docs.maesh.io/woocommerce' "
-							src="images/woocommerce.png" alt="maesh" style="cursor: pointer; width:80px; height:55px;">
-						<img id="prestashop-module-image"
-							onclick="window.location.href = 'https://docs.maesh.io/prestashop' "
-							src="images/prestashop.png" alt="maesh" style="width:80px; height:55px;cursor: pointer;">
-
-					</div>
-				</a>
-				<a class="card">
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-						stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-						class="feather feather-refresh-cw">
-						<polyline points="23 4 23 10 17 10"></polyline>
-						<polyline points="1 20 1 14 7 14"></polyline>
-						<path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
-					</svg>
-					<h5 class="bold mt-0 mb-1">No more hassle</h5>
-					<p class="m-0"><em>Already using PayNow?</em></p>
-					<p class="m-0">Maesh will fully automate these payments</p>
-
-				</a>
-				<a class="card">
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-						stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-						class="feather feather-key">
-						<path
-							d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4">
-						</path>
-					</svg>
-					<h5 class="bold mt-0 mb-1">Familiarity & Security</h5>
-					<p class="m-0">Leveraging the <img src="images/PayNow.png" alt="maesh" class="paynow"
-							style="width:80px;"> brand name</p>
-				</a>
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="comparison-header" style="text-align: center;">
+						Frequently Asked Questions
+					</h1>
+				</div>
 			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="accordion" id="accordionExample">
+						<div class="card">
+						  <div class="card-header" id="headingOne">
+							<h2 class="mb-0" onclick="toggleIcon(event)" >
+							  <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+								How fast are the payouts?  <span style="float: right;">-</span>
+							  </button>
+							</h2>
+						  </div>
+					  
+						  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+							<div class="card-body">
+								Payouts here at Maesh are fast - you can receive your payouts within a few business days, or even the same day. And for your first payout, there is no week long delay to get started. 
+							</div>
+						  </div>
+						</div>
+						<div class="card">
+						  <div class="card-header" id="headingTwo">
+							<h2 class="mb-0" onclick="toggleIcon(event)">
+							  <button class="btn btn-link collapsed accordion-button" type="button" data-toggle="collapse"   data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+								Do you also accept credit cards?  <span style="float: right;">+</span>
+
+							  </button>
+							</h2>
+						  </div>
+						  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+							<div class="card-body">
+								Maesh is currently focused on PayNow. If you do need to accept credit card payments, we recommend that you have another payment gateway alongside Maesh. Do put the Maesh payment gateway on the top of the list of payment methods - our merchants report better conversion rates when Maesh is on top 😉
+							</div>
+						  </div>
+						</div>
+						<div class="card">
+							<div class="card-header" id="headingThree">
+							  <h2 class="mb-0"  onclick="toggleIcon(event)">
+								<button class="btn btn-link collapsed accordion-button" type="button" data-toggle="collapse"  data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+									How does Maesh work with chargebacks? <span style="float: right;">+</span>
+								</button>
+							  </h2>
+							</div>
+							<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+								<div class="card-body">
+									Since we use bank apps and not credit cards, you won't have to worry about paying the expensive chargeback fees when you use Maesh.
+								</div>
+							</div>
+						  </div>
+						<div class="card">
+						  <div class="card-header" id="headingFour">
+							<h2 class="mb-0"  onclick="toggleIcon(event)">
+							  <button class="btn btn-link collapsed accordion-button" type="button" data-toggle="collapse"  data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+								I don't see my platform here. Is Maesh for me? <span style="float: right;">+</span>
+
+							  </button>
+							</h2>
+						  </div>
+						  <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+							<div class="card-body">
+								We are always looking to support more merchants - if you don't see your specific platform here, do still reach out! We will let you know if support is coming your way.
+							</div>
+						  </div>
+						</div>
+						<div class="card">
+							<div class="card-header" id="headingFive">
+							  <h2 class="mb-0"  onclick="toggleIcon(event)">
+								<button class="btn btn-link collapsed accordion-button" type="button" data-toggle="collapse"  data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+								  Is Maesh integrated with any accounting software like Xero? <span style="float: right;">+</span>
+								</button>
+							  </h2>
+							</div>
+							<div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+							  <div class="card-body">
+								Depending on your platform, existing plugins can work with Maesh - for example, the Xero plugin on WooCommerce works perfectly with Maesh.
+							  </div>
+							</div>
+						  </div>
+						<div class="card">
+							<div class="card-header" id="headingSix">
+							  <h2 class="mb-0" onclick="toggleIcon(event)">
+								<button class="btn btn-link collapsed accordion-button" type="button" data-toggle="collapse"   data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+								  How does Maesh reconcile orders? <span style="float: right;">+</span>
+								</button>
+							  </h2>
+							</div>
+							<div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+							  <div class="card-body">
+								For webstores like WooCommerce or Prestashop, Maesh automatically updates the order when payments are received. For bespoke webstores, we provide API endpoints for merchants to check payment status.
+							  </div>
+							</div>
+						  </div>
+						  <div class="card">
+							<div class="card-header" id="headingSeven">
+							  <h2 class="mb-0" onclick="toggleIcon(event)" >
+								<button class="btn btn-link collapsed accordion-button" type="button" data-toggle="collapse"  data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+								  I have more questions for Maesh <span style="float: right;">+</span>
+								</button>
+							  </h2>
+							</div>
+							<div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample">
+							  <div class="card-body">
+								If you have more questions about Maesh, do reach out to us at <a href="mailto:hello@maesh.io?subject=Maesh Inquiry"> hello@maesh.io </a>. We would be happy to assist you!
+							  </div>
+							</div>
+						  </div>
+						  
+					  </div>
+				</div>
+			</div>
+
 		</div>
 	</section>
+
 	<footer id="footer" class="footer">
 		<div class="container" style="margin-top: 40px;">
 			<div class="row" style="padding: 0px;">
@@ -661,6 +839,18 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 	<script src="https://www.google.com/recaptcha/api.js?hl=en"></script>
 	<script src="js/script.js"></script>
+	<script src="js/scroll.js"></script>
+
+	<script>
+		function toggleIcon(event){
+			console.log(event.target.firstElementChild)
+			if(event.target.getAttribute('aria-expanded')==='false'){
+				event.target.firstElementChild.innerHTML = '-';
+			}else{
+				event.target.firstElementChild.innerHTML = '+';
+			}
+		}
+	</script>
 </body>
 
 </html>
