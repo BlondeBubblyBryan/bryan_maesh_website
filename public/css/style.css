@@ -536,7 +536,7 @@ div.row.instruction-section > div {
   margin-top: -180px;
   padding-top: 500px;
   position: relative;
-  z-index: -1;
+  z-index: 1;
 }
 
 img.merchant-image {
