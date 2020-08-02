@@ -599,6 +599,11 @@ img.merchant-image {
   padding-top: 0px;
 }
 
+section#faq {
+  position: relative;
+  z-index: 2;
+}
+
 .color-1 {
   color: aliceblue !important;
 }
@@ -1406,4 +1411,25 @@ div.sib-input.sib-form-block, div.sib-form-block {
 
 .entry__field:focus-within {
   box-shadow: none !important;
+}
+
+.collapsible-link {
+  width: 100%;
+  position: relative;
+  text-align: left;
+}
+
+.collapsible-link::before {
+  content: '\f107';
+  position: absolute;
+  top: 50%;
+  right: 0.8rem;
+  transform: translateY(-50%);
+  display: block;
+  font-family: 'FontAwesome';
+  font-size: 1.1rem;
+}
+
+.collapsible-link[aria-expanded='true']::before {
+  content: '\f106';
 }
