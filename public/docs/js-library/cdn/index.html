@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Maesh.js Documentation : Vanilla JS CDN</title>
+    <meta name="description" content="">
+
+    <meta http-equiv="cleartype" content="on">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css" media="all">
+    <link rel="shortcut icon" href="../assets/images/favicon.png">
+    <style>
+        .hljs {
+            background-color: #002451 !important;
+        }
+
+        .code-badge-language {
+            color: black !important;
+        }
+
+        .code-badge {
+            background: #d1d1d1 !important;
+            padding: 8px !important;
+            color: black;
+        }
+
+        .code-badge-copy-icon {
+            font-size: 1.3em !important;
+            color: black;
+        }
+
+        mark {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            font-size: 15px;
+            line-height: 19px;
+            overflow: auto;
+            padding: 2px 5px;
+            border-radius: 3px
+        }
+    </style>
+    </style>
+</head>
+
+<body>
+    <div class="content-page">
+        <div class="content-code"></div>
+        <div class="content">
+            <div class="overflow-hidden content-section" id="content-main">
+                <h1 id="get-started" style="text-align: center;font-weight: 600; color:black;"><img class="logo-icon"
+                        src="../assets/images/js.png" alt="logo"
+                        style="width: 8%;vertical-align: middle;margin: 0 8px;"> Vanilla JS
+                    CDN
+                </h1>
+                <pre style="text-align: center;">
+<a href="https://dashboard.staging2.maesh.io/accounts/login/" class="content-button" target="__blank">Login</a> <a href="https://dashboard.staging2.maesh.io/accounts/signup/" class="content-button" target="__blank">Sign Up</a>
+</pre>
+                <p>
+                    This documentation will help you integrate Maesh as a component using the vanilla JS CDN version of
+                    Maesh.js.
+                </p>
+                <p>
+                    NOTE: You can only test the Maesh.js library in a server environment, testing on local environments
+                    is not possible as the library expects a request origin for security. Maesh.js Testing Sandbox
+                    coming soon! 🎉
+                </p>
+            </div>
+            <div class="overflow-hidden content-section" id="content-get-started">
+                <h1 id="get-started">Get started</h1>
+                <pre>Go to Settings Tab in Maesh Dashboard
+
+<img src="../assets/images/token-step.png" />
+</pre>
+                <p>
+                    To use this library, you need a <strong>Maesh API key</strong>. Create an <a
+                        href="https://dashboard.staging2.maesh.io/accounts/signup/">account</a>
+                    with Maesh to get your own API key. If you
+                    already have an account, <a href="https://dashboard.staging2.maesh.io/accounts/login/">login</a> to
+                    find your API key.
+                </p>
+
+                <p>
+                    Once you're in Maesh Dashboard, go to Settings tab and
+                    find the API key section to generate or view your API key.
+                </p>
+
+            </div>
+            <div class="overflow-hidden content-section" id="content-callback">
+                <h1 id="get-started" style="color: #ff4a59">Payment/Checkout Page</h1>
+
+            </div>
+            <div class="overflow-hidden content-section" id="content-include">
+                <h2 id="get-characters">Include Maesh.js</h2>
+                <pre><code class="html" style="padding: 0;"><script src="https://js.maesh.io/v1.js">
+</script></code></pre>
+                <p>
+                    Include the Maesh.js library on your checkout page or payment page by adding a <mark>script</mark>
+                    tag to the <mark>head​</mark> tag of your HTML file. 
+                </p>
+            </div>
+
+            <div class="overflow-hidden content-section" id="content-initialise">
+                <h2 id="get-characters">Initialise Maesh</h2>
+                <pre><code class="javascript">// Include below code in a script tag
+const maesh = Maesh();</code></pre>
+                <p>
+                    Initialise the Maesh function by assigning it to a variable. This is the entry point into Maesh.js
+                    library for creating a Maesh component
+                </p>
+            </div>
+
+            <div class="overflow-hidden content-section" id="content-create">
+                <h2 id="get-characters">Create Maesh Component</h2>
+                <pre><code class="hljs language-js">// Include below code in a script tag
+maesh.create({ 
+    api_key: '--YOUR_API_KEY--',
+    dom_element_id: '--YOUR_ELEMENT_ID--',
+    currency: 'SGD',
+    amount: 21700,
+    gotoUrl: 'https://merchant.com/success',
+    referenceCode: 'ABCDEFGH'
+    });</code></pre>
+                <p>
+                    Create an instance of Maesh in your website by calling the method ​<strong>create</strong>,
+                    which expects an
+                    object with below parameters as input. 
+                </p>
+                <h4>OBJECT PARAMETERS</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Param</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>api_key</td>
+                            <td>String</td>
+                            <td>Your API key. This key identifies you to Maesh. <br>
+                                Eg. sk39Josr78Ko23Mjftlp(Dummy)</td>
+                        </tr>
+                        <tr>
+                            <td>dom_element_id</td>
+                            <td>String</td>
+                            <td>This is the id of an empty HTML div element in your website, you want Maesh component to
+                                load in.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>amount</td>
+                            <td>Integer</td>
+                            <td>Only ​positive integers​ allowed. Amount is in a currency's​ ​smallest unit. Maximum
+                                amount allowed is S$200,000 due to FAST transaction upper limit<br>
+                                Eg. S$ 8.88 should be
+                                supplied as 888 </td>
+                        </tr>
+                        <tr>
+                            <td>currency</td>
+                            <td>String</td>
+                            <td>The currency you want your payment to be received in. Maximum characters allowed is 3
+                                <br>
+                                Eg. Singapore Dollar is SGD </td>
+                        </tr>
+                        <tr>
+                            <td>gotoUrl</td>
+                            <td>String</td>
+                            <td>
+                                The ​goto URL which will be invoked by Maesh after a payment status change has been
+                                detected i.e. maybe your order confirmation page.<br>
+                                Eg. https://merchant.com/success </td>
+                        </tr>
+                        <tr>
+                            <td>referenceCode</td>
+                            <td>String</td>
+                            <td>The merchant’s reference code for the order. Should be unique. Maximum characters
+                                allowed is 10.<br>
+                                Eg. ABCDEFGH </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="overflow-hidden content-section" id="content-component">
+                <h1 id="get-started">Maesh Component</h1>
+                <pre><img src="../assets/images/maesh-component.png" />
+</pre>
+                <p>
+                    This instance of Maesh would generate and display a QR code in your website page for the user to
+                    scan the QR and pay using any of the bank applications supporting  PayNow. 
+                </p>
+                <p>
+                    This is how the Maesh component is going to look like once it is successfully integrated. Once this
+                    payment is successfully completed, Maesh redirects the consumer to the URL (gotoUrl) that you
+                    provided. 
+                </p>
+            </div>
+            <div class="overflow-hidden content-section" id="content-callback">
+                <h1 id="get-started" style="color:#ff4a59;">Redirected Page</h1>
+
+            </div>
+            <div class="overflow-hidden content-section" id="content-callback">
+                <h2 id="get-started">Handling Callback in the redirected page</h2>
+                <p>
+                    In the redirected page, include a Maesh callback function to check the status of the  transaction,
+                    this is to ensure that the payment has been completed correctly. This  function will return the
+                    status of the transaction helping you with doing some additional tasks.  
+                </p>
+
+            </div>
+            <div class="overflow-hidden content-section" id="content-include-redirect">
+                <h2 id="get-characters">Include Maesh.js</h2>
+                <pre><code class="html" style="padding: 0;"><script src="https://js.maesh.io/v1.js">
+</script></code></pre>
+                <p>
+                    In the redirected page, include the Maesh.js library by adding the <mark>script</mark> tag to the
+                    ​<mark>head​</mark> tag of your HTML file. 
+                </p>
+            </div>
+
+            <div class="overflow-hidden content-section" id="content-maesh-callback">
+                <h2 id="get-characters">Initialise Maesh and call the Maesh callback function.</h2>
+                <pre><code class="javascript" style="display: block;">// Include below code in a script tag
+const maesh = Maesh();
+const maeshStatus = maesh.callback();
+// Resolve promise to get status
+maeshStatus.then(
+    status => { 
+        // Do something with the status here
+    });
+                </code></pre>
+                <p>
+                    In the redirected page, initialise the Maesh function by assigning it to a variable.
+                </p>
+                <p>
+                    Maesh
+                    callback will return a
+                    promise and resolving the promise will give you the status and can help you in rendering
+                    your redirected page conditionally. 
+                </p>
+                <p>
+                    The <mark>status</mark> response is a <mark>string</mark> and below table describes the different
+                    status you receive as response, case-sensitive.
+                </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>status</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Succeeded</td>
+                            <td>
+                                Payment is successful and Maesh received the payment.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Unpaid</td>
+                            <td>
+                                Payment is still not done yet, waiting for payment to complete
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Succeeded - Paid too much</td>
+                            <td>
+                                Payment is successful and Maesh received extra money from consumer than requested.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Cancelled</td>
+                            <td>
+                                Payment is unsuccessful and Maesh did received any payment.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Error</td>
+                            <td>
+                                Payment is not yet initiated or someone is trying to access redirect page directly.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="overflow-hidden content-section" id="content-maesh-callback">
+                <h2 id="get-characters">What if the consumer closes the browser?</h2>
+                <pre><code style="display: block;">API endpoint
+https://api.staging2.maesh.io/status
+
+
+
+                </code></pre>
+                <p>
+                    There are chances that the consumer might close the browser after scanning or move to another app on
+                    mobile while the payment is still processing, in these scenarios Maesh wouldn't able to redirect
+                    consumer to order conformation page.
+
+                </p>
+                <p>
+                    This means there is no way that Maesh can directly notify about the transaction. To solve this
+                    problem, we expose an API endpoint for you to call and get the status of the transaction if you did
+                    not receive it yet, after a pre-defined time maybe.
+                </p>
+            </div>
+
+            <div class="overflow-hidden content-section" id="content-errors">
+                <h2 id="errors">Parameters and Response</h2>
+                <p>
+                    The Maesh Status API uses the following:
+                </p>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Method</td>
+                            <td>
+                                POST
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Body</td>
+                            <td>
+                                {"reference" : 'Reference_Code_of_Order', "key" : 'Your_API_Key'}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Headers</td>
+                            <td>
+                                "Content-type": "application/json"
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Success Response</td>
+                            <td>
+                                {'response': 'success', 'status' : 'STATUS_OF_TRANSACTION'}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Error Response</td>
+                            <td>
+                                {'response': 'fail'}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="content-code"></div>
+    </div>
+    <script src="js/libs/jquery.js"></script>
+    <script src="js/script.js"></script>
+    <link href="https://unpkg.com/highlightjs-badge/highlightjs/styles/kavadocsdark.css" rel="stylesheet">
+    <script src="https://unpkg.com/highlightjs-badge/highlightjs/highlight.pack.js"></script>
+    <script src="https://unpkg.com/highlightjs-badge/highlightjs-badge.min.js"></script>
+    <script>
+        setTimeout(function () {
+            var pres = document.querySelectorAll("pre>code");
+            for (var i = 0; i < pres.length; i++) {
+                hljs.highlightBlock(pres[i]);
+            }
+            var options = {
+                contentSelector: ".content",
+                // Delay in ms used for `setTimeout` before badging is applied
+                // Use if you need to time highlighting and badge application
+                // since the badges need to be applied afterwards.
+                // 0 - direct execution (ie. you handle timing
+                loadDelay: 0,
+
+                // CSS class(es) used to render the copy icon.
+                copyIconClass: "fa fa-copy",
+                // CSS class(es) used to render the done icon.
+                checkIconClass: "fa fa-check text-success",
+
+                // hook to allow modifying the text before it's pasted
+                onBeforeTextCopied: function (text, codeElement) {
+                    return text; //  you can fix up the text here
+                }
+            };
+            window.highlightJsBadge(options);
+        }, 10);
+    </script>
+</body>
+
+</html>

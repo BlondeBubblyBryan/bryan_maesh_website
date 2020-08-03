@@ -1,0 +1,48 @@
+div.platform {
+    display: flex;
+    padding: 10px 20px;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 5px;
+    margin: 10px;
+    width: 45%;
+}
+
+div.platform:hover {
+    box-shadow: 0 0 0 1px rgba(50,50,93,0.01), 0 7px 14px 0 rgba(50,50,93,0.1), 0 3px 6px 0 rgba(0,0,0,0.02)
+}
+
+@media only screen and (max-width: 600px) {
+    div.platform {
+        width: 90%;
+    }
+  }
+
+div.platform-image > img {
+    height: 40px;
+}
+
+div.platform-image {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    width: 20%;
+}
+
+p.platform-subtext {
+    color: #444444;
+    margin-bottom: 0;
+}
+
+div.platform-text {
+    display: flex;
+    flex-direction: column;
+}
+
+a.platform-text-container {
+    display: flex;
+    align-items: center;
+}
+
+a:hover {
+    text-decoration: none;
+}
